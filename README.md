@@ -5,4 +5,4 @@
 - Spring Boot 2.7.x
 - Spring Data JPA
 - MySQL 8.0.x & H2 Database
-- QueryDSL
+- QueryDSL 5.0.0
