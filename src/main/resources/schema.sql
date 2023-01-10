@@ -51,25 +51,37 @@ create table hash_tag
 
 create table product
 (
-    id          bigint       not null auto_increment,
-    created_at  datetime,
-    updated_at  datetime,
-    description varchar(255) not null,
-    name        varchar(255) not null,
-    image_url   varchar(255) not null,
-    price       integer      not null,
+    id               bigint       not null auto_increment,
+    created_at       datetime,
+    updated_at       datetime,
+--     description      varchar(255) not null,
+    name             varchar(255) not null,
+    image_url        varchar(255) not null,
+    price            integer      not null,
+    star_score       float        not null,
+    discount_percent integer      not null,
     primary key (id)
 );
 
-create table reaction
+create table recommend
 (
-    id         bigint not null auto_increment,
-    created_at datetime,
-    updated_at datetime,
-    account_id bigint,
-    bookmark   TINYINT(1),
-    recommend  TINYINT(1),
-    feed_id    bigint not null,
+    id             bigint not null auto_increment,
+    created_at     datetime,
+    updated_at     datetime,
+    account_id     bigint,
+    is_recommended TINYINT(1),
+    feed_id        bigint not null,
+    primary key (id)
+);
+
+create table bookmark
+(
+    id            bigint not null auto_increment,
+    created_at    datetime,
+    updated_at    datetime,
+    account_id    bigint,
+    is_bookmarked TINYINT(1),
+    feed_id       bigint not null,
     primary key (id)
 );
 
@@ -85,5 +97,6 @@ create table special_review
     image_url         varchar(255) not null,
     account_id        bigint       not null,
     product_id        bigint       not null,
+    star_score        float        not null,
     primary key (special_review_id)
 );
