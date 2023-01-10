@@ -32,6 +32,9 @@ public class Comment extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private Long accountId;
+
     private int reportCount;
 
     public Comment(final Feed feed, final String content) {

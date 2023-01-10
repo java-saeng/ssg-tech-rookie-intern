@@ -29,6 +29,9 @@ public class Feed extends BaseEntity {
     @Column(nullable = false)
     private Long recommendCount;
 
+    @Column(columnDefinition = "TINYINT(1)")
+    private boolean isCommentBlocked;
+
     private Feed(final Long reviewId) {
         this.reviewId = reviewId;
     }

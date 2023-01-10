@@ -1,4 +1,4 @@
-package com.ssg.intern.mock.domain.account.entity;
+package com.ssg.intern.common.domain.account.entity;
 
 import com.ssg.intern.common.BaseEntity;
 import lombok.AccessLevel;

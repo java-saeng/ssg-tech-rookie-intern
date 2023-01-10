@@ -20,6 +20,7 @@ create table comment
     id           bigint       not null auto_increment,
     created_at   datetime,
     updated_at   datetime,
+    account_id   bigint,
     content      varchar(255) not null,
     report_count integer      not null,
     feed_id      bigint       not null,
@@ -28,12 +29,13 @@ create table comment
 
 create table feed
 (
-    id              bigint not null auto_increment,
-    created_at      datetime,
-    updated_at      datetime,
-    bookmark_count  bigint not null,
-    recommend_count bigint not null,
-    review_id       bigint not null,
+    id                 bigint not null auto_increment,
+    created_at         datetime,
+    updated_at         datetime,
+    is_comment_blocked TINYINT(1),
+    bookmark_count     bigint not null,
+    recommend_count    bigint not null,
+    review_id          bigint not null,
     primary key (id)
 );
 
@@ -54,6 +56,7 @@ create table product
     updated_at  datetime,
     description varchar(255) not null,
     name        varchar(255) not null,
+    image_url   varchar(255) not null,
     price       integer      not null,
     primary key (id)
 );
