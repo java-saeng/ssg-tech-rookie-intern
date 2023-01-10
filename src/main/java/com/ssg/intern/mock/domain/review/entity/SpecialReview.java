@@ -1,7 +1,7 @@
 package com.ssg.intern.mock.domain.review.entity;
 
 import com.ssg.intern.common.BaseEntity;
-import com.ssg.intern.mock.domain.account.entity.Account;
+import com.ssg.intern.common.domain.account.entity.Account;
 import com.ssg.intern.mock.domain.product.entity.Product;
 import lombok.AccessLevel;
 import lombok.Builder;

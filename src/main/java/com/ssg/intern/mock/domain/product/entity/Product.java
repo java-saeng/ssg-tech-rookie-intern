@@ -2,6 +2,7 @@ package com.ssg.intern.mock.domain.product.entity;
 
 import com.ssg.intern.common.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,13 +30,14 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private int price;
 
-    private Product(final String name, final String description, final int price) {
+    @Column(nullable = false)
+    private String imageUrl;
+
+    @Builder
+    private Product(final String name, final String description, final int price, final String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
-    }
-
-    public static Product of(final String name, final String description, final int price) {
-        return new Product(name, description, price);
+        this.imageUrl = imageUrl;
     }
 }
