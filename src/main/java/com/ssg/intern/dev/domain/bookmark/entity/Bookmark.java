@@ -1,9 +1,8 @@
-package com.ssg.intern.dev.domain.reaction.entity;
+package com.ssg.intern.dev.domain.bookmark.entity;
 
 import com.ssg.intern.common.BaseEntity;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +18,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Reaction extends BaseEntity {
+public class Bookmark extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,21 +26,20 @@ public class Reaction extends BaseEntity {
 
     private Long accountId;
 
-    @Column(columnDefinition = "TINYINT(1)")
-    private boolean bookmark;
-
-    @Column(columnDefinition = "TINYINT(1)")
-    private boolean recommend;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "feed_id", nullable = false)
+    @JoinColumn(name = "feed_id")
     private Feed feed;
 
-    @Builder
-    public Reaction(final Long accountId, final boolean bookmark, final boolean recommend, final Feed feed) {
+    @Column(columnDefinition = "TINYINT(1)")
+    private boolean isBookmarked;
+
+    private Bookmark(final Long accountId, final Feed feed, final boolean isBookmarked) {
         this.accountId = accountId;
-        this.bookmark = bookmark;
-        this.recommend = recommend;
         this.feed = feed;
+        this.isBookmarked = isBookmarked;
+    }
+
+    public static Bookmark of(final Long accountId, final Feed feed, final boolean isBookmarked) {
+        return new Bookmark(accountId, feed, isBookmarked);
     }
 }

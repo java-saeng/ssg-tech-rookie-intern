@@ -55,10 +55,14 @@ public class SpecialReview extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private float starScore;
+
     @Builder
     public SpecialReview(final Product product, final Account account, final CookLevel cookLevel,
                          final CookQuantity cookQuantity,
-                         final CookTime cookTime, final String imageUrl, final String description) {
+                         final CookTime cookTime, final String imageUrl, final String description,
+                         final float starScore) {
         this.product = product;
         this.account = account;
         this.cookLevel = cookLevel;
@@ -66,5 +70,6 @@ public class SpecialReview extends BaseEntity {
         this.cookTime = cookTime;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.starScore = starScore;
     }
 }
