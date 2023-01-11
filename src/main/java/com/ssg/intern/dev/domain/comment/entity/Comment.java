@@ -5,7 +5,6 @@ import com.ssg.intern.dev.domain.feed.entity.Feed;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,13 +36,14 @@ public class Comment extends BaseEntity {
 
     private int reportCount;
 
-    public Comment(final Feed feed, final String content) {
+    public Comment(final Feed feed, final String content, Long accountId) {
         this.feed = feed;
         this.content = content;
+        this.accountId = accountId;
         this.reportCount = 0;
     }
 
-    public static Comment of(final Feed feed, final String content) {
-        return new Comment(feed, content);
+    public static Comment of(final Feed feed, final String content, Long accountId) {
+        return new Comment(feed, content, accountId);
     }
 }

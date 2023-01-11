@@ -1,0 +1,47 @@
+package com.ssg.intern.dev.domain.comment.presentation;
+
+import com.ssg.intern.dev.domain.comment.presentation.model.CommentRegisterRequest;
+import com.ssg.intern.dev.domain.comment.service.CommentCommandService;
+import com.ssg.intern.dev.domain.comment.service.CommnetQueryService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api")
+public class CommentApi {
+
+    private final CommentCommandService commentCommandService;
+    private final CommnetQueryService commnetQueryService;
+
+    @GetMapping("/feeds/{feed-id}/comments")
+    public void getComments(@PathVariable("feed-id") Long id) {
+        commnetQueryService.getComments(id);
+    }
+
+    @PostMapping("/feeds/{feed-id}/comments")
+    public void createComment(@PathVariable("feed-id") Long feedId,
+                              @RequestHeader(value="account-id") String accountId,
+                              @RequestBody CommentRegisterRequest request) {
+        commentCommandService.createComment(feedId, accountId, request);
+    }
+
+    @PutMapping("/comments/{comment-id}")
+    public void updateComment(@PathVariable("comment-id") Long id,
+                              @RequestHeader(value = "account-id") String accountId,
+                              @RequestBody CommentRegisterRequest request) {
+        commentCommandService.updateComment(id, accountId, request);
+    }
+
+    @DeleteMapping("/comments/{comment-id}")
+    public void deleteComment(@PathVariable("comment-id") Long id,
+                              @RequestHeader(value = "account-id") String accountId) {
+        commentCommandService.deleteComment(id, accountId);
+    }
+
+    @PostMapping("/comments/{comment-id}/report")
+    public void reportComment(@PathVariable("comment-id") Long id) {
+
+    }
+
+}
