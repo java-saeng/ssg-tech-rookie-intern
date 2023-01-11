@@ -12,9 +12,11 @@
 
 해당된 Type 외에는 모두 삭제
 
-### ✏️Issue num
+### ✏️ Jira num
 
-resolved: #1
+resolved(SSG): #1
+
+resolved(Team B): #1
 
 ### 📑Description
 
