@@ -72,7 +72,7 @@ insert into special_review
 values (2, now(), now(), 'MEDIUM', 'COUPLE', 'TWENTY', '달달 볶아주세요',
         'https://succ.ssgcdn.com/uphoto/202212/20221214202412_1188070189_3_2.jpg', 2, 1, 3.6);
 insert into special_review
-values (3, now(), now(), 'HARD', 'FAMLIY', 'THIRTY', '고춧가루 팍팍',
+values (3, now(), now(), 'HARD', 'FAMILY', 'THIRTY', '고춧가루 팍팍',
         'https://succ.ssgcdn.com/uphoto/202212/20221203102228_1187313220_3_1.jpg', 2, 1, 3.7);
 insert into special_review
 values (4, now(), now(), 'EASY', 'PARTY', 'ONE_HOUR', '구워먹으면 맛있어용',
