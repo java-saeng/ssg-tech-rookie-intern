@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,5 +92,21 @@ public class FeedQueryService {
                             .imageUrl(specialReview.getImageUrl())
                             .starScore(specialReview.getStarScore())
                             .build();
+    }
+
+    public FeedProfileResponse showOneFeed(final long feedId) {
+        return feedRepository.findById(feedId)
+                             .map(feed -> {
+                                 final SpecialReview specialReview =
+                                         mockDataFacadeRepository.findBySpecialReviewId(feed.getId());
+
+                                 return FeedProfileResponse.builder()
+                                                           .feedReactionProfile(convertToReaction(feed))
+                                                           .commentProfile(convertToComment(feed, specialReview))
+                                                           .productProfile(convertToProduct(specialReview))
+                                                           .reviewProfile(convertToReview(specialReview))
+                                                           .build();
+                             })
+                             .orElseThrow(EntityNotFoundException::new);
     }
 }
