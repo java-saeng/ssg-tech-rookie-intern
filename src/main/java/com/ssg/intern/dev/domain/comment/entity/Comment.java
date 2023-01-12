@@ -29,7 +29,7 @@ public class Comment extends BaseEntity {
 
     private int reportCount;
 
-    public Comment(final Feed feed, final String content, Long accountId) {
+    private Comment(final Feed feed, final String content, Long accountId) {
         this.feed = feed;
         this.content = content;
         this.accountId = accountId;
@@ -39,4 +39,10 @@ public class Comment extends BaseEntity {
     public static Comment of(final Feed feed, final String content, Long accountId) {
         return new Comment(feed, content, accountId);
     }
+
+    public int updateReportCount(int count) {
+        this.reportCount += count;
+        return reportCount;
+    }
+
 }

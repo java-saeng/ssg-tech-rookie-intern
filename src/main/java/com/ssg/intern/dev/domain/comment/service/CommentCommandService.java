@@ -15,6 +15,7 @@ public class CommentCommandService {
 
     private final FeedRepository feedRepository;
     private final CommentRepository commentRepository;
+    private final CommentQueryService commentQueryService;
 
     public void createComment(Long feedId, String accountId, CommentRegisterRequest request) {
         commentRepository.save(
@@ -26,9 +27,8 @@ public class CommentCommandService {
     }
 
     public void updateComment(Long id, String accountId, CommentRegisterRequest request) {
-        Comment comment = commentRepository.findById(id).
-                orElseThrow(() -> new EntityNotFoundException("해당 댓글이 존재하지 않습니다."));
-        
+        commentQueryService.checkCommentAccount(id, Long.parseLong(accountId));
+        Comment comment = commentQueryService.getCommentById(id);
         commentRepository.save(
                 Comment.of(comment.getFeed(),
                         request.getContent(),
@@ -37,9 +37,17 @@ public class CommentCommandService {
     }
 
     public void deleteComment(Long id, String accountId) {
-        if(!commentRepository.existsDistinctByIdAndAccountId(id, Long.parseLong(accountId))) {
-            throw new EntityNotFoundException("해당 댓글이 존재하지 않거나 올바르지 않은 사용자입니다.");
-        }
+        commentQueryService.checkCommentAccount(id, Long.parseLong(accountId));
         commentRepository.deleteById(id);
     }
+
+    public void reportComment(Long id) {
+        Comment comment = commentQueryService.getCommentById(id);
+        if (comment.updateReportCount(1) >= 3) {
+            commentRepository.deleteById(id);
+        }
+        commentRepository.save(comment);
+    }
+
+
 }
