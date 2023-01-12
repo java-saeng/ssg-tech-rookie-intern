@@ -3,7 +3,8 @@ drop table if exists comment;
 drop table if exists feed;
 drop table if exists hash_tag;
 drop table if exists product;
-drop table if exists reaction;
+drop table if exists bookmark;
+drop table if exists recommend;
 drop table if exists special_review;
 
 create table account
@@ -35,7 +36,7 @@ create table feed
     is_comment_blocked TINYINT(1),
     bookmark_count     bigint not null,
     recommend_count    bigint not null,
-    review_id          bigint not null,
+    special_review_id  bigint not null,
     primary key (id)
 );
 

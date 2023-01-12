@@ -1,8 +1,9 @@
 package com.ssg.intern.dev.domain.comment.presentation;
 
 import com.ssg.intern.dev.domain.comment.presentation.model.CommentRegisterRequest;
+import com.ssg.intern.dev.domain.comment.presentation.model.CommentSelectResponse;
 import com.ssg.intern.dev.domain.comment.service.CommentCommandService;
-import com.ssg.intern.dev.domain.comment.service.CommnetQueryService;
+import com.ssg.intern.dev.domain.comment.service.CommentQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class CommentApi {
 
     private final CommentCommandService commentCommandService;
-    private final CommnetQueryService commnetQueryService;
+    private final CommentQueryService commentQueryService;
 
     @GetMapping("/feeds/{feed-id}/comments")
-    public void getComments(@PathVariable("feed-id") Long id) {
-        commnetQueryService.getComments(id);
+    public CommentSelectResponse getComments(@PathVariable("feed-id") Long id) {
+        return commentQueryService.getComments(id);
     }
 
     @PostMapping("/feeds/{feed-id}/comments")

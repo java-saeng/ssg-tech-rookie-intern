@@ -13,8 +13,8 @@ import javax.persistence.EntityNotFoundException;
 @RequiredArgsConstructor
 public class CommentCommandService {
 
-    private FeedRepository feedRepository;
-    private CommentRepository commentRepository;
+    private final FeedRepository feedRepository;
+    private final CommentRepository commentRepository;
 
     public void createComment(Long feedId, String accountId, CommentRegisterRequest request) {
         commentRepository.save(
