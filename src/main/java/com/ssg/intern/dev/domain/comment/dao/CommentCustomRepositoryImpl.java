@@ -19,10 +19,11 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
     @Override
     public List<CommentSingleDao> findAllInnerFetchJoinAccount() {
         return jpaQueryFactory
-                .select(new QCommentSingleDao(account.email, comment.content))
+                .select(new QCommentSingleDao(account.email, comment.content, comment.createdAt))
                 .from(comment)
                 .join(account)
                 .on(comment.accountId.eq(account.id))
+                .orderBy(comment.createdAt.desc())
                 .fetch();
     }
 }

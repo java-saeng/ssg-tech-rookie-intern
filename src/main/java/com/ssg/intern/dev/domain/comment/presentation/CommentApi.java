@@ -16,8 +16,8 @@ public class CommentApi {
     private final CommentQueryService commentQueryService;
 
     @GetMapping("/feeds/{feed-id}/comments")
-    public CommentSelectResponse getComments(@PathVariable("feed-id") Long id) {
-        return commentQueryService.getComments(id);
+    public CommentSelectResponse getComments(@PathVariable("feed-id") Long feedId) {
+        return commentQueryService.getComments(feedId);
     }
 
     @PostMapping("/feeds/{feed-id}/comments")

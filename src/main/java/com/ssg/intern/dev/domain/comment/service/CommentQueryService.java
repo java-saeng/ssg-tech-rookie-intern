@@ -21,9 +21,9 @@ public class CommentQueryService {
     private final FeedRepository feedRepository;
     private final CommentCustomRepositoryImpl commentCustomRepository;
 
-    public CommentSelectResponse getComments(Long id) {
+    public CommentSelectResponse getComments(Long feedId) {
         Long commentCount = commentRepository.countByFeed(
-                feedRepository.findById(id)
+                feedRepository.findById(feedId)
                         .orElseThrow(() -> new EntityNotFoundException("해당 피드가 존재하지 않습니다."))
         );
         List<CommentSingleDao> comments = commentCustomRepository.findAllInnerFetchJoinAccount();
