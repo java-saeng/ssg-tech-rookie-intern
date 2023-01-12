@@ -24,7 +24,7 @@ class FeedQueryServiceTest {
     @DisplayName("findFeedByCondition() : 추천 수에 따라서 Feed 정보를 정렬할 수 있다.")
     void testFindFeedByCondition_sortedByRecommendCount() {
         //when
-        final List<FeedProfileResponse> result = feedQueryService.findFeedByCondition(
+        final List<FeedProfileResponse> result = feedQueryService.showFeedsSortedByCondition(
                 new FeedProfileConditionRequest(SortingCondition.RECOMMENDATION));
 
         //then
@@ -38,7 +38,7 @@ class FeedQueryServiceTest {
     @DisplayName("findFeedByCondition() : 최근 등록 순에 따라서 Feed 정보를 정렬할 수 있다.")
     void testFindFeedByCondition_sortedByNewer() {
         //when
-        final List<FeedProfileResponse> result = feedQueryService.findFeedByCondition(
+        final List<FeedProfileResponse> result = feedQueryService.showFeedsSortedByCondition(
                 new FeedProfileConditionRequest(SortingCondition.NEWER));
 
         //then
