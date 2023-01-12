@@ -21,7 +21,7 @@ public class Feed extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Long reviewId;
+    private Long specialReviewId;
 
     @Column(nullable = false)
     private Long bookmarkCount;
@@ -32,8 +32,8 @@ public class Feed extends BaseEntity {
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isCommentBlocked;
 
-    private Feed(final Long reviewId) {
-        this.reviewId = reviewId;
+    private Feed(final Long specialReviewId) {
+        this.specialReviewId = specialReviewId;
     }
 
     public static Feed from(Long reviewId) {
