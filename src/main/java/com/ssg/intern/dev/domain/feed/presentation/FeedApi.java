@@ -21,7 +21,7 @@ public class FeedApi {
 
     @GetMapping("/feeds")
     public List<FeedProfileResponse> searchAllFeed(@ModelAttribute FeedProfileConditionRequest request) {
-        return feedQueryService.findFeedByCondition(request);
+        return feedQueryService.showFeedsSortedByCondition(request);
     }
 
     @GetMapping("/feeds/{feed-id}")

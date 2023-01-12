@@ -29,7 +29,7 @@ public class FeedQueryService {
     private final MockDataFacadeRepository mockDataFacadeRepository;
     private final CommentRepository commentRepository;
 
-    public List<FeedProfileResponse> findFeedByCondition(final FeedProfileConditionRequest request) {
+    public List<FeedProfileResponse> showFeedsSortedByCondition(final FeedProfileConditionRequest request) {
         return feedRepository.findAll().stream()
                              .sorted((o1, o2) -> {
                                  if (request.getCondition() == SortingCondition.RECOMMENDATION) {
