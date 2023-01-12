@@ -22,21 +22,21 @@ public class CommentApi {
 
     @PostMapping("/feeds/{feed-id}/comments")
     public void createComment(@PathVariable("feed-id") Long feedId,
-                              @RequestHeader(value="account-id") String accountId,
+                              @RequestHeader(value="Authorization") String accountId,
                               @RequestBody CommentRegisterRequest request) {
         commentCommandService.createComment(feedId, accountId, request);
     }
 
     @PutMapping("/comments/{comment-id}")
     public void updateComment(@PathVariable("comment-id") Long id,
-                              @RequestHeader(value = "account-id") String accountId,
+                              @RequestHeader(value = "Authorization") String accountId,
                               @RequestBody CommentRegisterRequest request) {
         commentCommandService.updateComment(id, accountId, request);
     }
 
     @DeleteMapping("/comments/{comment-id}")
     public void deleteComment(@PathVariable("comment-id") Long id,
-                              @RequestHeader(value = "account-id") String accountId) {
+                              @RequestHeader(value = "Authorization") String accountId) {
         commentCommandService.deleteComment(id, accountId);
     }
 
