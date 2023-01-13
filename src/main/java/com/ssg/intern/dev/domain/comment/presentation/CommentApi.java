@@ -24,14 +24,14 @@ public class CommentApi {
     public void createComment(@PathVariable("feed-id") Long feedId,
                               @RequestHeader(value="Authorization") String accountId,
                               @RequestBody CommentRegisterRequest request) {
-        commentCommandService.createComment(feedId, accountId, request);
+        commentCommandService.createComment(feedId, Long.parseLong(accountId), request);
     }
 
     @PutMapping("/comments/{comment-id}")
     public void updateComment(@PathVariable("comment-id") Long id,
                               @RequestHeader(value = "Authorization") String accountId,
                               @RequestBody CommentRegisterRequest request) {
-        commentCommandService.updateComment(id, accountId, request);
+        commentCommandService.updateComment(id, Long.parseLong(accountId), request);
     }
 
     @DeleteMapping("/comments/{comment-id}")

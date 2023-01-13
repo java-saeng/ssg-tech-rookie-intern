@@ -1,7 +1,6 @@
 package com.ssg.intern.dev.domain.comment.dao;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssg.intern.dev.domain.comment.entity.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
