@@ -72,7 +72,7 @@ insert into special_review
 values (2, now(), now(), 'MEDIUM', 'COUPLE', 'TWENTY', '달달 볶아주세요',
         'https://succ.ssgcdn.com/uphoto/202212/20221214202412_1188070189_3_2.jpg', 2, 1, 3.6);
 insert into special_review
-values (3, now(), now(), 'HARD', 'FAMLIY', 'THIRTY', '고춧가루 팍팍',
+values (3, now(), now(), 'HARD', 'FAMILY', 'THIRTY', '고춧가루 팍팍',
         'https://succ.ssgcdn.com/uphoto/202212/20221203102228_1187313220_3_1.jpg', 2, 1, 3.7);
 insert into special_review
 values (4, now(), now(), 'EASY', 'PARTY', 'ONE_HOUR', '구워먹으면 맛있어용',
@@ -136,6 +136,68 @@ values (19, now(), now(), 'EASY', 'PARTY', 'ONE_HOUR', '육회 그냥 먹어도 
 insert into special_review
 values (20, now(), now(), 'MEDIUM', 'FESTIVAL', 'TWO_HOURS', '사랑아 육회해',
         'https://sitem.ssgcdn.com/99/68/03/item/1000057036899_i1_1100.jpg', 7, 10, 4.6);
+
+-- feed 테이블
+
+insert into feed
+values (1, now(), now(), 0, 0, 0, 1);
+
+insert into feed
+values (2, now(), now(), 0, 0, 0, 2);
+
+insert into feed
+values (3, now(), now(), 0, 0, 0, 3);
+
+insert into feed
+values (4, now(), now(), 0, 0, 0, 4);
+
+insert into feed
+values (5, now(), now(), 0, 0, 0, 5);
+
+insert into feed
+values (6, now(), now(), 0, 0, 0, 6);
+
+insert into feed
+values (7, now(), now(), 0, 0, 0, 7);
+
+insert into feed
+values (8, now(), now(), 0, 0, 0, 8);
+
+insert into feed
+values (9, now(), now(), 0, 0, 0, 9);
+
+insert into feed
+values (10, now(), now(), 0, 0, 0, 10);
+
+insert into feed
+values (11, now(), now(), 0, 0, 0, 11);
+
+insert into feed
+values (12, now(), now(), 0, 0, 0, 12);
+
+insert into feed
+values (13, now(), now(), 0, 0, 0, 13);
+
+insert into feed
+values (14, now(), now(), 0, 0, 0, 14);
+
+insert into feed
+values (15, now(), now(), 0, 0, 0, 15);
+
+insert into feed
+values (16, now(), now(), 0, 0, 0, 16);
+
+insert into feed
+values (17, now(), now(), 0, 0, 0, 17);
+
+insert into feed
+values (18, now(), now(), 0, 0, 0, 18);
+
+insert into feed
+values (19, now(), now(), 0, 0, 0, 19);
+
+insert into feed
+values (20, now(), now(), 1, 0, 0, 20);
 
 -- 해시 태그
 
