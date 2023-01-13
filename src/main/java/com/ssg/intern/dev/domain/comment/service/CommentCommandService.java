@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,23 +18,22 @@ public class CommentCommandService {
     private final CommentRepository commentRepository;
     private final CommentQueryService commentQueryService;
 
-    public void createComment(Long feedId, String accountId, CommentRegisterRequest request) {
+    private static final int REPORT_LIMIT = 3;
+
+    public void createComment(Long feedId, Long accountId, CommentRegisterRequest request) {
         commentRepository.save(
                 Comment.of(feedRepository.findById(feedId)
                                 .orElseThrow(() -> new EntityNotFoundException("해당 피드가 존재하지 않습니다.")),
                         request.getContent(),
-                        Long.parseLong(accountId))
+                        accountId)
         );
     }
 
-    public void updateComment(Long id, String accountId, CommentRegisterRequest request) {
-        commentQueryService.checkCommentAccount(id, Long.parseLong(accountId));
-        Comment comment = commentQueryService.getCommentById(id);
-        commentRepository.save(
-                Comment.of(comment.getFeed(),
-                        request.getContent(),
-                        comment.getAccountId()
-                ));
+    @Transactional
+    public void updateComment(Long id, Long accountId, CommentRegisterRequest request) {
+        commentQueryService.checkCommentAccount(id, accountId);
+        commentQueryService.getCommentById(id)
+                .updateContent(request.getContent());
     }
 
     public void deleteComment(Long id, String accountId) {
@@ -41,12 +41,12 @@ public class CommentCommandService {
         commentRepository.deleteById(id);
     }
 
+    @Transactional
     public void reportComment(Long id) {
         Comment comment = commentQueryService.getCommentById(id);
-        if (comment.updateReportCount(1) >= 3) {
+        if (comment.updateReportCount(1) >= REPORT_LIMIT) {
             commentRepository.deleteById(id);
         }
-        commentRepository.save(comment);
     }
 
 

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityNotFoundException;
@@ -32,16 +33,33 @@ class CommentCommandServiceTest {
     @Autowired
     private FeedRepository feedRepository;
 
-    @BeforeEach
-    void before() {
-        Feed feed = feedRepository.findById(1L).orElseThrow();
-        Comment comment = Comment.of(feed, "comment content", 1L);
-        commentRepository.save(comment);
-    }
     @Test
-    @DisplayName("댓글 신고 테스트 - reportCount 증가?")
-    void reportCommentCountTest() {
+    @DisplayName("댓글 생성 테스트")
+    void createCommentTest() {
         //given
+
+        //when
+//        commentCommandService.createComment(1L, 2L, );
+        //then
+    }
+
+    @BeforeEach
+    void test() {
+//        Feed feed = feedRepository.findById(1L).orElseThrow();
+//        commentRepository.save(
+//                Comment.of(feed, "comment content", 1L)
+//        );
+    }
+
+    @Test
+    @DisplayName("댓글 신고 테스트 - reportCount 증가되고 3번 이상이면 댓글 삭제되는지 확인")
+    void reportCommentTest() {
+        //given
+        Feed feed = feedRepository.findById(1L).orElseThrow();
+        commentRepository.save(
+                Comment.of(feed, "comment content", 1L)
+        );
+
         //when
         commentCommandService.reportComment(1L);
         commentCommandService.reportComment(1L);
@@ -49,14 +67,8 @@ class CommentCommandServiceTest {
         //then
         Comment comment = commentRepository.findById(1L).orElseThrow();
         assertThat(comment.getReportCount()).isEqualTo(2);
-    }
-    @Test
-    @DisplayName("댓글 신고 3번 이상이면 삭제 되는지 테스트")
-    void reportCommentDeleteTest() {
-        //given
+
         //when
-        commentCommandService.reportComment(1L);
-        commentCommandService.reportComment(1L);
         commentCommandService.reportComment(1L);
 
         //then
@@ -64,4 +76,6 @@ class CommentCommandServiceTest {
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessageContaining("");
     }
+
+
 }
