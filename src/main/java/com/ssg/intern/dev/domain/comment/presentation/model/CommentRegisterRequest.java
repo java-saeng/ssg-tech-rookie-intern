@@ -1,6 +1,5 @@
 package com.ssg.intern.dev.domain.comment.presentation.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 

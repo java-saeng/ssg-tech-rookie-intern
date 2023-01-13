@@ -20,6 +20,7 @@ public class CommentCommandService {
 
     private static final int REPORT_LIMIT = 3;
 
+    @Transactional
     public void createComment(Long feedId, Long accountId, CommentRegisterRequest request) {
         commentRepository.save(
                 Comment.of(feedRepository.findById(feedId)
@@ -36,8 +37,9 @@ public class CommentCommandService {
                 .updateContent(request.getContent());
     }
 
-    public void deleteComment(Long id, String accountId) {
-        commentQueryService.checkCommentAccount(id, Long.parseLong(accountId));
+    @Transactional
+    public void deleteComment(Long id, Long accountId) {
+        commentQueryService.checkCommentAccount(id, accountId);
         commentRepository.deleteById(id);
     }
 
