@@ -1,11 +1,10 @@
 package com.ssg.intern.dev.domain.feed.presentation;
 
-import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileConditionRequest;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
 import com.ssg.intern.dev.domain.feed.service.FeedQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +19,8 @@ public class FeedApi {
     private final FeedQueryService feedQueryService;
 
     @GetMapping("/feeds")
-    public List<FeedProfileResponse> searchAllFeed(@ModelAttribute FeedProfileConditionRequest request) {
-        return feedQueryService.showFeedsSortedByCondition(request);
+    public List<FeedProfileResponse> searchAllFeed(Pageable pageable) {
+        return feedQueryService.showFeedsSortedByCondition(pageable);
     }
 
     @GetMapping("/feeds/{feed-id}")
