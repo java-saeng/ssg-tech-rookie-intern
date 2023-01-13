@@ -13,6 +13,7 @@ public class CommentSingleDao {
 
     private LocalDateTime createdAt;
 
+    @Builder
     @QueryProjection
     public CommentSingleDao(String email, String content, LocalDateTime createdAt) {
         this.email = email;
