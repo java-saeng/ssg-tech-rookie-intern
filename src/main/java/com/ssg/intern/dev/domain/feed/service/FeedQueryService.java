@@ -1,16 +1,14 @@
 package com.ssg.intern.dev.domain.feed.service;
 
-import com.ssg.intern.dev.domain.comment.dao.CommentRepository;
 import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
-import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileConditionRequest;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
-import com.ssg.intern.dev.global.SortingCondition;
 import com.ssg.intern.mock.MockDataFacadeRepository;
 import com.ssg.intern.mock.domain.product.entity.Product;
 import com.ssg.intern.mock.domain.review.entity.SpecialReview;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,17 +25,11 @@ public class FeedQueryService {
 
     private final FeedRepository feedRepository;
     private final MockDataFacadeRepository mockDataFacadeRepository;
-    private final CommentRepository commentRepository;
 
-    public List<FeedProfileResponse> showFeedsSortedByCondition(final FeedProfileConditionRequest request) {
-        return feedRepository.findAll().stream()
-                             .sorted((o1, o2) -> {
-                                 if (request.getCondition() == SortingCondition.RECOMMENDATION) {
-                                     return o2.getRecommendCount().compareTo(o1.getRecommendCount());
-                                 }
-                                 return o1.getCreatedAt().compareTo(o2.getCreatedAt());
-                             })
+    public List<FeedProfileResponse> showFeedsSortedByCondition(Pageable pageable) {
+        return feedRepository.findAllFeeds(pageable).stream()
                              .map(feed -> {
+
                                  final SpecialReview specialReview =
                                          mockDataFacadeRepository.findBySpecialReviewId(feed.getId());
 
@@ -56,7 +48,8 @@ public class FeedQueryService {
     }
 
     private List<CommentProfile> convertToComment(Feed feed, SpecialReview specialReview) {
-        final List<Comment> savedComments = commentRepository.findCommentsByFeedId(feed.getId());
+
+        final List<Comment> savedComments = feed.getComments();
 
         return savedComments.stream()
                             .map(comment -> {
