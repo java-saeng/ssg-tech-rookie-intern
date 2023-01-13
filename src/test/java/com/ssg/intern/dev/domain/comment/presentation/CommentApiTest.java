@@ -1,10 +1,14 @@
 package com.ssg.intern.dev.domain.comment.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssg.intern.dev.domain.comment.dao.CommentRepository;
 import com.ssg.intern.dev.domain.comment.dao.CommentSingleDao;
+import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.comment.presentation.model.CommentRegisterRequest;
 import com.ssg.intern.dev.domain.comment.presentation.model.CommentSelectResponse;
+import com.ssg.intern.dev.domain.comment.service.CommentCommandService;
 import com.ssg.intern.dev.domain.comment.service.CommentQueryService;
+import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,6 +52,15 @@ class CommentApiTest {
 
     @MockBean
     private CommentQueryService commentQueryService;
+
+    @MockBean
+    private CommentCommandService commentCommandService;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private FeedRepository feedRepository;
 
     @Test
     @DisplayName("댓글 조회")
@@ -145,6 +158,8 @@ class CommentApiTest {
     @DisplayName("댓글 삭제 API 테스트")
     void deleteCommentTest() throws Exception {
         //given
+        commentRepository.save(Comment.of(feedRepository.findById(1L).orElseThrow(),
+                "comment", 1L));
         //when
         //then
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/api/comments/{comment-id}", 1L)
@@ -161,4 +176,21 @@ class CommentApiTest {
                 );
     }
 
+    @Test
+    @DisplayName("댓글 신고 API 테스트")
+    void reportCommentTest() throws Exception {
+        //given
+        Comment comment = commentRepository.save(Comment.of(feedRepository.findById(1L).orElseThrow(),
+                "comment", 1L));
+        //when
+        //then
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/api/comments/{comment-id}/report", comment.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(document("comment-report",
+                        pathParameters(
+                                RequestDocumentation.parameterWithName("comment-id").description("댓글 ID")
+                        ))
+                );
+    }
 }

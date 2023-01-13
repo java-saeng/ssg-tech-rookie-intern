@@ -44,9 +44,9 @@ public class CommentCommandService {
     }
 
     @Transactional
-    public void reportComment(Long id) {
+    public void reportComment(Long id, int count) {
         Comment comment = commentQueryService.getCommentById(id);
-        if (comment.updateReportCount(1) >= REPORT_LIMIT) {
+        if (comment.updateReportCount(count) >= REPORT_LIMIT) {
             commentRepository.deleteById(id);
         }
     }

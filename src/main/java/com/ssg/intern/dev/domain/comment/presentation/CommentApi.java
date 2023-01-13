@@ -42,7 +42,7 @@ public class CommentApi {
 
     @PostMapping("/comments/{comment-id}/report")
     public void reportComment(@PathVariable("comment-id") Long id) {
-        commentCommandService.reportComment(id);
+        commentCommandService.reportComment(id, 1);
     }
 
 }

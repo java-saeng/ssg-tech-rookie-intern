@@ -452,6 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_댓글_생성">댓글 생성</a></li>
 <li><a href="#_댓글_수정">댓글 수정</a></li>
 <li><a href="#_댓글_삭제">댓글 삭제</a></li>
+<li><a href="#_댓글_신고">댓글 신고</a></li>
 </ul>
 </li>
 </ul>
@@ -492,7 +493,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   "comments" : [ {
     "email" : "wldnjs@ssg.com",
     "content" : "댓글입니다",
-    "createdAt" : "2023-01-13T15:07:23.472846"
+    "createdAt" : "2023-01-13T15:40:19.064072"
   } ]
 }</code></pre>
 </div>
@@ -745,11 +746,36 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_댓글_신고"><a class="link" href="#_댓글_신고">댓글 신고</a></h3>
+<div class="sect3">
+<h4 id="_요청_5"><a class="link" href="#_요청_5">요청</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. /api/comments/{comment-id}/report</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>comment-id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 ID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-01-13 15:09:00 +0900
+Last updated 2023-01-13 15:41:20 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

@@ -4,27 +4,14 @@ import com.ssg.intern.dev.domain.comment.dao.CommentRepository;
 import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.comment.presentation.model.CommentRegisterRequest;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
-import com.ssg.intern.dev.domain.feed.entity.Feed;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.persistence.EntityNotFoundException;
 
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CommentCommandServiceTest {
@@ -91,15 +78,14 @@ class CommentCommandServiceTest {
         Comment comment = commentRepository.save(dummyComment());
 
         //when
-        commentCommandService.reportComment(comment.getId());
-        commentCommandService.reportComment(comment.getId());
+        commentCommandService.reportComment(comment.getId(), 2);
         Comment result = commentRepository.findById(comment.getId()).orElseThrow();
 
         //then
         assertThat(result.getReportCount()).isEqualTo(2);
 
         //when
-        commentCommandService.reportComment(comment.getId());
+        commentCommandService.reportComment(comment.getId(),1);
 
         //then
         assertThatThrownBy(() -> commentRepository.findById(comment.getId()).orElseThrow())

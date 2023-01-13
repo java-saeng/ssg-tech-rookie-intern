@@ -41,3 +41,7 @@ include::{snippets}/comment-update/request-body.adoc[]
 include::{snippets}/comment-delete/path-parameters.adoc[]
 Header
 include::{snippets}/comment-delete/request-headers.adoc[]
+
+=== 댓글 신고
+==== 요청
+include::{snippets}/comment-report/path-parameters.adoc[]
