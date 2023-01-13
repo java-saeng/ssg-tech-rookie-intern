@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>REST API</title>
+<title>TEAM B API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,38 +435,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article toc2 toc-left">
+<body class="book toc2 toc-left">
 <div id="header">
-<h1>REST API</h1>
+<h1>TEAM B API</h1>
 <div class="details">
 <span id="revnumber">version 0.0.1-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_1_개요">1. 개요</a></li>
-<li><a href="#_2_인증">2. 인증</a></li>
-<li><a href="#_3_이미지">3. 이미지</a></li>
+<ul class="sectlevel0">
+<li><a href="#_1_댓글_api">1. 댓글 API</a>
+<ul class="sectlevel2">
+<li><a href="#_댓글_조회">댓글 조회</a></li>
+<li><a href="#_댓글_생성">댓글 생성</a></li>
+<li><a href="#_댓글_수정">댓글 수정</a></li>
+<li><a href="#_댓글_삭제">댓글 삭제</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_1_개요">1. 개요</h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_2_인증">2. 인증</h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_3_이미지">3. 이미지</h2>
-<div class="sectionbody">
+<h1 id="_1_댓글_api" class="sect0"><a class="link" href="#_1_댓글_api">1. 댓글 API</a></h1>
+<div class="sect2">
+<h3 id="_댓글_조회"><a class="link" href="#_댓글_조회">댓글 조회</a></h3>
+<div class="sect3">
+<h4 id="_요청"><a class="link" href="#_요청">요청</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. /api/feeds/{feed-id}/comments</caption>
 <colgroup>
@@ -486,19 +482,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </tbody>
 </table>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
 </div>
-</div>
+<div class="sect3">
+<h4 id="_응답"><a class="link" href="#_응답">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "commentCount" : 1,
   "comments" : [ {
     "email" : "wldnjs@ssg.com",
-    "content" : "댓글입니당",
-    "createdAt" : "2023-01-12T19:47:29.23678"
+    "content" : "댓글입니다",
+    "createdAt" : "2023-01-13T15:07:23.472846"
   } ]
 }</code></pre>
 </div>
@@ -541,11 +535,221 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_댓글_생성"><a class="link" href="#_댓글_생성">댓글 생성</a></h3>
+<div class="sect3">
+<h4 id="_요청_2"><a class="link" href="#_요청_2">요청</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. /api/feeds/{feed-id}/comments</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>feed-id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">피드 ID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Header</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자 ID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Request Body</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">작성할 댓글 내용</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>example</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{"content":"comment content"}</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_댓글_수정"><a class="link" href="#_댓글_수정">댓글 수정</a></h3>
+<div class="sect3">
+<h4 id="_요청_3"><a class="link" href="#_요청_3">요청</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. /api/comments/{comment-id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>comment-id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 ID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Header</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자 ID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Request Body</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정할 댓글 내용</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>example</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{"content":"comment update content"}</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_댓글_삭제"><a class="link" href="#_댓글_삭제">댓글 삭제</a></h3>
+<div class="sect3">
+<h4 id="_요청_4"><a class="link" href="#_요청_4">요청</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. /api/comments/{comment-id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>comment-id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 ID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Header</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자 ID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-01-12 19:26:08 +0900
+Last updated 2023-01-13 15:09:00 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

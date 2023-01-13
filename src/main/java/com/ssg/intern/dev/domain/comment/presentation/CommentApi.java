@@ -37,7 +37,7 @@ public class CommentApi {
     @DeleteMapping("/comments/{comment-id}")
     public void deleteComment(@PathVariable("comment-id") Long id,
                               @RequestHeader(value = "Authorization") String accountId) {
-        commentCommandService.deleteComment(id, accountId);
+        commentCommandService.deleteComment(id, Long.parseLong(accountId));
     }
 
     @PostMapping("/comments/{comment-id}/report")
