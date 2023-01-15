@@ -26,8 +26,11 @@ public class BookmarkCommandService {
 
                             final Feed savedFeed = bookmark.getFeed();
 
-                            savedFeed.increaseBookmark();
-                            bookmark.addBookmark();
+                            if (!bookmark.isBookmarked()) {
+                                savedFeed.increaseBookmark();
+                                bookmark.addBookmark();
+                            }
+
                         }),
 
                         () -> {
@@ -47,8 +50,11 @@ public class BookmarkCommandService {
         bookmarkRepository.findBookmarkByFeedAndAccount(feedId, accountId)
                 .ifPresent(
                         (bookmark -> {
-                            bookmark.cancelBookmark();
-                            bookmark.getFeed().decreaseBookmark();
+
+                            if (bookmark.isBookmarked()) {
+                                bookmark.cancelBookmark();
+                                bookmark.getFeed().decreaseBookmark();
+                            }
                         })
                 );
     }
