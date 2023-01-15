@@ -83,18 +83,14 @@ class RecommendCommandServiceTest {
         feed.increaseRecommend();
 
         //when
-        when(feedRepository.findById(anyLong()))
-                .thenReturn(Optional.of(feed));
-
-        when(recommendRepository.findById(anyLong()))
+        when(recommendRepository.findRecommendByFeedAndAccount(anyLong(), anyLong()))
                 .thenReturn(Optional.of(recommend));
 
-        final long recommendCount = recommendCommandService.
-                cancelRecommendToFeedByFeedId(1L, 1L, 1L);
+        recommendCommandService.cancelRecommendToFeedByFeedId(1L, 1L);
 
         //then
         assertAll(
-                () -> assertEquals(recommendCount, 2),
+                () -> assertEquals(feed.getRecommendCount(), 2),
                 () -> assertFalse(recommend.isRecommended())
         );
     }
