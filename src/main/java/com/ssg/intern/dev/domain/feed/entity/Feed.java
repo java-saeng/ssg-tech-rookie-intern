@@ -51,4 +51,8 @@ public class Feed extends BaseEntity {
     public void changeCommentStatus() {
         isCommentBlocked = !isCommentBlocked;
     }
+
+    public void increaseRecommend() {
+        recommendCount++;
+    }
 }
