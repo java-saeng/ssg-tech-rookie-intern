@@ -46,4 +46,8 @@ public class Bookmark extends BaseEntity {
     public void addBookmark() {
         isBookmarked = true;
     }
+
+    public void cancelBookmark() {
+        isBookmarked = false;
+    }
 }

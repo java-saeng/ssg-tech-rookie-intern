@@ -4,8 +4,6 @@ import com.ssg.intern.dev.domain.bookmark.dao.BookmarkRepository;
 import com.ssg.intern.dev.domain.bookmark.entity.Bookmark;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
-import com.ssg.intern.dev.domain.recommend.dao.RecommendRepository;
-import com.ssg.intern.dev.domain.recommend.entity.Recommend;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,5 +71,29 @@ class BookmarkCommandServiceTest {
         //then
         assertEquals(feed.getBookmarkCount(), 1);
         verify(bookmarkRepository, times(1)).save(any());
+    }
+
+    @Test
+    @DisplayName("cancelBookmarkToFeedByFeedId() : feed에 북마크를 취소할 수 있습니다.")
+    void test_cancelBookmarkToFeedByFeedId() {
+        //given
+        final Feed feed = Feed.from(1L);
+        final Bookmark bookmark = Bookmark.of(1L, feed, true);
+
+        feed.increaseBookmark();
+        feed.increaseBookmark();
+        feed.increaseBookmark();
+
+        //when
+        when(bookmarkRepository.findBookmarkByFeedAndAccount(anyLong(), anyLong()))
+                .thenReturn(Optional.of(bookmark));
+
+        bookmarkCommandService.cancelBookmarkToFeedByFeedId(1L, 1L);
+
+        //then
+        assertAll(
+                () -> assertEquals(feed.getBookmarkCount(), 2),
+                () -> assertFalse(bookmark.isBookmarked())
+        );
     }
 }
