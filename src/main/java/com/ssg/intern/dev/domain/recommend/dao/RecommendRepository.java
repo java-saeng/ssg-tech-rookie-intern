@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface RecommendRepository extends JpaRepository<Recommend, Long> {
+public interface RecommendRepository extends JpaRepository<Recommend, Long>, RecommendRepositoryCustom {
 
     @Override
     @Query("select r from Recommend r inner join fetch r.feed where r.id=:id")
