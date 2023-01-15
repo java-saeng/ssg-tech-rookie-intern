@@ -25,10 +25,9 @@ public class RecommendApi {
         recommendCommandService.addRecommendToFeedByFeedId(accountId, feedId);
     }
 
-    @DeleteMapping("/feeds/{feed-id}/recommends/{recommend-id}")
-    public long minusRecommend(@RequestHeader(HttpHeaders.AUTHORIZATION) long accountId,
-                              @PathVariable("feed-id") long feedId,
-                              @PathVariable("recommend-id") long recommendId) {
-        return recommendCommandService.cancelRecommendToFeedByFeedId(accountId, feedId, recommendId);
+    @DeleteMapping("/feeds/{feed-id}/recommends")
+    public void minusRecommend(@RequestHeader(HttpHeaders.AUTHORIZATION) long accountId,
+                              @PathVariable("feed-id") long feedId) {
+        recommendCommandService.cancelRecommendToFeedByFeedId(accountId, feedId);
     }
 }
