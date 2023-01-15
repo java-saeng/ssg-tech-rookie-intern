@@ -63,4 +63,8 @@ public class Feed extends BaseEntity {
     public void increaseBookmark() {
         bookmarkCount++;
     }
+
+    public void decreaseBookmark() {
+        bookmarkCount--;
+    }
 }

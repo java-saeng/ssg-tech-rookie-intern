@@ -41,4 +41,15 @@ public class BookmarkCommandService {
                         }
                 );
     }
+
+    public void cancelBookmarkToFeedByFeedId(final long accountId, final long feedId) {
+
+        bookmarkRepository.findBookmarkByFeedAndAccount(feedId, accountId)
+                .ifPresent(
+                        (bookmark -> {
+                            bookmark.cancelBookmark();
+                            bookmark.getFeed().decreaseBookmark();
+                        })
+                );
+    }
 }
