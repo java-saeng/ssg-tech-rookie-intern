@@ -42,4 +42,8 @@ public class Bookmark extends BaseEntity {
     public static Bookmark of(final Long accountId, final Feed feed, final boolean isBookmarked) {
         return new Bookmark(accountId, feed, isBookmarked);
     }
+
+    public void addBookmark() {
+        isBookmarked = true;
+    }
 }

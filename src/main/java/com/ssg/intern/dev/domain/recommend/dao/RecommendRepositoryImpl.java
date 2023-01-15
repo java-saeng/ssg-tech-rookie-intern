@@ -31,6 +31,6 @@ public class RecommendRepositoryImpl implements RecommendRepositoryCustom {
     }
 
     private BooleanExpression eqFeedId(long feedId) {
-        return feed.id.eq(feedId);
+        return recommend.feed.id.eq(feedId);
     }
 }
