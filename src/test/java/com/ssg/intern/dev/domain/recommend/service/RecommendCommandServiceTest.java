@@ -75,4 +75,32 @@ class RecommendCommandServiceTest {
         //then
         assertEquals(recommendCount, 1);
     }
+
+    @Test
+    @DisplayName("cancelRecommendToFeedByFeedId() : feed에 추천해요를 취소할 수 있습니다.")
+    void test_cancelRecommendToFeedByFeedId() {
+        //given
+        final Feed feed = Feed.from(1L);
+        final Recommend recommend = Recommend.of(1L, true, feed);
+
+        feed.increaseRecommend();
+        feed.increaseRecommend();
+        feed.increaseRecommend();
+
+        //when
+        when(feedRepository.findById(anyLong()))
+                .thenReturn(Optional.of(feed));
+
+        when(recommendRepository.findById(anyLong()))
+                .thenReturn(Optional.of(recommend));
+
+        final long recommendCount = recommendCommandService.
+                cancelRecommendToFeedByFeedId(1L, 1L, 1L);
+
+        //then
+        assertAll(
+                () -> assertEquals(recommendCount, 2),
+                () -> assertFalse(recommend.isRecommended())
+        );
+    }
 }

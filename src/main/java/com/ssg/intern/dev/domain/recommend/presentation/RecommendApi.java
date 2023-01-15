@@ -3,6 +3,7 @@ package com.ssg.intern.dev.domain.recommend.presentation;
 import com.ssg.intern.dev.domain.recommend.service.RecommendCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -23,5 +24,12 @@ public class RecommendApi {
                               @PathVariable("feed-id") long feedId,
                               @PathVariable(value = "recommend-id", required = false) Optional<Long> recommendId) {
         return recommendCommandService.addRecommendToFeedByFeedId(accountId, feedId, recommendId);
+    }
+
+    @DeleteMapping("/feeds/{feed-id}/recommends/{recommend-id}")
+    public long minusRecommend(@RequestHeader(HttpHeaders.AUTHORIZATION) long accountId,
+                              @PathVariable("feed-id") long feedId,
+                              @PathVariable("recommend-id") long recommendId) {
+        return recommendCommandService.cancelRecommendToFeedByFeedId(accountId, feedId, recommendId);
     }
 }
