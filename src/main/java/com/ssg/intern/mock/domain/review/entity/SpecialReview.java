@@ -41,6 +41,9 @@ public class SpecialReview extends BaseEntity {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "specialReview")
+    private List<HashTag> hashTags = new ArrayList<>();
+
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private CookLevel cookLevel;
