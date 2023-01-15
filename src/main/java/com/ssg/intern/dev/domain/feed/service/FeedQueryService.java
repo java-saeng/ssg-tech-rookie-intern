@@ -4,6 +4,7 @@ import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
+import com.ssg.intern.dev.domain.feed.presentation.model.FeedSearchingConditionRequest;
 import com.ssg.intern.mock.MockDataFacadeRepository;
 import com.ssg.intern.mock.domain.product.entity.Product;
 import com.ssg.intern.mock.domain.review.entity.SpecialReview;
@@ -102,5 +103,26 @@ public class FeedQueryService {
                                                            .build();
                              })
                              .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<FeedProfileResponse> showSatisfiedConditionFeeds(final Pageable pageable,
+                                                                 final FeedSearchingConditionRequest request) {
+
+        return mockDataFacadeRepository.findBySearchingCondition(pageable, request)
+                                       .stream()
+                                       .map(specialReview -> {
+
+                                           final Feed feed = feedRepository.findById(specialReview.getId())
+                                                                           .orElseThrow(EntityNotFoundException::new);
+
+                                           return FeedProfileResponse.builder()
+                                                                     .feedReactionProfile(convertToReaction(feed))
+                                                                     .commentProfile(
+                                                                             convertToComment(feed, specialReview))
+                                                                     .productProfile(convertToProduct(specialReview))
+                                                                     .reviewProfile(convertToReview(specialReview))
+                                                                     .build();
+                                       })
+                                       .collect(Collectors.toList());
     }
 }
