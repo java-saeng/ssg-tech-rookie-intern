@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,14 +48,14 @@ public class RecommendCommandService {
     public void cancelRecommendToFeedByFeedId(final long accountId, final long feedId) {
 
         recommendRepository.findRecommendByFeedAndAccount(feedId, accountId)
-                .ifPresent(
-                        (recommend -> {
+                           .ifPresent(
+                                   (recommend -> {
 
-                            if (recommend.isRecommended()) {
-                                recommend.cancelRecommend();
-                                recommend.getFeed().decreaseRecommend();
-                            }
-                        })
-                );
+                                       if (recommend.isRecommended()) {
+                                           recommend.cancelRecommend();
+                                           recommend.getFeed().decreaseRecommend();
+                                       }
+                                   })
+                           );
     }
 }

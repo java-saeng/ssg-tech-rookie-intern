@@ -2,15 +2,13 @@ package com.ssg.intern.dev.domain.recommend.dao;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssg.intern.dev.domain.feed.entity.QFeed;
-import com.ssg.intern.dev.domain.recommend.entity.QRecommend;
 import com.ssg.intern.dev.domain.recommend.entity.Recommend;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-import static com.ssg.intern.dev.domain.feed.entity.QFeed.*;
-import static com.ssg.intern.dev.domain.recommend.entity.QRecommend.*;
+import static com.ssg.intern.dev.domain.feed.entity.QFeed.feed;
+import static com.ssg.intern.dev.domain.recommend.entity.QRecommend.recommend;
 
 @RequiredArgsConstructor
 public class RecommendRepositoryImpl implements RecommendRepositoryCustom {

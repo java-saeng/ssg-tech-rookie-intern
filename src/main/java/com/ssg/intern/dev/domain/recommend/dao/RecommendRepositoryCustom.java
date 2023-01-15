@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface RecommendRepositoryCustom {
 
-    public Optional<Recommend> findRecommendByFeedAndAccount(long feedId, long accountId);
+    Optional<Recommend> findRecommendByFeedAndAccount(long feedId, long accountId);
 }

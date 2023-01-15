@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -19,7 +17,7 @@ public class RecommendApi {
 
     private final RecommendCommandService recommendCommandService;
 
-    @PostMapping( "/feeds/{feed-id}/recommends")
+    @PostMapping("/feeds/{feed-id}/recommends")
     public void plusRecommend(@RequestHeader(HttpHeaders.AUTHORIZATION) long accountId,
                               @PathVariable("feed-id") long feedId) {
         recommendCommandService.addRecommendToFeedByFeedId(accountId, feedId);
@@ -27,7 +25,7 @@ public class RecommendApi {
 
     @DeleteMapping("/feeds/{feed-id}/recommends")
     public void minusRecommend(@RequestHeader(HttpHeaders.AUTHORIZATION) long accountId,
-                              @PathVariable("feed-id") long feedId) {
+                               @PathVariable("feed-id") long feedId) {
         recommendCommandService.cancelRecommendToFeedByFeedId(accountId, feedId);
     }
 }
