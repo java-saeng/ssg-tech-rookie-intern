@@ -27,8 +27,11 @@ public class RecommendCommandService {
 
                                        final Feed savedFeed = recommend.getFeed();
 
-                                       savedFeed.increaseRecommend();
-                                       recommend.addRecommend();
+                                       if (!recommend.isRecommended()) {
+                                           savedFeed.increaseRecommend();
+                                           recommend.addRecommend();
+                                       }
+
                                    }),
 
                                    () -> {
@@ -48,8 +51,11 @@ public class RecommendCommandService {
         recommendRepository.findRecommendByFeedAndAccount(feedId, accountId)
                 .ifPresent(
                         (recommend -> {
-                            recommend.cancelRecommend();
-                            recommend.getFeed().decreaseRecommend();
+
+                            if (recommend.isRecommended()) {
+                                recommend.cancelRecommend();
+                                recommend.getFeed().decreaseRecommend();
+                            }
                         })
                 );
     }
