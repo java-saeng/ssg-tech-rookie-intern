@@ -1,17 +1,14 @@
 package com.ssg.intern.dev.domain.bookmark.dao;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.dev.domain.bookmark.entity.Bookmark;
-import com.ssg.intern.dev.domain.bookmark.entity.QBookmark;
-import com.ssg.intern.dev.domain.feed.entity.QFeed;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-import static com.ssg.intern.dev.domain.bookmark.entity.QBookmark.*;
-import static com.ssg.intern.dev.domain.feed.entity.QFeed.*;
+import static com.ssg.intern.dev.domain.bookmark.entity.QBookmark.bookmark;
+import static com.ssg.intern.dev.domain.feed.entity.QFeed.feed;
 
 @RequiredArgsConstructor
 public class BookmarkRepositoryImpl implements BookmarkRepositoryCustom {

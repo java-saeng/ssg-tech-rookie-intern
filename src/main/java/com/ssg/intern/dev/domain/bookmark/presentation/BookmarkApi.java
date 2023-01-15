@@ -19,7 +19,7 @@ public class BookmarkApi {
 
     @PostMapping("/feeds/{feed-id}/bookmarks")
     public void plusBookmark(@RequestHeader(HttpHeaders.AUTHORIZATION) long accountId,
-                              @PathVariable("feed-id") long feedId) {
+                             @PathVariable("feed-id") long feedId) {
         bookmarkCommandService.addBookmarkToFeedByFeedId(accountId, feedId);
     }
 

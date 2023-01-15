@@ -35,7 +35,7 @@ public class Feed extends BaseEntity {
     private long recommendCount;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "feed")
-    private List<Comment> comments = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
 
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isCommentBlocked;

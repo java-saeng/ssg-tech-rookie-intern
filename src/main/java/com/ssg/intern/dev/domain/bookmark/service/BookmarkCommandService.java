@@ -21,41 +21,41 @@ public class BookmarkCommandService {
     public void addBookmarkToFeedByFeedId(final long accountId, final long feedId) {
 
         bookmarkRepository.findBookmarkByFeedAndAccount(feedId, accountId)
-                .ifPresentOrElse(
-                        (bookmark -> {
+                          .ifPresentOrElse(
+                                  (bookmark -> {
 
-                            final Feed savedFeed = bookmark.getFeed();
+                                      final Feed savedFeed = bookmark.getFeed();
 
-                            if (!bookmark.isBookmarked()) {
-                                savedFeed.increaseBookmark();
-                                bookmark.addBookmark();
-                            }
+                                      if (!bookmark.isBookmarked()) {
+                                          savedFeed.increaseBookmark();
+                                          bookmark.addBookmark();
+                                      }
 
-                        }),
+                                  }),
 
-                        () -> {
-                            final Feed savedFeed = feedRepository.findById(feedId)
-                                                                 .orElseThrow(EntityNotFoundException::new);
+                                  () -> {
+                                      final Feed savedFeed = feedRepository.findById(feedId)
+                                                                           .orElseThrow(EntityNotFoundException::new);
 
-                            final Bookmark bookmark = Bookmark.of(accountId, savedFeed, true);
+                                      final Bookmark bookmark = Bookmark.of(accountId, savedFeed, true);
 
-                            bookmarkRepository.save(bookmark);
-                            savedFeed.increaseBookmark();
-                        }
-                );
+                                      bookmarkRepository.save(bookmark);
+                                      savedFeed.increaseBookmark();
+                                  }
+                          );
     }
 
     public void cancelBookmarkToFeedByFeedId(final long accountId, final long feedId) {
 
         bookmarkRepository.findBookmarkByFeedAndAccount(feedId, accountId)
-                .ifPresent(
-                        (bookmark -> {
+                          .ifPresent(
+                                  (bookmark -> {
 
-                            if (bookmark.isBookmarked()) {
-                                bookmark.cancelBookmark();
-                                bookmark.getFeed().decreaseBookmark();
-                            }
-                        })
-                );
+                                      if (bookmark.isBookmarked()) {
+                                          bookmark.cancelBookmark();
+                                          bookmark.getFeed().decreaseBookmark();
+                                      }
+                                  })
+                          );
     }
 }
