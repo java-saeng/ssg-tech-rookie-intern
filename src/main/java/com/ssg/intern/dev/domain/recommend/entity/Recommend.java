@@ -46,4 +46,8 @@ public class Recommend extends BaseEntity {
     public void addRecommend() {
         isRecommended = true;
     }
+
+    public void cancelRecommend() {
+        isRecommended = false;
+    }
 }

@@ -55,4 +55,8 @@ public class Feed extends BaseEntity {
     public void increaseRecommend() {
         recommendCount++;
     }
+
+    public void decreaseRecommend() {
+        recommendCount--;
+    }
 }

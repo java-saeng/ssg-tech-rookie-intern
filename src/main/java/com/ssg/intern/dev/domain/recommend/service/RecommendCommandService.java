@@ -44,4 +44,17 @@ public class RecommendCommandService {
 
         return feed.getRecommendCount();
     }
+
+    public long cancelRecommendToFeedByFeedId(final long accountId, final long feedId, final long recommendId) {
+        final Recommend recommend = recommendRepository.findById(recommendId)
+                                                       .orElseThrow(EntityNotFoundException::new);
+
+        final Feed feed = recommend.getFeed();
+
+        feed.decreaseRecommend();
+
+        recommend.cancelRecommend();
+
+        return feed.getRecommendCount();
+    }
 }
