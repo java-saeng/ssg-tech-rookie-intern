@@ -12,8 +12,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @DisplayName("RecommendCommandService Unit Test")
 class RecommendCommandServiceTest {
@@ -40,18 +39,14 @@ class RecommendCommandServiceTest {
         final Recommend recommend = Recommend.of(1L, false, feed);
 
         //when
-        when(feedRepository.findById(anyLong()))
-                .thenReturn(Optional.of(feed));
-
-        when(recommendRepository.findById(anyLong()))
+        when(recommendRepository.findRecommendByFeedAndAccount(anyLong(), anyLong()))
                 .thenReturn(Optional.of(recommend));
 
-        final long recommendCount = recommendCommandService.
-                addRecommendToFeedByFeedId(1L, 1L, Optional.of(1L));
+        recommendCommandService.addRecommendToFeedByFeedId(1L, 1L);
 
         //then
         assertAll(
-                () -> assertEquals(recommendCount, 1),
+                () -> assertEquals(feed.getRecommendCount(), 1),
                 () -> assertTrue(recommend.isRecommended())
         );
     }
@@ -66,14 +61,14 @@ class RecommendCommandServiceTest {
         when(feedRepository.findById(anyLong()))
                 .thenReturn(Optional.of(feed));
 
-        when(recommendRepository.findById(anyLong()))
+        when(recommendRepository.findRecommendByFeedAndAccount(anyLong(), anyLong()))
                 .thenReturn(Optional.empty());
 
-        final long recommendCount = recommendCommandService.
-                addRecommendToFeedByFeedId(1L, 1L, Optional.empty());
+        recommendCommandService.addRecommendToFeedByFeedId(1L, 1L);
 
         //then
-        assertEquals(recommendCount, 1);
+        assertEquals(feed.getRecommendCount(), 1);
+        verify(recommendRepository, times(1)).save(any());
     }
 
     @Test

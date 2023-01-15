@@ -19,30 +19,28 @@ public class RecommendCommandService {
     private final RecommendRepository recommendRepository;
     private final FeedRepository feedRepository;
 
-    public long addRecommendToFeedByFeedId(final long accountId, final long feedId,
-                                           final Optional<Long> recommendId) {
+    public void addRecommendToFeedByFeedId(final long accountId, final long feedId) {
 
-        final Feed feed = feedRepository.findById(feedId)
-                                        .orElseThrow(EntityNotFoundException::new);
+        recommendRepository.findRecommendByFeedAndAccount(feedId, accountId)
+                           .ifPresentOrElse(
+                                   (recommend -> {
 
-        feed.increaseRecommend();
+                                       final Feed savedFeed = recommend.getFeed();
 
-        recommendId.ifPresentOrElse(
-                (id) -> {
-                    final Recommend savedRecommend = recommendRepository.findById(id)
-                                                                        .orElseThrow(EntityNotFoundException::new);
+                                       savedFeed.increaseRecommend();
+                                       recommend.addRecommend();
+                                   }),
 
-                    savedRecommend.addRecommend();
-                },
+                                   () -> {
+                                       final Feed savedFeed = feedRepository.findById(feedId)
+                                                                            .orElseThrow(EntityNotFoundException::new);
 
-                () -> {
-                    final Recommend recommend = Recommend.of(accountId, true, feed);
+                                       final Recommend recommend = Recommend.of(accountId, true, savedFeed);
 
-                    recommendRepository.save(recommend);
-                }
-        );
-
-        return feed.getRecommendCount();
+                                       recommendRepository.save(recommend);
+                                       savedFeed.increaseRecommend();
+                                   }
+                           );
     }
 
     public long cancelRecommendToFeedByFeedId(final long accountId, final long feedId, final long recommendId) {
