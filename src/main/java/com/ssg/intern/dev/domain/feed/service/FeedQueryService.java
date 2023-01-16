@@ -57,6 +57,7 @@ public class FeedQueryService {
                                                      .author(specialReview.getAccount().getEmail())
                                                      .content(comment.getContent())
                                                      .commentCount(savedComments.size())
+                                                     .isCommentBlocked(feed.isCommentBlocked())
                                                      .build();
                             })
                             .collect(Collectors.toList());

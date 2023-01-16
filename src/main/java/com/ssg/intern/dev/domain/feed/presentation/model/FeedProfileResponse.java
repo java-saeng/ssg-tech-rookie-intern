@@ -45,12 +45,15 @@ public class FeedProfileResponse {
         private int commentCount;
         private String content;
         private String author;
+        private boolean isCommentBlocked;
 
         @Builder
-        public CommentProfile(final int commentCount, final String content, final String author) {
+        public CommentProfile(final int commentCount, final String content, final String author,
+                              final boolean isCommentBlocked) {
             this.commentCount = commentCount;
             this.content = content;
             this.author = author;
+            this.isCommentBlocked = isCommentBlocked;
         }
     }
 
