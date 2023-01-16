@@ -4,8 +4,8 @@ drop table if exists feed;
 drop table if exists hash_tag;
 drop table if exists product;
 drop table if exists bookmark;
-drop table if exists recommend;
 drop table if exists special_review;
+drop table if exists recommend;
 
 create table account
 (

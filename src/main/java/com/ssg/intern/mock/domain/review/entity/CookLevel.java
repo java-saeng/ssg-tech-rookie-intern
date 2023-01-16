@@ -1,7 +1,6 @@
 package com.ssg.intern.mock.domain.review.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public enum CookLevel {

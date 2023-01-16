@@ -1,15 +1,20 @@
 package com.ssg.intern.dev.domain.feed.entity;
 
 import com.ssg.intern.common.BaseEntity;
+import com.ssg.intern.dev.domain.comment.entity.Comment;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -28,6 +33,9 @@ public class Feed extends BaseEntity {
 
     @Column(nullable = false)
     private long recommendCount;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "feed")
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isCommentBlocked;
