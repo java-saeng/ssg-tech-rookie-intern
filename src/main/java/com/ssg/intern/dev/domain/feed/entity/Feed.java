@@ -47,4 +47,8 @@ public class Feed extends BaseEntity {
     public static Feed from(Long specialReviewId) {
         return new Feed(specialReviewId);
     }
+
+    public void changeCommentStatus() {
+        isCommentBlocked = !isCommentBlocked;
+    }
 }
