@@ -11,7 +11,7 @@ import static com.ssg.intern.dev.domain.comment.entity.QComment.comment;
 
 @Repository
 @RequiredArgsConstructor
-public class CommentCustomRepositoryImpl implements CommentCustomRepository {
+public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 

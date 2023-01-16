@@ -4,21 +4,20 @@ import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest
-class CommentCustomRepositoryImplTest {
+class CommentRepositoryCustomImplTest {
 
     @Autowired
-    private CommentCustomRepositoryImpl commentCustomRepository;
+    private CommentRepositoryCustomImpl commentCustomRepository;
 
     @Autowired
     private CommentRepository commentRepository;
