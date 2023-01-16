@@ -6,14 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,13 +29,24 @@ public class Comment extends BaseEntity {
 
     private int reportCount;
 
-    public Comment(final Feed feed, final String content) {
+    private Comment(final Feed feed, final String content, Long accountId) {
         this.feed = feed;
         this.content = content;
+        this.accountId = accountId;
         this.reportCount = 0;
     }
 
-    public static Comment of(final Feed feed, final String content) {
-        return new Comment(feed, content);
+    public static Comment of(final Feed feed, final String content, Long accountId) {
+        return new Comment(feed, content, accountId);
     }
+
+    public int updateReportCount(int count) {
+        this.reportCount += count;
+        return reportCount;
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
 }

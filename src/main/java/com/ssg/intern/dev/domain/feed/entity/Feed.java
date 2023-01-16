@@ -29,10 +29,10 @@ public class Feed extends BaseEntity {
     private Long specialReviewId;
 
     @Column(nullable = false)
-    private Long bookmarkCount;
+    private long bookmarkCount;
 
     @Column(nullable = false)
-    private Long recommendCount;
+    private long recommendCount;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "feed")
     private List<Comment> comments = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Feed extends BaseEntity {
         this.specialReviewId = specialReviewId;
     }
 
-    public static Feed from(Long reviewId) {
-        return new Feed(reviewId);
+    public static Feed from(Long specialReviewId) {
+        return new Feed(specialReviewId);
     }
 }
