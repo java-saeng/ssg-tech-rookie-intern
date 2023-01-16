@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DisplayName("SpecialReviewRepository Querydsl Integration Test")
-class SpecialReviewRepositoryImplTest {
+class SpecialReviewRepositoryCustomImplTest {
 
     @Autowired
     JPAQueryFactory queryFactory;

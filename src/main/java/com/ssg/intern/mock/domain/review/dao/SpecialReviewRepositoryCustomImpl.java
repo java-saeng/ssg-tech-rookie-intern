@@ -21,7 +21,7 @@ import static com.ssg.intern.mock.domain.product.entity.QProduct.product;
 import static com.ssg.intern.mock.domain.review.entity.QSpecialReview.specialReview;
 
 @RequiredArgsConstructor
-public class SpecialReviewRepositoryImpl implements SpecialReviewRepositoryCustom {
+public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
@@ -46,7 +46,7 @@ public class SpecialReviewRepositoryImpl implements SpecialReviewRepositoryCusto
                                                                .innerJoin(account).fetchJoin()
                                                                .on(account.id.eq(specialReview.account.id))
                                                                .innerJoin(product).fetchJoin()
-                                                               .on(account.id.eq(specialReview.account.id))
+                                                               .on(product.id.eq(specialReview.product.id))
                                                                .where(containsHashtag(condition.getHashTag()))
                                                                .where(eqCookLevel(condition.getCookLevel()))
                                                                .where(eqCookQuantity(condition.getCookQuantity()))
