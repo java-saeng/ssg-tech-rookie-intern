@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class CommentSingleDao {
     private String email;
     private String content;
-
     private LocalDateTime createdAt;
 
     @Builder

@@ -32,9 +32,8 @@ public class CommentCommandService {
 
     @Transactional
     public void updateComment(Long id, Long accountId, CommentRegisterRequest request) {
-        commentQueryService.checkCommentAccount(id, accountId);
-        commentQueryService.getCommentById(id)
-                .updateContent(request.getContent());
+        commentQueryService.checkCommentAccount(id, accountId)
+                        .updateContent(request.getContent());
     }
 
     @Transactional

@@ -6,7 +6,7 @@
 :source-highlighter: highlightjs
 :sectlinks:
 
-= 1. 댓글 API
+= 댓글 API
 === 댓글 조회
 ==== 요청
 include::{snippets}/comment-select/path-parameters.adoc[]
@@ -14,7 +14,6 @@ include::{snippets}/comment-select/path-parameters.adoc[]
 ==== 응답
 include::{snippets}/comment-select/response-body.adoc[]
 include::{snippets}/comment-select/response-fields.adoc[]
-
 
 === 댓글 생성
 ==== 요청
