@@ -7,7 +7,11 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+import static com.ssg.intern.dev.domain.feed.presentation.model.MyReviewProfileResponse.*;
+
 public interface FeedRepositoryCustom {
 
-    public Page<Feed> findAllFeeds(Pageable pageable);
+    Page<Feed> findAllFeeds(Pageable pageable);
+
+    List<MyReview> findMyReviews(Long accountId, SortingCondition sortingCondition);
 }
