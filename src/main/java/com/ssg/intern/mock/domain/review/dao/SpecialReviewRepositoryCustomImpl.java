@@ -47,10 +47,12 @@ public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositor
                                                                .on(account.id.eq(specialReview.account.id))
                                                                .innerJoin(product).fetchJoin()
                                                                .on(product.id.eq(specialReview.product.id))
-                                                               .where(containsHashtag(condition.getHashTag()))
-                                                               .where(eqCookLevel(condition.getCookLevel()))
-                                                               .where(eqCookQuantity(condition.getCookQuantity()))
-                                                               .where(eqCookTime(condition.getCookTime()))
+                                                               .where(containsHashtag(condition.getHashTag())
+                                                                              .and(eqCookLevel(
+                                                                                      condition.getCookLevel()))
+                                                                              .and(eqCookQuantity(
+                                                                                      condition.getCookQuantity()))
+                                                                              .and(eqCookTime(condition.getCookTime())))
                                                                .offset(pageable.getOffset())
                                                                .limit(pageable.getPageSize())
                                                                .fetch();
