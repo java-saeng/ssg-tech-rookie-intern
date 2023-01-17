@@ -2,7 +2,6 @@ package com.ssg.intern.dev.domain.feed.dao;
 
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
 import com.ssg.intern.dev.global.SortingCondition;
@@ -12,12 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.ssg.intern.dev.domain.comment.entity.QComment.*;
-import static com.ssg.intern.dev.domain.feed.entity.QFeed.*;
+import static com.ssg.intern.dev.domain.comment.entity.QComment.comment;
+import static com.ssg.intern.dev.domain.feed.entity.QFeed.feed;
 
 @RequiredArgsConstructor
 public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
