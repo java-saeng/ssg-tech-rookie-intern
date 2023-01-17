@@ -42,4 +42,12 @@ public class Recommend extends BaseEntity {
     public static Recommend of(final Long accountId, final boolean isRecommended, final Feed feed) {
         return new Recommend(accountId, isRecommended, feed);
     }
+
+    public void addRecommend() {
+        isRecommended = true;
+    }
+
+    public void cancelRecommend() {
+        isRecommended = false;
+    }
 }
