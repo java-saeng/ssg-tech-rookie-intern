@@ -31,7 +31,7 @@ public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositor
                            .innerJoin(account).fetchJoin()
                            .on(account.id.eq(specialReview.account.id))
                            .innerJoin(product).fetchJoin()
-                           .on(account.id.eq(specialReview.account.id))
+                           .on(product.id.eq(specialReview.product.id))
                            .where(specialReview.id.eq(specialReviewId))
                            .fetchOne();
     }
