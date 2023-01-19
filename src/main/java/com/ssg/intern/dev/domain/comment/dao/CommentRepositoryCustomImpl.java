@@ -32,8 +32,8 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
     @Override
     public List<Comment> findCommentsByFeedId(final Long feedId) {
         return jpaQueryFactory.selectFrom(comment)
-                              .innerJoin(feed).fetchJoin()
-                              .on(comment.feed.id.eq(feedId))
-                              .fetch();
+                .innerJoin(feed).fetchJoin()
+                .on(comment.feed.id.eq(feedId))
+                .fetch();
     }
 }

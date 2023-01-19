@@ -1,18 +1,28 @@
 package com.ssg.intern.dev.domain.mypage.presentation;
 
+import com.ssg.intern.dev.domain.mypage.presentation.model.BookmarkProfileResponse;
+import com.ssg.intern.dev.domain.mypage.service.MypageQueryService;
 import com.ssg.intern.dev.domain.mypage.service.MypageCommandService;
+import com.ssg.intern.dev.global.SortingCondition;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class MypageApi {
 
+    private final MypageQueryService mypageQueryService;
     private final MypageCommandService mypageCommandService;
+
+    @GetMapping("/me/thumbnails")
+    public BookmarkProfileResponse getThumbnails(@RequestParam String sortingCondition,
+                                                 @RequestHeader(value = "Authorization") @NotBlank String accountId) {
+        return mypageQueryService.getThumbnails(Long.parseLong(accountId),SortingCondition.valueOf(sortingCondition));
+    }
 
     @PatchMapping("/me/feeds/{feed-id}/comments/block")
     public void modifyCommentBlocked(@PathVariable("feed-id") long feedId) {
