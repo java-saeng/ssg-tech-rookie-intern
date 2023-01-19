@@ -1,6 +1,7 @@
 package com.ssg.intern.mock.domain.review.dao;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedSearchingConditionRequest;
 import com.ssg.intern.mock.domain.review.entity.CookLevel;
@@ -40,24 +41,29 @@ public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositor
     public Page<SpecialReview> findBySearchingCondition(final Pageable pageable,
                                                         final FeedSearchingConditionRequest condition) {
 
-        final List<SpecialReview> specialReviews = queryFactory.selectFrom(specialReview).distinct()
-                                                               .innerJoin(hashTag).fetchJoin()
-                                                               .on(specialReview.id.eq(hashTag.specialReview.id))
+        final List<SpecialReview> specialReviews = queryFactory.selectFrom(specialReview)
                                                                .innerJoin(account).fetchJoin()
                                                                .on(account.id.eq(specialReview.account.id))
                                                                .innerJoin(product).fetchJoin()
                                                                .on(product.id.eq(specialReview.product.id))
-                                                               .where(containsHashtag(condition.getHashTag())
-                                                                              .and(eqCookLevel(
-                                                                                      condition.getCookLevel()))
+                                                               .where(eqCookLevel(condition.getCookLevel())
                                                                               .and(eqCookQuantity(
                                                                                       condition.getCookQuantity()))
-                                                                              .and(eqCookTime(condition.getCookTime())))
+                                                                              .and(eqCookTime(condition.getCookTime()))
+                                                                              .and(hashTagSubQuery(condition)))
                                                                .offset(pageable.getOffset())
                                                                .limit(pageable.getPageSize())
                                                                .fetch();
 
         return PageableExecutionUtils.getPage(specialReviews, pageable, specialReviews::size);
+    }
+
+    private static BooleanExpression hashTagSubQuery(final FeedSearchingConditionRequest condition) {
+        return JPAExpressions.selectFrom(hashTag)
+                             .where(hashTag.specialReview.id
+                                            .eq(specialReview.id)
+                                            .and(containsHashtag(condition.getHashTag())))
+                             .exists();
     }
 
     private static BooleanExpression eqCookTime(final CookTime cookTime) {
