@@ -47,18 +47,16 @@ public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
                         specialReview.description,
                         feed.recommendCount,
                         feed.bookmarkCount,
-                        feed.comments.size(),
-                        feed.isCommentBlocked
-                )).distinct()
+                        queryFactory.select(comment.count())
+                                .from(comment)
+                                .where(comment.feed.id.eq(feed.id)),
+                        feed.isCommentBlocked))
                 .from(feed)
                 .innerJoin(specialReview).fetchJoin()
                 .on(feed.specialReviewId.eq(specialReview.id))
-                .leftJoin(comment).fetchJoin()
-                .on(comment.feed.id.eq(feed.id))
                 .where(specialReview.account.id.eq(accountId))
                 .orderBy(sorting(sortingCondition))
-                .fetch()
-                ;
+                .fetch();
     }
 
     private OrderSpecifier<?> sort(final Sort sort) {

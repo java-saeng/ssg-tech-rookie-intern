@@ -23,19 +23,19 @@ public class MyReviewProfileResponse {
     @Getter
     @NoArgsConstructor
     public static class MyReview {
-        private String imageUrl; //review
-        private float starScore; //review
+        private String imageUrl;
+        private float starScore;
         private LocalDateTime createdAt;
         private String description;
         private long recommendCount;
         private long bookmarkCount;
-        private int commentCount; //TODO : int에서 long으로 변환해야함!
+        private long commentCount;
         private boolean isCommentBlocked;
 
         @Builder
         @QueryProjection
         public MyReview(String imageUrl, float starScore, LocalDateTime createdAt, String description,
-                        long recommendCount, long bookmarkCount, int commentCount, boolean isCommentBlocked) {
+                        long recommendCount, long bookmarkCount, long commentCount, boolean isCommentBlocked) {
             this.imageUrl = imageUrl;
             this.starScore = starScore;
             this.createdAt = createdAt;
