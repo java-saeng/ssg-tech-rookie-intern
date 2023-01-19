@@ -6,10 +6,9 @@ import com.ssg.intern.dev.domain.mypage.service.MypageCommandService;
 import com.ssg.intern.dev.global.SortingCondition;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class MypageApi {
 
     @GetMapping("/me/thumbnails")
     public BookmarkProfileResponse getThumbnails(@RequestParam String sortingCondition,
-                                                 @RequestHeader(value = "Authorization") String accountId) {
+                                                 @RequestHeader(value = "Authorization") @NotBlank String accountId) {
         return mypageQueryService.getThumbnails(Long.parseLong(accountId),SortingCondition.valueOf(sortingCondition));
     }
 
