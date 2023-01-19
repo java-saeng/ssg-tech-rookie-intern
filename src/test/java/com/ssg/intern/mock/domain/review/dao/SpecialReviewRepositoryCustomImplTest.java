@@ -1,5 +1,6 @@
 package com.ssg.intern.mock.domain.review.dao;
 
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.mock.domain.review.entity.CookLevel;
 import com.ssg.intern.mock.domain.review.entity.CookQuantity;
@@ -50,17 +51,23 @@ class SpecialReviewRepositoryCustomImplTest {
     @Test
     @DisplayName("findBySearchingCondition() : 원하는 조건에 맞게 SpecialReview를 조회할 수 있다.")
     void testFindBySearchingCondition() {
-        final List<SpecialReview> specialReviews = queryFactory.selectFrom(specialReview).distinct()
-                                                               .innerJoin(hashTag).fetchJoin()
-                                                               .on(specialReview.id.eq(hashTag.specialReview.id))
+
+        final List<SpecialReview> specialReviews = queryFactory.selectFrom(specialReview)
                                                                .innerJoin(account).fetchJoin()
                                                                .on(account.id.eq(specialReview.account.id))
                                                                .innerJoin(product).fetchJoin()
-                                                               .on(account.id.eq(specialReview.account.id))
-                                                               .where(hashTag.name.eq("좋아"))
-                                                               .where(specialReview.cookLevel.eq(CookLevel.EASY))
-                                                               .where(specialReview.cookQuantity.eq(CookQuantity.SOLO))
-                                                               .where(specialReview.cookTime.eq(CookTime.TEN))
+                                                               .on(product.id.eq(specialReview.product.id))
+                                                               .where(specialReview.cookLevel.eq(CookLevel.EASY)
+                                                                              .and(specialReview.cookQuantity.eq(CookQuantity.SOLO))
+                                                                              .and(specialReview.cookTime.eq(CookTime.TEN))
+                                                                              .and(
+                                                                                      JPAExpressions.selectFrom(hashTag)
+                                                                                                    .where(hashTag.specialReview.id
+                                                                                                                   .eq(specialReview.id)
+                                                                                                                   .and(hashTag.name.contains(
+                                                                                                                           "좋아")))
+                                                                                                    .exists(
+                                                                                                    )))
                                                                .fetch();
 
         assertAll(
