@@ -16,13 +16,17 @@ public class FeedProfileResponse {
     private ProductProfile productProfile;
     private ReviewProfile reviewProfile;
 
+    private List<String> hashTags;
+
     @Builder
     public FeedProfileResponse(final FeedReactionProfile feedReactionProfile, final List<CommentProfile> commentProfile,
-                               final ProductProfile productProfile, final ReviewProfile reviewProfile) {
+                               final ProductProfile productProfile, final ReviewProfile reviewProfile,
+                               List<String> hashTags) {
         this.feedReactionProfile = feedReactionProfile;
         this.commentProfile = commentProfile;
         this.productProfile = productProfile;
         this.reviewProfile = reviewProfile;
+        this.hashTags = hashTags;
     }
 
     @Getter
@@ -30,10 +34,12 @@ public class FeedProfileResponse {
     public static class FeedReactionProfile {
         private long bookmarkCount;
         private long recommendCount;
+        private long feedId;
 
-        public FeedReactionProfile(final long bookmarkCount, final long recommendCount) {
+        public FeedReactionProfile(final long bookmarkCount, final long recommendCount, final long feedId) {
             this.bookmarkCount = bookmarkCount;
             this.recommendCount = recommendCount;
+            this.feedId = feedId;
         }
     }
 
@@ -87,11 +93,13 @@ public class FeedProfileResponse {
         private String description;
         private String imageUrl;
         private float starScore;
+        private String author;
 
         @Builder
         public ReviewProfile(final LocalDateTime createdAt, final String cookLevel, final String cookQuantity,
                              final String cookTime,
-                             final String description, final String imageUrl, final float starScore) {
+                             final String description, final String imageUrl, final float starScore,
+                             final String author) {
             this.createdAt = createdAt;
             this.cookLevel = cookLevel;
             this.cookQuantity = cookQuantity;
@@ -99,6 +107,7 @@ public class FeedProfileResponse {
             this.description = description;
             this.imageUrl = imageUrl;
             this.starScore = starScore;
+            this.author = author;
         }
     }
 }

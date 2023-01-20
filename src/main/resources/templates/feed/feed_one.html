@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+<head>
+    <title>피드 하나 조회</title>
+</head>
+
+<body>
+
+<div class="hstack gap-md-3 bg-secondary p-4 bg-opacity-50">
+    <div class="mx-auto fs-2 fw-bolder">전체</div>
+    <div class="mx-auto fs-2 fw-bolder">#1인요리</div>
+    <div class="mx-auto fs-2 fw-bolder">#간편요리</div>
+    <div class="mx-auto fs-2 fw-bolder">#매일매일</div>
+</div>
+
+<div class="d-flex">
+    <div class="p-3" id="newer">
+        <button id="newer-button" th:style="'background: white; border: 0'"
+                th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
+            최신순
+        </button>
+    </div>
+    <div class="p-3">
+        <button th:style="'background: white; border: 0'"
+                th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
+            랭킹순
+        </button>
+    </div>
+</div>
+
+<div class="container text-center rounded-pill border border-success p-3 mw-100" style="margin-bottom: 5%">
+    <div class="row">
+        <div class="col">
+            1. 요리 재료
+        </div>
+        <div class="col">
+            2. 요리 과정
+        </div>
+        <div class="col">
+            3. 요리 완성
+        </div>
+    </div>
+</div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                    class="active"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img th:src="${feed.reviewProfile.imageUrl}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img th:src="${feed.reviewProfile.imageUrl}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img th:src="${feed.reviewProfile.imageUrl}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+        <div style="width: 500px; height: 500px">
+            <img th:src="${feed.productProfile.imageUrl}"
+                 style="width: 50%; height: 50%; float: left; margin-top: 10%;">
+        </div>
+
+
+        <div style="float: left; margin-top: 10%; margin-left: 10%">
+            <p th:text="${feed.productProfile.name}"></p>
+            <p th:text="${feed.productProfile.discountPercent}"></p>
+            <p th:text="${feed.productProfile.price}"></p>
+            <span style="text-align: left; margin-left: 5%;">
+            별점<span th:text="${feed.productProfile.starScore}"></span>
+        </span>
+        </div>
+
+    </div>
+
+    <div>
+
+
+        <span style="text-align: right; margin-left: 60%">
+            <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
+                 class="d-inline-block align-text-top"
+                 th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''"
+            >
+            추천해요<span th:text="${feed.feedReactionProfile.recommendCount}"></span>
+        </span>
+
+        <span style="text-align: right; margin-left: 5%;">
+            <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
+                 class="d-inline-block align-text-top">
+            북마크<span th:text="${feed.feedReactionProfile.bookmarkCount}"></span>
+        </span>
+    </div>
+
+    <div class="d-flex mb-3">
+        <div class="p-2" th:text="${feed.reviewProfile.createdAt}"></div>
+        <div class="p-2" th:text="${feed.reviewProfile.author}"></div>
+    </div>
+
+    <div class="d-grid gap-1">
+        <div>요리 분량
+            <div class="p-2 bg-light border" th:text="${feed.reviewProfile.cookQuantity}" text="요리"></div>
+        </div>
+
+        <div class="p-2 bg-light border" th:text="${feed.reviewProfile.cookLevel}"></div>
+        <div class="p-2 bg-light border" th:text="${feed.reviewProfile.cookTime}"></div>
+    </div>
+
+    <div class="d-flex flex-column mb-3">
+        <div class="p-2">
+            요리 분량<span></span>
+        </div>
+        <div class="p-2">
+            요리 난이도<span></span>
+        </div>
+        <div class="p-2">
+            요리 시간<span></span>
+        </div>
+    </div>
+
+    <div th:text="${feed.reviewProfile.description}"></div>
+
+    <div th:each="hashTag : ${feed.hashTags}">
+        <div th:text="|#${hashTag}|">
+        </div>
+    </div>
+
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
