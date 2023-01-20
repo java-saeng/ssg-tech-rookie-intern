@@ -25,11 +25,11 @@ public class MypageController {
 
     @GetMapping("/me/thumbnails")
     public String getThumbnails(@RequestParam String sortingCondition,
-                                @RequestHeader(value = "Authorization") String accountId,
+                                @RequestHeader(value = "Authorization") Long accountId,
                                 Model model) {
-        final BookmarkProfileResponse response = mypageQueryService.getThumbnails(Long.parseLong(accountId),
-                                                                                  SortingCondition.valueOf(
-                                                                                          sortingCondition));
+        final BookmarkProfileResponse response = mypageQueryService.getThumbnails(accountId,
+                SortingCondition.valueOf(
+                        sortingCondition));
         model.addAttribute("thumbnails", response.getThumbnails());
         model.addAttribute("bookmarkCount", response.getBookmarkTotalCount());
 
@@ -42,10 +42,12 @@ public class MypageController {
     }
 
     @GetMapping("/me")
-    public String getMyFeeds(@RequestParam("sorting") String sortingCondition, Model model) {
-        final MyReviewProfileResponse response = mypageQueryService.getMyFeeds(Long.parseLong("2"),
-                                                                              SortingCondition.valueOf(
-                                                                                      sortingCondition));
+    public String getMyFeeds(@RequestParam("sorting") String sortingCondition,
+                             @RequestHeader(value = "Authorization") Long accountId,
+                             Model model) {
+        final MyReviewProfileResponse response = mypageQueryService.getMyFeeds(accountId,
+                SortingCondition.valueOf(
+                        sortingCondition));
 
         model.addAttribute("myReviews", response.getReviews());
         model.addAttribute("totalReviewCount", response.getTotalReviewCount());
