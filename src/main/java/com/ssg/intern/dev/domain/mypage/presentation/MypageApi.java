@@ -21,8 +21,8 @@ public class MypageApi {
 
     @GetMapping("/me/thumbnails")
     public BookmarkProfileResponse getThumbnails(@RequestParam String sortingCondition,
-                                                 @RequestHeader(value = "Authorization") @NotBlank String accountId) {
-        return mypageQueryService.getThumbnails(Long.parseLong(accountId),SortingCondition.valueOf(sortingCondition));
+                                                 @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
+        return mypageQueryService.getThumbnails(accountId,SortingCondition.valueOf(sortingCondition));
     }
 
     @PatchMapping("/me/feeds/{feed-id}/comments/block")
@@ -32,7 +32,7 @@ public class MypageApi {
 
     @GetMapping("/me")
     public MyReviewProfileResponse getMyFeeds(@RequestParam("sorting") String sortingCondition,
-                                              @RequestHeader(value = "Authorization") @NotBlank String accountId) {
-        return mypageQueryService.getMyFeeds(Long.parseLong(accountId), SortingCondition.valueOf(sortingCondition));
+                                              @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
+        return mypageQueryService.getMyFeeds(accountId, SortingCondition.valueOf(sortingCondition));
     }
 }
