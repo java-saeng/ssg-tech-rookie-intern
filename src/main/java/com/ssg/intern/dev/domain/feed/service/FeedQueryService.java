@@ -5,6 +5,7 @@ import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
 import com.ssg.intern.mock.MockDataFacadeRepository;
+import com.ssg.intern.mock.domain.hashtag.entity.HashTag;
 import com.ssg.intern.mock.domain.product.entity.Product;
 import com.ssg.intern.mock.domain.review.entity.SpecialReview;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +39,17 @@ public class FeedQueryService {
                                                            .commentProfile(convertToComment(feed, specialReview))
                                                            .productProfile(convertToProduct(specialReview))
                                                            .reviewProfile(convertToReview(specialReview))
+                                                           .hashTags(specialReview.getHashTags()
+                                                                                  .stream()
+                                                                                  .map((HashTag::getName))
+                                                                                  .collect(Collectors.toList()))
                                                            .build();
                              })
                              .collect(Collectors.toList());
     }
 
     private FeedReactionProfile convertToReaction(Feed feed) {
-        return new FeedReactionProfile(feed.getBookmarkCount(), feed.getRecommendCount());
+        return new FeedReactionProfile(feed.getBookmarkCount(), feed.getRecommendCount(), feed.getId());
     }
 
     private List<CommentProfile> convertToComment(Feed feed, SpecialReview specialReview) {
@@ -85,6 +90,7 @@ public class FeedQueryService {
                             .description(specialReview.getDescription())
                             .imageUrl(specialReview.getImageUrl())
                             .starScore(specialReview.getStarScore())
+                            .author(specialReview.getAccount().getEmail())
                             .build();
     }
 

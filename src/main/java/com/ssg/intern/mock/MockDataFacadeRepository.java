@@ -1,6 +1,7 @@
 package com.ssg.intern.mock;
 
 import com.ssg.intern.mock.domain.hashtag.dao.HashTagRepository;
+import com.ssg.intern.mock.domain.hashtag.entity.HashTag;
 import com.ssg.intern.mock.domain.product.dao.ProductRepository;
 import com.ssg.intern.mock.domain.review.dao.SpecialReviewRepository;
 import com.ssg.intern.mock.domain.review.entity.SpecialReview;

@@ -2,6 +2,7 @@ package com.ssg.intern.mock.domain.review.entity;
 
 import com.ssg.intern.common.BaseEntity;
 import com.ssg.intern.common.domain.account.entity.Account;
+import com.ssg.intern.mock.domain.hashtag.entity.HashTag;
 import com.ssg.intern.mock.domain.product.entity.Product;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,6 +19,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -57,6 +61,9 @@ public class SpecialReview extends BaseEntity {
 
     @Column(nullable = false)
     private float starScore;
+
+    @OneToMany(mappedBy = "specialReview")
+    private List<HashTag> hashTags = new ArrayList<>();
 
     @Builder
     public SpecialReview(final Product product, final Account account, final CookLevel cookLevel,
