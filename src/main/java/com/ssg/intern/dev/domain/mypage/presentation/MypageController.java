@@ -48,7 +48,7 @@ public class MypageController {
                                                                                       sortingCondition));
 
         model.addAttribute("myReviews", response.getReviews());
-        model.addAttribute("totalReviewCount", response.getTotalReivewCount());
+        model.addAttribute("totalReviewCount", response.getTotalReviewCount());
 
         return "/mypage/mypage_review";
     }
