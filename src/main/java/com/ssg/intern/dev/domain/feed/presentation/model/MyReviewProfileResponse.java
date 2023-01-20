@@ -12,11 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 public class MyReviewProfileResponse {
 
-    private long totalReivewCount;
+    private long totalReviewCount;
     private List<MyReview> reviews;
 
-    public MyReviewProfileResponse(long totalReivewCount, List<MyReview> reviews) {
-        this.totalReivewCount = totalReivewCount;
+    public MyReviewProfileResponse(long totalReviewCount, List<MyReview> reviews) {
+        this.totalReviewCount = totalReviewCount;
         this.reviews = reviews;
     }
 
