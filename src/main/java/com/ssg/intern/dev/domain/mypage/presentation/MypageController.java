@@ -24,7 +24,7 @@ public class MypageController {
     private final MypageCommandService mypageCommandService;
 
     @GetMapping("/me/thumbnails")
-    public String getThumbnails(@RequestParam String sortingCondition,
+    public String getThumbnails(@RequestParam("sorting") String sortingCondition,
                                 @RequestHeader(value = "Authorization") Long accountId,
                                 Model model) {
         final BookmarkProfileResponse response = mypageQueryService.getThumbnails(accountId,

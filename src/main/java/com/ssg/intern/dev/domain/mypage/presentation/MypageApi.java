@@ -20,7 +20,7 @@ public class MypageApi {
     private final MypageCommandService mypageCommandService;
 
     @GetMapping("/me/thumbnails")
-    public BookmarkProfileResponse getThumbnails(@RequestParam String sortingCondition,
+    public BookmarkProfileResponse getThumbnails(@RequestParam("sorting") String sortingCondition,
                                                  @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
         return mypageQueryService.getThumbnails(accountId,SortingCondition.valueOf(sortingCondition));
     }
