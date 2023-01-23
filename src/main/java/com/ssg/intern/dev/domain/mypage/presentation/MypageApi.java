@@ -22,6 +22,9 @@ public class MypageApi {
     @GetMapping("/me/thumbnails")
     public BookmarkProfileResponse getThumbnails(@RequestParam("sorting") String sortingCondition,
                                                  @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
+        if(sortingCondition==null) {
+            sortingCondition = "NEWER";
+        }
         return mypageQueryService.getThumbnails(accountId,SortingCondition.valueOf(sortingCondition));
     }
 
@@ -33,6 +36,9 @@ public class MypageApi {
     @GetMapping("/me")
     public MyReviewProfileResponse getMyFeeds(@RequestParam("sorting") String sortingCondition,
                                               @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
+        if(sortingCondition==null) {
+            sortingCondition = "NEWER";
+        }
         return mypageQueryService.getMyFeeds(accountId, SortingCondition.valueOf(sortingCondition));
     }
 }
