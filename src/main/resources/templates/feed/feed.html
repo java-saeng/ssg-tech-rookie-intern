@@ -159,8 +159,7 @@
 
         <div class="d-flex mb-3">
             <div class="p-2" th:text="${#temporals.format(feed.reviewProfile.createdAt, 'yyyy.MM.dd')}"></div>
-            <div class="p-2" th:text="작성자"></div>
-            <!--        <div class="p-2" th:text="${feed.reviewProfile.author}"></div>-->
+            <div class="p-2" th:text="${feed.reviewProfile.author}"></div>
         </div>
 
         <div class="d-grid gap-1 bg-light border">
