@@ -6,6 +6,7 @@ import com.ssg.intern.dev.domain.mypage.service.MypageCommandService;
 import com.ssg.intern.dev.domain.mypage.service.MypageQueryService;
 import com.ssg.intern.dev.global.SortingCondition;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotBlank;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class MypageController {
@@ -27,6 +29,9 @@ public class MypageController {
     public String getThumbnails(@RequestParam("sorting") String sortingCondition,
                                 @RequestHeader(value = "Authorization") Long accountId,
                                 Model model) {
+        if(sortingCondition==null) {
+            sortingCondition = "NEWER";
+        }
         final BookmarkProfileResponse response = mypageQueryService.getThumbnails(accountId,
                 SortingCondition.valueOf(
                         sortingCondition));
@@ -42,12 +47,14 @@ public class MypageController {
     }
 
     @GetMapping("/me")
-    public String getMyFeeds(@RequestParam("sorting") String sortingCondition,
-                             @RequestHeader(value = "Authorization") Long accountId,
+    public String getMyFeeds(@RequestParam(value = "sorting", required = false) String sortingCondition,
+//                             @RequestHeader(value = "Authorization") Long accountId,
                              Model model) {
-        final MyReviewProfileResponse response = mypageQueryService.getMyFeeds(accountId,
-                SortingCondition.valueOf(
-                        sortingCondition));
+        if(sortingCondition==null) {
+            sortingCondition = "NEWER";
+        }
+        final MyReviewProfileResponse response = mypageQueryService.getMyFeeds(1L,
+                        SortingCondition.valueOf(sortingCondition));
 
         model.addAttribute("myReviews", response.getReviews());
         model.addAttribute("totalReviewCount", response.getTotalReviewCount());
