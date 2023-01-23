@@ -7,14 +7,51 @@
     <title>피드 하나 조회</title>
 </head>
 
+<header>
+    <nav class="navbar bg-light" style="width: 100%">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.ssg.com/">
+                <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="150px" class="d-inline-block align-text-top">
+            </a>
+
+            <form class="d-flex" role="search" style="width: 70%;" action="https://www.ssg.com/search.ssg">
+                <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
+               style="width: 5%; text-align: center">
+                <img th:src="@{/assets/cart.svg}" alt="Logo" width="30" height="24"
+                     class="d-inline-block align-text-top">
+            </a>
+        </div>
+    </nav>
+
+    <div class="d-inline-flex flex-row justify-content-between w-100">
+        <div class="m-3 flex-fill">
+            <!--        <form class="d-flex" role="search" style="width: 100%;" action="https://www.ssg.com/search.ssg">-->
+            <form class="d-flex" role="search" action="#">
+                <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="dropdown m-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
 <body>
 
-<div class="hstack gap-md-3 bg-secondary p-4 bg-opacity-50">
-    <div class="mx-auto fs-2 fw-bolder">전체</div>
-    <div class="mx-auto fs-2 fw-bolder">#1인요리</div>
-    <div class="mx-auto fs-2 fw-bolder">#간편요리</div>
-    <div class="mx-auto fs-2 fw-bolder">#매일매일</div>
-</div>
+
 
 <div class="d-flex">
     <div class="p-3" id="newer">
