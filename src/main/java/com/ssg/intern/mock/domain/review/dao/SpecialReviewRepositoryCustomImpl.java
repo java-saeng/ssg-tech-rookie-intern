@@ -7,7 +7,6 @@ import com.ssg.intern.dev.domain.feed.presentation.model.FeedSearchingConditionR
 import com.ssg.intern.mock.domain.review.entity.CookLevel;
 import com.ssg.intern.mock.domain.review.entity.CookQuantity;
 import com.ssg.intern.mock.domain.review.entity.CookTime;
-import com.ssg.intern.mock.domain.hashtag.entity.QHashTag;
 import com.ssg.intern.mock.domain.review.entity.SpecialReview;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
