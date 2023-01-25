@@ -20,7 +20,7 @@ public class MypageApi {
     private final MypageCommandService mypageCommandService;
 
     @GetMapping("/me/thumbnails")
-    public BookmarkProfileResponse getThumbnails(@RequestParam("sorting") SortingCondition sortingCondition,
+    public BookmarkProfileResponse getThumbnails(@RequestParam(value = "sorting", required = false) SortingCondition sortingCondition,
                                                  @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
         if(sortingCondition==null) {
             sortingCondition = SortingCondition.NEWER;
@@ -34,7 +34,7 @@ public class MypageApi {
     }
 
     @GetMapping("/me")
-    public MyReviewProfileResponse getMyFeeds(@RequestParam("sorting") SortingCondition sortingCondition,
+    public MyReviewProfileResponse getMyFeeds(@RequestParam(value = "sorting", required = false) SortingCondition sortingCondition,
                                               @RequestHeader(value = "Authorization") @NotBlank Long accountId) {
         if(sortingCondition==null) {
             sortingCondition = SortingCondition.NEWER;
