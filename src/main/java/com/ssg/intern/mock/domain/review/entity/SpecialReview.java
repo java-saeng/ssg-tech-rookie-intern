@@ -65,9 +65,6 @@ public class SpecialReview extends BaseEntity {
     @Column(nullable = false)
     private float starScore;
 
-    @OneToMany(mappedBy = "specialReview")
-    private List<HashTag> hashTags = new ArrayList<>();
-
     @Builder
     public SpecialReview(final Product product, final Account account, final CookLevel cookLevel,
                          final CookQuantity cookQuantity,
