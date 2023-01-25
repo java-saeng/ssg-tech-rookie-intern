@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
-<meta charset="utf-8">
+<meta charset="utf-8"/>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <title>내가 저장한 북마크 미리보기</title>
 
@@ -28,7 +28,7 @@
 <ul class="nav justify-content-center" style="width: 100%; background-color: gainsboro">
     <li class="nav-item" style="width: 49%; text-align: center">
         <div class="container-fluid">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="http://localhost:8080/me">
                 <img th:src="@{/assets/pencil.svg}" alt="Logo" width="20" height="20"
                      class="d-inline-block align-text-top">
                 내가 작성한 레시피
@@ -38,7 +38,7 @@
     <li class="vr"></li>
     <li class="nav-item" style="width: 49%; text-align: center">
         <div class="container-fluid">
-            <a class="nav-link" href="http://localhost:8080/feeds">
+            <a class="nav-link" href="http://localhost:8080/me/thumbnails">
                 <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
                      class="d-inline-block align-text-top">
                 북마크한 레시피
@@ -53,8 +53,16 @@
         <span th:text="${bookmarkCount}"></span>
         <span>개</span>
     </div>
-    <div class="p-3">최근 저장순</div>
-    <div class="p-3">오래된 순</div>
+    <button id="newer-button" th:style="'background: white; border: 0'"
+            th:onclick="'location.href=\''+ @{http://localhost:8080/me/thumbnails?sortingCondition=NEWER} + '\''">
+        최근 저장순
+    </button>
+    <div class="p-3">
+        <button th:style="'background: white; border: 0'"
+                th:onclick="'location.href=\''+ @{http://localhost:8080/me/thumbnails?sortingCondition=OLDER} + '\''">
+            오래된 순
+        </button>
+    </div>
 </div>
 
 <div class="row row-cols-2 row-cols-md-2 g-4 mx-3 d-flex justify-content-center">
@@ -78,7 +86,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

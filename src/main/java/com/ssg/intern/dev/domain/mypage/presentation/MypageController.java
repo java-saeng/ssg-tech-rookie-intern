@@ -23,7 +23,7 @@ public class MypageController {
     private final MypageCommandService mypageCommandService;
 
     @GetMapping("/me/thumbnails")
-    public String getThumbnails(@RequestParam("sorting") SortingCondition sortingCondition,
+    public String getThumbnails(@RequestParam(value = "sorting", required = false) SortingCondition sortingCondition,
                                 Model model) {
 
         if(sortingCondition==null) {
