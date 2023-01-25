@@ -50,7 +50,8 @@ public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
                         queryFactory.select(comment.count())
                                 .from(comment)
                                 .where(comment.feed.id.eq(feed.id)),
-                        feed.isCommentBlocked))
+                        feed.isCommentBlocked,
+                        feed.id))
                 .from(feed)
                 .innerJoin(specialReview).fetchJoin()
                 .on(feed.specialReviewId.eq(specialReview.id))
