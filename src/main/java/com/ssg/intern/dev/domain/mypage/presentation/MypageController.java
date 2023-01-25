@@ -12,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.constraints.NotBlank;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,15 +23,14 @@ public class MypageController {
     private final MypageCommandService mypageCommandService;
 
     @GetMapping("/me/thumbnails")
-    public String getThumbnails(@RequestParam("sorting") String sortingCondition,
-                                @RequestHeader(value = "Authorization") Long accountId,
+    public String getThumbnails(@RequestParam("sorting") SortingCondition sortingCondition,
                                 Model model) {
+
         if(sortingCondition==null) {
-            sortingCondition = "NEWER";
+            sortingCondition = SortingCondition.NEWER;
         }
-        final BookmarkProfileResponse response = mypageQueryService.getThumbnails(accountId,
-                SortingCondition.valueOf(
-                        sortingCondition));
+
+        final BookmarkProfileResponse response = mypageQueryService.getThumbnails(1L, sortingCondition);
         model.addAttribute("thumbnails", response.getThumbnails());
         model.addAttribute("bookmarkCount", response.getBookmarkTotalCount());
 
@@ -47,14 +43,14 @@ public class MypageController {
     }
 
     @GetMapping("/me")
-    public String getMyFeeds(@RequestParam(value = "sorting", required = false) String sortingCondition,
-//                             @RequestHeader(value = "Authorization") Long accountId,
+    public String getMyFeeds(@RequestParam(value = "sorting", required = false) SortingCondition sortingCondition,
                              Model model) {
+
         if(sortingCondition==null) {
-            sortingCondition = "NEWER";
+            sortingCondition = SortingCondition.NEWER;
         }
-        final MyReviewProfileResponse response = mypageQueryService.getMyFeeds(1L,
-                        SortingCondition.valueOf(sortingCondition));
+
+        final MyReviewProfileResponse response = mypageQueryService.getMyFeeds(1L, sortingCondition);
 
         model.addAttribute("myReviews", response.getReviews());
         model.addAttribute("totalReviewCount", response.getTotalReviewCount());
