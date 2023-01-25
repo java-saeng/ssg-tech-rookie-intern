@@ -7,8 +7,8 @@
     <title>피드</title>
 </head>
 
-<header>
-    <nav class="navbar bg-light" style="width: 100%">
+<header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
+    <nav class="navbar bg-light" style="width: 100%;">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://www.ssg.com/">
                 <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="150px" class="d-inline-block align-text-top">
@@ -25,54 +25,50 @@
                      class="d-inline-block align-text-top">
             </a>
         </div>
+
+        <div class="d-inline-flex flex-row justify-content-between w-100">
+            <div class="m-3 flex-fill">
+                <form class="d-flex" role="search" action="#">
+                    <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+
+            <div class="dropdown m-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
+
+    <div class="d-flex bg-light">
+        <div class="p-3" id="newer">
+            <button id="newer-button" th:style="'border: 0; background-color: transparent'"
+                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
+                최신순
+            </button>
+        </div>
+        <div class="p-3">
+            <button th:style="'border: 0; background-color: transparent'"
+                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
+                랭킹순
+            </button>
+        </div>
+    </div>
 </header>
 
 <body>
 
-<div class="d-inline-flex flex-row justify-content-between w-100">
-    <div class="m-3 flex-fill">
-        <!--        <form class="d-flex" role="search" style="width: 100%;" action="https://www.ssg.com/search.ssg">-->
-        <form class="d-flex" role="search" action="#">
-            <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
+<div class="card p-3" th:each="feed : ${feeds}">
 
-    <div class="dropdown m-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown button
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="d-flex">
-    <div class="p-3" id="newer">
-        <button id="newer-button" th:style="'background: white; border: 0'"
-                th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
-            최신순
-        </button>
-    </div>
-    <div class="p-3">
-        <button th:style="'background: white; border: 0'"
-                th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
-            랭킹순
-        </button>
-    </div>
-    <div class="p-3">
-        <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
-             class="d-inline-block align-text-top">
-    </div>
-</div>
-
-<div class="card p-3 m-3" th:each="feed : ${feeds}">
-
-    <div class="card-header container text-center rounded-pill border border-success p-3 my-3">
+    <div class="card-header container text-center rounded-pill border border-success p-3 my-3" style="width: 800px; margin: 0 auto;">
         <div class="row">
             <div class="col">
                 1. 요리 재료
@@ -86,7 +82,7 @@
         </div>
     </div>
 
-    <div class="d-flex m-auto p-5" style="height: 650px; width: 800px;">
+    <div class="d-flex m-auto p-5" style="height: 650px; width: 800px; border: 3px solid lightgrey;">
         <div id="carouselExampleIndicators" class="carousel slide card-img-top d-flex w-100" data-bs-ride="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
@@ -121,75 +117,95 @@
 
 
     <div class="card-body">
-
-        <div class="d-flex justify-content-around" style="height: 200px; border: solid 1px black">
-            <div style="width: 30%">
+        <div class="d-flex justify-content-around"
+             style="height: 170px; width:800px; border:1px solid lightgrey; margin: 0 auto">
+            <div style="width: 40%">
                 <img th:src="${feed.productProfile.imageUrl}"
                      style="height: 100%; float: left; padding: 1em 3em;">
             </div>
-            <div class="align-self-center" style="width: 70%;">
+            <div class="align-self-center" style="width: 60%;">
                 <div>
                     <p th:text="${feed.productProfile.name}"/>
                 </div>
                 <div>
                     <span th:text="${feed.productProfile.discountPercent}" style="color: red"></span>
-                    <span style="color: red">%&nbsp;&nbsp;</span>
+                    <span style="color: red; margin-right: 10px">%&nbsp;&nbsp;</span>
                     <span th:text="${feed.productProfile.price}"/>
                     <span>원</span>
+                    <span style="float: right; margin-right: 100px">
+                        <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
+                            class="d-inline-block align-text-top"/>
+                        <span th:text="${feed.productProfile.starScore}"></span>
+                        <span>/ 5</span>
+                    </span>
                 </div>
             </div>
         </div>
 
-        <div>
+        <div style="width: 800px; margin: 0 auto; padding-top: 1em; padding-bottom: 1em">
             <span>
-                별점<span th:text="${feed.productProfile.starScore}"></span>
+                <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top"/>
+                <span th:text="${feed.reviewProfile.starScore}"></span>
             </span>
-            <span style="text-align: right; margin-left: 60%">
-            <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
+            <span style="text-align: right; margin-left: 77%">
+                <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
                  class="d-inline-block align-text-top"/>
-            <span th:text="${feed.feedReactionProfile.recommendCount}"></span>
-        </span>
+                <span th:text="${feed.feedReactionProfile.recommendCount}"></span>
+            </span>
 
             <span style="text-align: right; margin-left: 5%;">
-            <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
-                 class="d-inline-block align-text-top"/>
+                <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
+                    class="d-inline-block align-text-top"/>
             <span th:text="${feed.feedReactionProfile.bookmarkCount}"></span>
-        </span>
+            </span>
         </div>
 
-        <div class="d-flex mb-3">
-            <div class="p-2" th:text="${#temporals.format(feed.reviewProfile.createdAt, 'yyyy.MM.dd')}"></div>
-            <div class="p-2" th:text="${feed.reviewProfile.author}"></div>
+        <div class="d-flex mb-3" style="width: 800px; margin: 0 auto;">
+            <div th:text="${#temporals.format(feed.reviewProfile.createdAt, 'yyyy.MM.dd')}" style="color: #909090"></div>
+            <div style="color: #909090">&nbsp&nbsp;|&nbsp;&nbsp;</div>
+            <div th:text="${feed.reviewProfile.author}" style="color: #909090"></div>
         </div>
 
-        <div class="d-grid gap-1 bg-light border">
-            <div>
-                <div class="float-start">요리 분량</div>
-                <div class="p-2 bg-light border float-end" th:text="${feed.reviewProfile.cookQuantity}" text="요리"></div>
+        <div class="d-grid gap-1" style="width: 800px; margin: 0 auto;">
+            <div class="d-flex">
+                <div style="width: 100px; font-weight: bold">요리 분량</div>
+                <div th:text="${feed.reviewProfile.cookQuantity}"></div>
             </div>
-            <div>
-                <div class="float-start">요리 난이도</div>
-                <div class="p-2 bg-light border float-end" th:text="${feed.reviewProfile.cookLevel}" text="요리"></div>
+            <div class="d-flex">
+                <div style="width: 100px; font-weight: bold">요리 난이도</div>
+                <div th:text="${feed.reviewProfile.cookLevel}" text="요리"></div>
             </div>
-            <div>
-                <div class="float-start">요리 시간</div>
-                <div class="p-2 bg-light border float-end" th:text="${feed.reviewProfile.cookTime}" text="요리"></div>
+            <div class="d-flex">
+                <div style="width: 100px; font-weight: bold">요리 시간</div>
+                <div th:text="${feed.reviewProfile.cookTime}" text="요리"></div>
             </div>
         </div>
 
-        <div th:text="${feed.reviewProfile.description}"></div>
+        <div th:text="${feed.reviewProfile.description}" style="width: 800px; margin: 20px auto; min-height: 30px"></div>
 
-        <div class="d-inline-block" th:each="hashTag : ${feed.hashTags}" style="background-color: #909090; border-radius: 25%">
-            <span style="color: white">#</span>
-            <span th:text="${hashTag}" style="color:white;"></span>
+        <div style="width: 800px; margin: 0 auto">
+            <div class="d-inline-block" th:each="hashTag : ${feed.hashTags}"
+                 style="border: 1px solid #dfe0e1; border-radius: 25%; margin: 1px 3px; padding: 1px">
+                <span style="color: darkgrey; font-weight: bold">#</span>
+                <span th:text="${hashTag}" style="color:darkgray; font-weight: bold;"></span>
+            </div>
         </div>
 
-        <hr>
 
-<!--        <div th:each="">-->
-<!--            <div> 댓글 </div>-->
-<!--            <div th:text="${feed.commentProfile.commentCount}"></div>-->
-<!--        </div>-->
+        <div th:if="${feed.commentProfile.size() != 0}" style="width: 800px; margin: 0 auto">
+            <hr>
+            <div class="d-flex" style="margin-bottom: 10px">
+                <div>댓글&nbsp;</div>
+                <div th:text="${feed.commentProfile.get(0).getCommentCount()}"></div>
+                <div>개 모두보기</div>
+            </div>
+            <div class="d-flex">
+                <div th:text="${feed.commentProfile.get(0).getAuthor()}" style="margin-right: 100px;"></div>
+                <div th:text="${feed.commentProfile.get(0).getContent()}"></div>
+            </div>
+
+        </div>
 
     </div>
 </div>
