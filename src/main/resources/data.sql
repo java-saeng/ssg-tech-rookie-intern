@@ -260,3 +260,15 @@ values (19, now(), now(), '쓱쉐프', 18);
 
 insert into hash_tag
 values (20, now(), now(), '방구석', 19);
+
+insert into comment
+values (1, now(), now(), 1, '댓글1', 0, 20);
+
+insert into comment
+values (2, now(), now(), 2, '댓글2', 0, 20);
+
+insert into comment
+values (3, now(), now(), 2, '너무 맛있겠네요~', 0, 11);
+
+insert into hash_tag
+values (21, now(), now(), '전복', 11);
