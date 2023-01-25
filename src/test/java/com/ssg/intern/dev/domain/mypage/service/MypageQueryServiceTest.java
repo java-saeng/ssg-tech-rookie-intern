@@ -57,7 +57,7 @@ class MypageQueryServiceTest {
         //when
         MyReviewProfileResponse feeds = mypageQueryService.getMyFeeds(2L, SortingCondition.NEWER);
         //then
-        assertThat(feeds.getTotalReivewCount()).isEqualTo(4);
+        assertThat(feeds.getTotalReviewCount()).isEqualTo(4);
         assertThat(feeds.getReviews().get(0).getCommentCount()).isEqualTo(2);
         assertThat(feeds.getReviews().get(1).getCommentCount()).isEqualTo(0);
         assertThat(feeds.getReviews().get(2).getCommentCount()).isEqualTo(2);
