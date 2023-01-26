@@ -36,10 +36,18 @@ public class FeedProfileResponse {
         private long recommendCount;
         private long feedId;
 
-        public FeedReactionProfile(final long bookmarkCount, final long recommendCount, final long feedId) {
+        //TODO : bookmark, recommend 표시 DTO 분리
+        private boolean isBookmarked;
+        private boolean isRecommended;
+
+        @Builder
+        public FeedReactionProfile(final long bookmarkCount, final long recommendCount, final long feedId,
+                                   final boolean isBookmarked, final boolean isRecommended) {
             this.bookmarkCount = bookmarkCount;
             this.recommendCount = recommendCount;
             this.feedId = feedId;
+            this.isBookmarked = isBookmarked;
+            this.isRecommended = isRecommended;
         }
     }
 

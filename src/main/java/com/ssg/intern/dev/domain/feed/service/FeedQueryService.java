@@ -1,10 +1,12 @@
 package com.ssg.intern.dev.domain.feed.service;
 
+import com.ssg.intern.dev.domain.bookmark.service.BookmarkQueryService;
 import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedSearchingConditionRequest;
+import com.ssg.intern.dev.domain.recommend.service.RecommendQueryService;
 import com.ssg.intern.mock.MockDataFacadeRepository;
 import com.ssg.intern.mock.domain.hashtag.entity.HashTag;
 import com.ssg.intern.mock.domain.product.entity.Product;
@@ -27,6 +29,8 @@ public class FeedQueryService {
 
     private final FeedRepository feedRepository;
     private final MockDataFacadeRepository mockDataFacadeRepository;
+    private final BookmarkQueryService bookmarkQueryService;
+    private final RecommendQueryService recommendQueryService;
 
     public List<FeedProfileResponse> showFeedsSortedByCondition(Pageable pageable) {
         return feedRepository.findAllFeeds(pageable).stream()
@@ -36,7 +40,7 @@ public class FeedQueryService {
                                          mockDataFacadeRepository.findBySpecialReviewId(feed.getId());
 
                                  return FeedProfileResponse.builder()
-                                                           .feedReactionProfile(convertToReaction(feed))
+                                                           .feedReactionProfile(convertToReaction(feed, specialReview))
                                                            .commentProfile(convertToComment(feed, specialReview))
                                                            .productProfile(convertToProduct(specialReview))
                                                            .reviewProfile(convertToReview(specialReview))
@@ -49,8 +53,19 @@ public class FeedQueryService {
                              .collect(Collectors.toList());
     }
 
-    private FeedReactionProfile convertToReaction(Feed feed) {
-        return new FeedReactionProfile(feed.getBookmarkCount(), feed.getRecommendCount(), feed.getId());
+    private FeedReactionProfile convertToReaction(Feed feed, SpecialReview specialReview) {
+
+        final Long accountId = specialReview.getAccount().getId();
+        final Long feedId = feed.getId();
+
+        return FeedReactionProfile.builder()
+                                  .feedId(feedId)
+                                  .bookmarkCount(feed.getBookmarkCount())
+                                  .recommendCount(feed.getRecommendCount())
+                                  //TODO : DTO 분리 시켜서 Http header에서 accountId를 받아서 1L 대신 넣어주기
+                                  .isRecommended(recommendQueryService.isAccountRecommendFeed(1L, feedId))
+                                  .isBookmarked(bookmarkQueryService.isAccountBookmarkFeed(1L, feedId))
+                                  .build();
     }
 
     private List<CommentProfile> convertToComment(Feed feed, SpecialReview specialReview) {
@@ -102,7 +117,7 @@ public class FeedQueryService {
                                          mockDataFacadeRepository.findBySpecialReviewId(feed.getId());
 
                                  return FeedProfileResponse.builder()
-                                                           .feedReactionProfile(convertToReaction(feed))
+                                                           .feedReactionProfile(convertToReaction(feed, specialReview))
                                                            .commentProfile(convertToComment(feed, specialReview))
                                                            .productProfile(convertToProduct(specialReview))
                                                            .reviewProfile(convertToReview(specialReview))
@@ -122,7 +137,7 @@ public class FeedQueryService {
                                                                            .orElseThrow(EntityNotFoundException::new);
 
                                            return FeedProfileResponse.builder()
-                                                                     .feedReactionProfile(convertToReaction(feed))
+                                                                     .feedReactionProfile(convertToReaction(feed, specialReview))
                                                                      .commentProfile(
                                                                              convertToComment(feed, specialReview))
                                                                      .productProfile(convertToProduct(specialReview))
