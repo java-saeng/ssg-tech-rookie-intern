@@ -67,35 +67,39 @@
     </div>
 </div>
 
-<div class="card m-3"  th:each="myReview : ${myReviews}" style="height: 200px;">
+<div class="card m-3"  th:each="myReview : ${myReviews}" style="height: 230px;">
     <div class="card-body row">
-        <div class="p-3 col align-middle" style="height: 200px; width: 200px; margin-top: -17px;">
+        <div class="p-3 col align-middle" style="height: 230px; width: 230px; margin-top: -17px;">
             <img th:src="${myReview.imageUrl}" class="img-fluid rounded-start rounded-end" alt="..."
                  style="width: 100%; height: 100%; object-fit: cover"
             />
         </div>
         <div class="p-3 col-md-7 h-100">
-            <div class="position-relative">
-                <p class="card-text" th:text="${myReview.starScore}"></p>
+            <div class="position-relative" style="margin-left: 25px;">
+                <p style="margin-top: 3px">
+                    <img th:src="@{/assets/star-fill.svg}">&nbsp;</img>
+                    <span class="card-text" th:text="${myReview.starScore}"></span>
+                </p>
+
                 <p class="card-text" th:text="${myReview.description}"></p>
                 <p class="card-text" th:text="${#temporals.format(myReview.createdAt, 'yyyy.MM.dd')}"></p>
             </div>
         </div>
-        <div class="p-3 col-md-2 h-100 align-middle" style="height: auto">
-            <div class="row row-cols-1" style="height: 80%">
-                <span th:class="col" style="padding-left: 30%; padding-right: 20%; padding-bottom: 3%">
-                    <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
-                         class="d-inline-block align-text-top">
+        <div class="p-3 col-md-2 h-100 align-middle" style="margin-right: 10px;">
+            <div class="row row-cols-1" style="height: 100%">
+                <span th:class="col" style="padding-left: 30%; padding-right: 20%;">
+                    <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="23" height="23"
+                         class="d-inline-block">
                     <p class="card-text" style="float: right" th:text="${myReview.recommendCount}"></p>
                 </span>
-                <div th:class="col" style="padding-left: 30%; padding-right: 20%; padding-bottom: 3%">
-                    <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
-                         class="d-inline-block align-text-top">
+                <div th:class="col" style="padding-left: 30%; padding-right: 20%;">
+                    <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="23" height="23"
+                         class="d-inline-block">
                     <p class="card-text" style="float: right" th:text="${myReview.bookmarkCount}"></p>
                 </div>
-                <div th:class="col" style="padding-left: 30%; padding-right: 20%; padding-bottom: 3%">
-                    <img th:src="@{/assets/chat.svg}" alt="Logo" width="20" height="20"
-                         class="d-inline-block align-text-top">
+                <div th:class="col" style="padding-left: 30%; padding-right: 20%;">
+                    <img th:src="@{/assets/chat.svg}" alt="Logo" width="23" height="23"
+                         class="d-inline-block">
                     <p class="card-text" style="float: right" th:text="${myReview.commentCount}"></p>
                 </div>
                 <div class="form-check form-switch col d-flex" style="min-width: 105%">
