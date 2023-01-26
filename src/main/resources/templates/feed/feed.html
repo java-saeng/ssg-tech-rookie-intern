@@ -68,7 +68,8 @@
 
 <div class="card p-3 m-3" th:each="feed : ${feeds}">
 
-    <div class="card-header container text-center rounded-pill border border-success p-3 my-3" style="width: 800px; margin: 0 auto;">
+    <div class="card-header container text-center rounded-pill border border-success p-3 my-3"
+         style="width: 800px; margin: 0 auto;">
         <div class="row">
             <div class="col">
                 1. 요리 재료
@@ -134,7 +135,7 @@
                     <span>원</span>
                     <span style="float: right; margin-right: 100px">
                         <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
-                            class="d-inline-block align-text-top"/>
+                             class="d-inline-block align-text-top"/>
                         <span th:text="${feed.productProfile.starScore}"></span>
                         <span>/ 5</span>
                     </span>
@@ -145,24 +146,32 @@
         <div style="width: 800px; margin: 0 auto; padding-top: 1em; padding-bottom: 1em">
             <span>
                 <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"/>
+                     class="d-inline-block align-text-top"
+                />
                 <span th:text="${feed.reviewProfile.starScore}"></span>
             </span>
+
             <span style="text-align: right; margin-left: 77%">
                 <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
-                 class="d-inline-block align-text-top"/>
+                     class="d-inline-block align-text-top"
+                     th:onclick="'submitRecommend(' + ${feed.feedReactionProfile.feedId} + ',' + ${feed.feedReactionProfile.recommended} + ')'"
+                     th:id="${feed.feedReactionProfile.feedId}"
+                />
                 <span th:text="${feed.feedReactionProfile.recommendCount}"></span>
             </span>
 
             <span style="text-align: right; margin-left: 5%;">
                 <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
-                    class="d-inline-block align-text-top"/>
+                     class="d-inline-block align-text-top"
+                     th:onclick="'submitBookmark(' + ${feed.feedReactionProfile.feedId} + ',' + ${feed.feedReactionProfile.bookmarked} + ')'"
+                />
             <span th:text="${feed.feedReactionProfile.bookmarkCount}"></span>
             </span>
         </div>
 
         <div class="d-flex mb-3" style="width: 800px; margin: 0 auto;">
-            <div th:text="${#temporals.format(feed.reviewProfile.createdAt, 'yyyy.MM.dd')}" style="color: #909090"></div>
+            <div th:text="${#temporals.format(feed.reviewProfile.createdAt, 'yyyy.MM.dd')}"
+                 style="color: #909090"></div>
             <div style="color: #909090">&nbsp&nbsp;|&nbsp;&nbsp;</div>
             <div th:text="${feed.reviewProfile.author}" style="color: #909090"></div>
         </div>
@@ -182,7 +191,8 @@
             </div>
         </div>
 
-        <div th:text="${feed.reviewProfile.description}" style="width: 800px; margin: 20px auto; min-height: 30px"></div>
+        <div th:text="${feed.reviewProfile.description}"
+             style="width: 800px; margin: 20px auto; min-height: 30px"></div>
 
         <div style="width: 800px; margin: 0 auto">
             <div class="d-inline-block" th:each="hashTag : ${feed.hashTags}"
@@ -211,6 +221,64 @@
 </div>
 
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+<script>
+    function submitRecommend(feedId, isRecommended) {
+
+        console.log(feedId);
+        console.log(isRecommended);
+
+        if (isRecommended === false) {
+            fetch('http://localhost:8080/api/feeds/' + feedId + '/recommends', {
+                method: 'POST',
+                headers: {'Authorization': '1'}
+            })
+                .then(response => {
+                    window.location.href = 'http://localhost:8080/feeds';
+                });
+        } else {
+            fetch('http://localhost:8080/api/feeds/' + feedId + '/recommends', {
+                method: 'DELETE',
+                headers: {'Authorization': '1'}
+            })
+                .then(response => {
+                    window.location.href = 'http://localhost:8080/feeds';
+                });
+        }
+
+
+    }
+
+</script>
+
+<script>
+
+    function submitBookmark(feedId, isBookmarked) {
+
+        console.log(feedId);
+        console.log(isBookmarked);
+
+        if (isBookmarked === false) {
+            fetch('http://localhost:8080/api/feeds/' + feedId + '/bookmarks', {
+                method: 'POST',
+                headers: {'Authorization': '1'}
+            })
+                .then(response => {
+                    window.location.href = 'http://localhost:8080/feeds';
+                });
+        } else {
+            fetch('http://localhost:8080/api/feeds/' + feedId + '/bookmarks', {
+                method: 'DELETE',
+                headers: {'Authorization': '1'}
+            })
+                .then(response => {
+                    window.location.href = 'http://localhost:8080/feeds';
+                });
+        }
+
+    }
+
+</script>
 
 </body>
 </html>
