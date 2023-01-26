@@ -33,7 +33,7 @@
             <a class="nav-link" href="http://localhost:8080/me" style="color: black; font-weight: bold">
                 <img th:src="@{/assets/pencil.svg}" alt="Logo" width="20" height="20"
                      class="d-inline-block align-text-top">
-                내가 작성한 리뷰
+                내가 작성한 레시피
             </a>
         </div>
     </li>
@@ -43,7 +43,7 @@
             <a class="nav-link" href="http://localhost:8080/me/thumbnails" style="color: black; font-weight: bold">
                 <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
                      class="d-inline-block align-text-top">
-                북마크한 리뷰
+                북마크한 레시피
             </a>
         </div>
     </li>
@@ -78,11 +78,11 @@
             <div class="position-relative" style="margin-left: 25px;">
                 <p style="margin-top: 3px">
                     <img th:src="@{/assets/star-fill.svg}">&nbsp;</img>
-                    <span class="card-text" th:text="${myReview.starScore}"></span>
+                    <span class="card-text" th:text="${myReview.starScore}" style="margin-right: 60px"></span>
+                    <span class="card-text" th:text="${#temporals.format(myReview.createdAt, 'yyyy.MM.dd')}" style="color: darkgray"></span>
                 </p>
 
                 <p class="card-text" th:text="${myReview.description}"></p>
-                <p class="card-text" th:text="${#temporals.format(myReview.createdAt, 'yyyy.MM.dd')}"></p>
             </div>
         </div>
         <div class="p-3 col-md-2 h-100 align-middle" style="margin-right: 10px;">
