@@ -1,54 +1,111 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 
 <head>
     <title>피드 하나 조회</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="script" th:href="@{/js/bootstrap.min.js}"/>
+    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 </head>
 
 <header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
-    <nav class="navbar bg-light" style="width: 100%;">
+    <nav class="navbar bg-light" style="width: 100%; height: 80px; border-bottom: 1px solid lightgrey;">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://www.ssg.com/">
-                <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="150px" class="d-inline-block align-text-top">
+                <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="175px" class="d-inline-block align-text-top">
             </a>
 
-            <form class="d-flex" role="search" style="width: 70%;" action="https://www.ssg.com/search.ssg">
+            <form class="d-flex" role="search" style="width: 67%; height: 45px" action="https://www.ssg.com/search.ssg">
                 <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 
             <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
-               style="width: 5%; text-align: center">
+               style="width: 10%; text-align: center">
                 <img th:src="@{/assets/cart.svg}" alt="Logo" width="30" height="24"
                      class="d-inline-block align-text-top">
             </a>
         </div>
+    </nav>
 
-        <div class="d-inline-flex flex-row justify-content-between w-100">
+    <div class="bg-light" style="margin-top: -1px;padding-left: 10%;padding-right: 10%; min-height: 80px; border-bottom: 2px solid lightgrey;">
+        <div class="d-inline-flex flex-row justify-content-between" style="width: 80%;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search" action="#">
-                    <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search" style=" height: 45px;">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
-
-            <div class="dropdown m-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+        </div>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
+                aria-expanded="true" aria-controls="collapseExample" style="margin-left: 25px; width: 80px; height: 45px;
+                font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
+            필터
+        </button>
+        <div class="collapse" id="cookFilter" style="margin-left: 120px">
+            <div class="card card-body" style="width: max-content; background-color: lightgrey;">
+                <div>
+                    <ul style="list-style: none; margin-bottom: 2em">
+                        <li style="float:left; margin-right: 1em; font-weight: bold">요리난이도</li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">쉬워요</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">보통예요</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">어려워요</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul style="list-style: none; margin-bottom: 2em">
+                        <li style="float:left; margin-right: 2em; font-weight: bold">요리분량</a></li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">1인</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">2~3인</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">3~4인</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">5~10인</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10인 이상</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul style="list-style: none">
+                        <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10분 미만</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10분~20분</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">30분</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">1시간</a>
+                        </li>
+                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">2시간 이상</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <div class="d-flex bg-light">
+
+    <div class="d-flex bg-light" style="margin-top: -1px; height: 70px; border-bottom: 1px solid lightgrey;
+    font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
         <div class="p-3" id="newer">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
                     th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
@@ -203,19 +260,18 @@
         </div>
 
 
-        <div th:if="${feed.commentProfile.size() != 0}" style="width: 800px; margin: 0 auto">
-            <hr>
-            <div class="d-flex" style="margin-bottom: 10px">
-                <div>댓글&nbsp;</div>
-                <div th:text="${feed.commentProfile.get(0).getCommentCount()}"></div>
-                <div>개 모두보기</div>
-            </div>
-            <div class="d-flex">
-                <div th:text="${feed.commentProfile.get(0).getAuthor()}" style="margin-right: 100px;"></div>
-                <div th:text="${feed.commentProfile.get(0).getContent()}"></div>
-            </div>
-
-        </div>
+        <!--        <div th:if="${feed.commentProfile.size() != 0}" style="width: 800px; margin: 0 auto">-->
+        <!--            <hr>-->
+        <!--            <div class="d-flex" style="margin-bottom: 10px">-->
+        <!--                <div>댓글&nbsp;</div>-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getCommentCount()}"></div>-->
+        <!--                <div>개 모두보기</div>-->
+        <!--            </div>-->
+        <!--            <div class="d-flex">-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getAuthor()}" style="margin-right: 100px;"></div>-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getContent()}"></div>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
     </div>
 </div>
