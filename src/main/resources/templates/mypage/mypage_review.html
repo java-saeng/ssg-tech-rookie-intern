@@ -27,7 +27,7 @@
     </div>
 </nav>
 
-<ul class="nav justify-content-center" style="width: 100%;">
+<ul class="nav justify-content-center" style="width: 100%; border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;">
     <li class="nav-item" style="width: 49%; text-align: center">
         <div class="container-fluid">
             <a class="nav-link" href="http://localhost:8080/me" style="color: black; font-weight: bold">
@@ -69,7 +69,7 @@
 
 <div class="card m-3"  th:each="myReview : ${myReviews}" style="height: 200px;">
     <div class="card-body row">
-        <div class="p-3 col align-middle" style="height: 200px; width: 200px; margin-top: -17px">
+        <div class="p-3 col align-middle" style="height: 200px; width: 200px; margin-top: -17px;">
             <img th:src="${myReview.imageUrl}" class="img-fluid rounded-start rounded-end" alt="..."
                  style="width: 100%; height: 100%; object-fit: cover"
             />
