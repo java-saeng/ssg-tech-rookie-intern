@@ -31,7 +31,7 @@
 
     <div class="bg-light"
          style="margin-top: -1px;padding-left: 5%;padding-right: 5%; min-height: 80px; border-bottom: 2px solid lightgrey;">
-        <div class="d-inline-flex flex-row justify-content-between" style="width: 80%;">
+        <div class="d-inline-flex flex-row justify-content-between" style="width: 80%; margin-left: 30px;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search" action="#">
                     <input class="form-control me-2 dropdown-input" type="query" placeholder="Search"
@@ -58,7 +58,8 @@
                 </ul>
             </div>
             <div class="collapse" id="cookFilter" style="width: fit-content;">
-                <div class="card card-body" style="width: max-content; background-color: lightgrey; margin-right: 65px;">
+                <div class="card card-body"
+                     style="width: max-content; background-color: lightgrey; margin-right: 65px;">
                     <div>
                         <ul style="list-style: none; margin-bottom: 2em">
                             <li style="float:left; margin-right: 1em; font-weight: bold">요리난이도</li>
@@ -125,7 +126,7 @@
 
     <div class="d-flex bg-light" style="margin-top: -1px; height: 70px; border-bottom: 1px solid lightgrey;
     font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
-        <div class="p-3" id="newer">
+        <div class="p-3" id="newer" style="margin-left: 5px;">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
                     th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
                 최신순
@@ -136,6 +137,12 @@
                     th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
                 랭킹순
             </button>
+        </div>
+        <div class="p-3">
+            <a href="http://localhost:8080/me">
+                <img th:src="@{/assets/person-fill.svg}"
+                     style="width: 40px; height: 40px; margin-left: 657px;"/>
+            </a>
         </div>
     </div>
 </header>
