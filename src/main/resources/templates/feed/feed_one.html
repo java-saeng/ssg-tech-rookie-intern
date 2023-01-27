@@ -29,78 +29,97 @@
         </div>
     </nav>
 
-    <div class="bg-light" style="margin-top: -1px;padding-left: 10%;padding-right: 10%; min-height: 80px; border-bottom: 2px solid lightgrey;">
+    <div class="bg-light"
+         style="margin-top: -1px;padding-left: 5%;padding-right: 5%; min-height: 80px; border-bottom: 2px solid lightgrey;">
         <div class="d-inline-flex flex-row justify-content-between" style="width: 80%;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search" action="#">
-                    <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search" style=" height: 45px;">
+                    <input class="form-control me-2 dropdown-input" type="query" placeholder="Search"
+                           aria-label="Search"
+                           style=" height: 45px;cursor: pointer" id="dropdown-input">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </div>
+
+
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
                 aria-expanded="true" aria-controls="collapseExample" style="margin-left: 25px; width: 80px; height: 45px;
                 font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
             필터
         </button>
-        <div class="collapse" id="cookFilter" style="margin-left: 120px">
-            <div class="card card-body" style="width: max-content; background-color: lightgrey;">
-                <div>
-                    <ul style="list-style: none; margin-bottom: 2em">
-                        <li style="float:left; margin-right: 1em; font-weight: bold">요리난이도</li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">쉬워요</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">보통예요</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">어려워요</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <ul style="list-style: none; margin-bottom: 2em">
-                        <li style="float:left; margin-right: 2em; font-weight: bold">요리분량</a></li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">1인</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">2~3인</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">3~4인</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">5~10인</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10인 이상</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <ul style="list-style: none">
-                        <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10분 미만</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10분~20분</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">30분</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">1시간</a>
-                        </li>
-                        <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                            <a href="#" style="text-decoration-line: none; color: black; margin: 10px">2시간 이상</a>
-                        </li>
-                    </ul>
+
+        <div class="d-flex flex-row justify-content-between">
+            <div style="width: fit-content">
+                <ul id="dropdown-menu" style="display: none; list-style: none">
+                    <li onclick="setValue(this)">Option 1</li>
+                    <li onclick="setValue(this)">Option 2</li>
+                    <li onclick="setValue(this)">Option 3</li>
+                </ul>
+            </div>
+            <div class="collapse" id="cookFilter" style="width: fit-content;">
+                <div class="card card-body" style="width: max-content; background-color: lightgrey; margin-right: 65px;">
+                    <div>
+                        <ul style="list-style: none; margin-bottom: 2em">
+                            <li style="float:left; margin-right: 1em; font-weight: bold">요리난이도</li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">쉬워요</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">보통예요</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">어려워요</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul style="list-style: none; margin-bottom: 2em">
+                            <li style="float:left; margin-right: 2em; font-weight: bold">요리분량</a></li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">1인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">2~3인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">3~4인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">5~10인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10인 이상</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul style="list-style: none">
+                            <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10분 미만</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">10분~20분</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">30분</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">1시간</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a href="#" style="text-decoration-line: none; color: black; margin: 10px">2시간 이상</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button style="width: fit-content; float: right">
+                        적용
+                    </button>
                 </div>
             </div>
         </div>
+
     </div>
 
 
@@ -334,6 +353,22 @@
 
     }
 
+</script>
+
+<script>
+    var input = document.getElementById("dropdown-input");
+    var menu = document.getElementById("dropdown-menu");
+    input.addEventListener("click", function () {
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    });
+
+    function setValue(li) {
+        input.value = li.innerText;
+    }
 </script>
 
 </body>
