@@ -67,53 +67,53 @@
     </div>
 </div>
 
-<div class="card m-3"  th:each="myReview : ${myReviews}" style="height: 230px;">
+<div class="card m-4"  th:each="myReview : ${myReviews}" style="height: 230px;">
     <div class="card-body row">
-        <div class="p-3 col align-middle" style="height: 230px; width: 230px; margin-top: -17px;">
+        <div class="p-4 col align-middle" style="height: 230px; width: 230px; margin-top: -17px;">
             <img th:src="${myReview.imageUrl}" class="img-fluid rounded-start rounded-end" alt="..."
                  style="width: 100%; height: 100%; object-fit: cover"
             />
         </div>
-        <div class="p-3 col-md-7 h-100">
+        <div class="p-4 col-md-7 h-100">
             <div class="position-relative" style="margin-left: 25px;">
-                <p style="margin-top: 3px">
+                <p style="margin-bottom: 20px">
                     <img th:src="@{/assets/star-fill.svg}">&nbsp;</img>
-                    <span class="card-text" th:text="${myReview.starScore}" style="margin-right: 60px"></span>
+                    <span class="card-text" th:text="${myReview.starScore}" style="margin-right: 80px"></span>
                     <span class="card-text" th:text="${#temporals.format(myReview.createdAt, 'yyyy.MM.dd')}" style="color: darkgray"></span>
                 </p>
 
-                <p class="card-text" th:text="${myReview.description}"></p>
+                <p class="card-text" th:text="${myReview.description}" style="font-size: 18px; font-family: SansSerif;"></p>
             </div>
         </div>
-        <div class="p-3 col-md-2 h-100 align-middle" style="margin-right: 10px;">
-            <div class="row row-cols-1" style="height: 100%">
-                <span th:class="col" style="padding-left: 30%; padding-right: 20%;">
-                    <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="23" height="23"
+        <div class="p-4 col-md-2 h-100 align-middle" style="margin-right: 10px;">
+            <div class="row row-cols-1" style="height: 100%; margin-top: 10px;">
+                <span th:class="col" style="padding-left: 30%; padding-right: 20%; margin-bottom: -20px">
+                    <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="25" height="25"
                          class="d-inline-block">
                     <p class="card-text" style="float: right" th:text="${myReview.recommendCount}"></p>
                 </span>
                 <div th:class="col" style="padding-left: 30%; padding-right: 20%;">
-                    <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="23" height="23"
+                    <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="25" height="25"
                          class="d-inline-block">
                     <p class="card-text" style="float: right" th:text="${myReview.bookmarkCount}"></p>
                 </div>
-                <div th:class="col" style="padding-left: 30%; padding-right: 20%;">
-                    <img th:src="@{/assets/chat.svg}" alt="Logo" width="23" height="23"
-                         class="d-inline-block">
-                    <p class="card-text" style="float: right" th:text="${myReview.commentCount}"></p>
-                </div>
-                <div class="form-check form-switch col d-flex" style="min-width: 105%">
-                    <div>댓글막기</div>
-                    <div style="margin-left: auto;">
-                        <input th:if="${myReview.isCommentBlocked}"
-                               class="form-check-input" type="checkbox" role="switch" th:id="flexSwitchCheckDefault" checked
-                               th:onclick="'sendRequest(' + ${myReview.specialReviewId} + ')'"/>
+<!--                <div th:class="col" style="padding-left: 30%; padding-right: 20%;">-->
+<!--                    <img th:src="@{/assets/chat.svg}" alt="Logo" width="23" height="23"-->
+<!--                         class="d-inline-block">-->
+<!--                    <p class="card-text" style="float: right" th:text="${myReview.commentCount}"></p>-->
+<!--                </div>-->
+<!--                <div class="form-check form-switch col d-flex" style="min-width: 105%">-->
+<!--                    <div>댓글막기</div>-->
+<!--                    <div style="margin-left: auto;">-->
+<!--                        <input th:if="${myReview.isCommentBlocked}"-->
+<!--                               class="form-check-input" type="checkbox" role="switch" th:id="flexSwitchCheckDefault" checked-->
+<!--                               th:onclick="'sendRequest(' + ${myReview.specialReviewId} + ')'"/>-->
 
-                        <input th:unless=" ${myReview.isCommentBlocked}"
-                               class="form-check-input" type="checkbox" role="switch" th:id="flexSwitchCheckDefault"
-                               th:onclick="'sendRequest(' + ${myReview.specialReviewId} + ')'"/>
-                    </div>
-                </div>
+<!--                        <input th:unless=" ${myReview.isCommentBlocked}"-->
+<!--                               class="form-check-input" type="checkbox" role="switch" th:id="flexSwitchCheckDefault"-->
+<!--                               th:onclick="'sendRequest(' + ${myReview.specialReviewId} + ')'"/>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
