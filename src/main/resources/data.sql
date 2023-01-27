@@ -79,7 +79,7 @@ values (4, now(), now(), 'EASY', 'PARTY', 'ONE_HOUR', '구워먹으면 맛있어
         'https://succ.ssgcdn.com/uphoto/202209/20220927203329_1182361564_3_1.jpg', 2, 1, 3.8);
 insert into special_review
 values (5, now(), now(), 'MEDIUM', 'FESTIVAL', 'TWO_HOURS', '최고의 레시피',
-        'https://succ.ssgcdn.com/uphoto/202301/20230107122916_1189667038_3_1.jpg', 3, 2, 3.9);
+        'https://succ.ssgcdn.com/uphoto/202210/20221027161201_1184564522_3_1.jpg', 3, 2, 3.9);
 
 insert into special_review
 values (6, now(), now(), 'HARD', 'SOLO', 'TEN', '소고기는 이렇게 드셔보세요',
@@ -95,7 +95,7 @@ values (9, now(), now(), 'HARD', 'PARTY', 'ONE_HOUR', '이렇게 하면 우리 �
         'https://succ.ssgcdn.com/uphoto/202301/20230103195103_1189393996_3_1.jpg', 4, 4, 4.3);
 insert into special_review
 values (10, now(), now(), 'EASY', 'FESTIVAL', 'TWO_HOURS', '새우로 사랑도 잡으새우',
-        'https://succ.ssgcdn.com/uphoto/202211/20221115125456_1186049795_3_1.jpg', 1, 4, 4.4);
+        'https://succ.ssgcdn.com/uphoto/202301/20230118183756_1190383162_3_1.jpg', 1, 4, 4.4);
 
 insert into special_review
 values (11, now(), now(), 'MEDIUM', 'SOLO', 'TEN', '몸보신엔 전복이쥬',
@@ -103,7 +103,7 @@ values (11, now(), now(), 'MEDIUM', 'SOLO', 'TEN', '몸보신엔 전복이쥬',
 
 insert into special_review
 values (12, now(), now(), 'HARD', 'COUPLE', 'TWENTY', '싱싱한 제철 전복, 이렇게 드셔보세요!',
-        'https://succ.ssgcdn.com/uphoto/202107/20210727164712_1140217068_1.jpg', 5, 5, 4.6);
+        'https://succ.ssgcdn.com/uphoto/202207/20220703164357_1175739232_3_1.jpg', 5, 5, 4.6);
 
 insert into special_review
 values (13, now(), now(), 'EASY', 'FAMILY', 'THIRTY', '샤인머스켓 그냥 먹어도 꿀맛이지롱',
