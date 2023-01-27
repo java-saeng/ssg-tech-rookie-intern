@@ -142,6 +142,10 @@ public class FeedQueryService {
                                                                              convertToComment(feed, specialReview))
                                                                      .productProfile(convertToProduct(specialReview))
                                                                      .reviewProfile(convertToReview(specialReview))
+                                                                     .hashTags(specialReview.getHashTags()
+                                                                                            .stream()
+                                                                                            .map((HashTag::getName))
+                                                                                            .collect(Collectors.toList()))
                                                                      .build();
                                        })
                                        .collect(Collectors.toList());
