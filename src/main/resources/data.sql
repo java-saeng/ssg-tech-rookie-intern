@@ -41,7 +41,7 @@ values (4, now(), now(), '싱싱한 새우',
 
 insert into product
 values (5, now(), now(), '제주에서 막 잡은 전복',
-        'https://sitem.ssgcdn.com/30/18/63/item/1000057631830_i1_1100.jpg', 34610, 4.4, 50);
+        'https://sitem.ssgcdn.com/60/42/51/item/1000340514260_i1_1100.jpg', 34610, 4.4, 50);
 
 insert into product
 values (6, now(), now(), '방금 막 딴 샤인머스켓',
