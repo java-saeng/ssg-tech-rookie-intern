@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public enum CookQuantity {
 
-    SOLO("1인분"),
-    COUPLE("2~3인분"),
-    FAMILY("3~4인분"),
-    PARTY("5~10인분"),
-    FESTIVAL("5~10인분");
+    SOLO("1인"),
+    COUPLE("2~3인"),
+    FAMILY("3~4인"),
+    PARTY("5~10인"),
+    FESTIVAL("10인 이상");
 
     private final String quantity;
 
