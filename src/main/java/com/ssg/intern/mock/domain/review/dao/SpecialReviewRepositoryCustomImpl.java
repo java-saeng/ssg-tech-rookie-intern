@@ -48,11 +48,8 @@ public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositor
                                                                .on(account.id.eq(specialReview.account.id))
                                                                .innerJoin(product).fetchJoin()
                                                                .on(product.id.eq(specialReview.product.id))
-                                                               .where(eqCookLevel(condition.getCookLevel())
-                                                                              .and(eqCookQuantity(
-                                                                                      condition.getCookQuantity()))
-                                                                              .and(eqCookTime(condition.getCookTime()))
-                                                                              .and(hashTagSubQuery(condition)))
+                                                               .where(eqCookLevel(condition), eqCookQuantity(condition),
+                                                                      eqCookTime(condition), hashTagSubQuery(condition))
                                                                .offset(pageable.getOffset())
                                                                .limit(pageable.getPageSize())
                                                                .fetch();
@@ -61,23 +58,25 @@ public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositor
     }
 
     private static BooleanExpression hashTagSubQuery(final FeedSearchingConditionRequest condition) {
-        return JPAExpressions.selectFrom(hashTag)
-                             .where(hashTag.specialReview.id
-                                            .eq(specialReview.id)
-                                            .and(containsHashtag(condition.getHashTag())))
-                             .exists();
+
+        return StringUtils.hasText(condition.getHashTag()) ? JPAExpressions.selectFrom(hashTag)
+                                                                           .where(hashTag.specialReview.id
+                                                                                          .eq(specialReview.id)
+                                                                                          .and(containsHashtag(
+                                                                                                  condition.getHashTag())))
+                                                                           .exists() : null;
     }
 
-    private static BooleanExpression eqCookTime(final CookTime cookTime) {
-        return cookTime == null ? null : specialReview.cookTime.eq(cookTime);
+    private static BooleanExpression eqCookTime(final FeedSearchingConditionRequest condition) {
+        return condition.getCookTime() == null ? null : specialReview.cookTime.eq(condition.getCookTime());
     }
 
-    private static BooleanExpression eqCookQuantity(final CookQuantity cookQuantity) {
-        return cookQuantity == null ? null : specialReview.cookQuantity.eq(cookQuantity);
+    private static BooleanExpression eqCookQuantity(final FeedSearchingConditionRequest condition) {
+        return condition.getCookQuantity() == null ? null : specialReview.cookQuantity.eq(condition.getCookQuantity());
     }
 
-    private static BooleanExpression eqCookLevel(final CookLevel cookLevel) {
-        return cookLevel == null ? null : specialReview.cookLevel.eq(cookLevel);
+    private static BooleanExpression eqCookLevel(final FeedSearchingConditionRequest condition) {
+        return condition.getCookLevel() == null ? null : specialReview.cookLevel.eq(condition.getCookLevel());
     }
 
     private static BooleanExpression containsHashtag(final String keyword) {
