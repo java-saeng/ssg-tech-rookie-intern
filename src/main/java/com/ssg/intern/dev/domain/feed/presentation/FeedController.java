@@ -1,6 +1,7 @@
 package com.ssg.intern.dev.domain.feed.presentation;
 
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
+import com.ssg.intern.dev.domain.feed.presentation.model.FeedSearchingConditionRequest;
 import com.ssg.intern.dev.domain.feed.service.FeedQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -31,5 +32,14 @@ public class FeedController {
         model.addAttribute("feed", response);
 
         return "feed/feed_one";
+    }
+
+    @GetMapping("/feeds/search")
+    public String searchSpecificFeed(Pageable pageable, FeedSearchingConditionRequest request, Model model) {
+        final List<FeedProfileResponse> result = feedQueryService.showSatisfiedConditionFeeds(pageable,
+                                                                                              request);
+        model.addAttribute("feeds", result);
+
+        return "feed/feed_list";
     }
 }
