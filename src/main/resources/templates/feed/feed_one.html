@@ -31,7 +31,7 @@
 
     <div class="bg-light"
          style="margin-top: -1px;padding-left: 5%;padding-right: 5%; min-height: 80px; border-bottom: 2px solid lightgrey;">
-        <div class="d-inline-flex flex-row justify-content-between" style="width: 80%;">
+        <div class="d-inline-flex flex-row justify-content-between" style="width: 60%; margin-right: 205px;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2 dropdown-input" type="query" placeholder="Search"
@@ -45,7 +45,7 @@
 
 
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
-                aria-expanded="true" aria-controls="collapseExample" style="margin-left: 25px; width: 80px; height: 45px;
+                aria-expanded="true" aria-controls="collapseExample" style="width: 77px; height: 45px;
                 font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
             필터
         </button>
@@ -53,9 +53,10 @@
         <div class="d-flex flex-row justify-content-between">
             <div style="width: fit-content">
                 <ul id="dropdown-menu" style="display: none; list-style: none">
-                    <li onclick="setValue(this)">Option 1</li>
-                    <li onclick="setValue(this)">Option 2</li>
-                    <li onclick="setValue(this)">Option 3</li>
+                    <div class="d-flex" th:each="hashtag : ${hashtags}">
+                        <div>#&nbsp;</div>
+                        <li onclick="setValue(this)" th:text="${hashtag.name}"></li>
+                    </div>
                 </ul>
             </div>
             <div class="collapse" id="cookFilter" style="width: fit-content;">

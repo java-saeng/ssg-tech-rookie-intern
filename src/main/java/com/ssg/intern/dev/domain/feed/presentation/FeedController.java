@@ -3,7 +3,10 @@ package com.ssg.intern.dev.domain.feed.presentation;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedSearchingConditionRequest;
 import com.ssg.intern.dev.domain.feed.service.FeedQueryService;
+import com.ssg.intern.mock.domain.hashtag.dao.HashTagRepository;
+import com.ssg.intern.mock.domain.hashtag.entity.HashTag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class FeedController {
 
     private final FeedQueryService feedQueryService;
+    private final HashTagRepository hashTagRepository;
 
     @GetMapping("/feeds")
     public String searchAllFeed(Pageable pageable, Model model) {
@@ -29,7 +34,10 @@ public class FeedController {
     @GetMapping("/feeds/{feed-id}")
     public String searchOneFeed(@PathVariable("feed-id") long feedId, Model model) {
         final FeedProfileResponse response = feedQueryService.showOneFeed(feedId);
+        final List<HashTag> hashTags =  hashTagRepository.findTop5ByOrderByIdAsc();
+
         model.addAttribute("feed", response);
+        model.addAttribute("hashtags", hashTags);
 
         return "feed/feed_one";
     }
