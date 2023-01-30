@@ -34,7 +34,7 @@ public class FeedController {
     @GetMapping("/feeds/{feed-id}")
     public String searchOneFeed(@PathVariable("feed-id") long feedId, Model model) {
         final FeedProfileResponse response = feedQueryService.showOneFeed(feedId);
-        final List<HashTag> hashTags =  hashTagRepository.findTop5ByOrderByIdAsc();
+        final List<HashTag> hashTags =  hashTagRepository.findDistinctTop10ByOrderByIdAsc();
 
         model.addAttribute("feed", response);
         model.addAttribute("hashtags", hashTags);
