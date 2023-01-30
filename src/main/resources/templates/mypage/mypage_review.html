@@ -8,64 +8,74 @@
     <script src="/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-
-<nav class="navbar bg-light" style="width: 100%">
-    <div class="container-fluid">
-        <a class="navbar-brand" style="width: 20%;">SSG.COM</a>
-
-        <form class="d-flex" role="search" style="width: 65%;">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-        <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
-           style="width: 5%; text-align: center">
-            <img src="/assets/cart.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        </a>
-
-    </div>
-</nav>
-
-<ul class="nav justify-content-center" style="width: 100%; border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;">
-    <li class="nav-item" style="width: 49%; text-align: center">
+<header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
+    <nav class="navbar bg-light" style="width: 100%; height: 80px; border-bottom: 1px solid lightgrey;">
         <div class="container-fluid">
-            <a class="nav-link" href="http://localhost:8080/me" style="color: black; font-weight: bold">
-                <img th:src="@{/assets/pencil.svg}" alt="Logo" width="20" height="20"
+            <a class="navbar-brand" href="https://www.ssg.com/">
+                <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="175px" class="d-inline-block align-text-top">
+            </a>
+
+            <form class="d-flex" role="search" style="width: 67%; height: 45px" action="https://www.ssg.com/search.ssg">
+                <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
+               style="width: 10%; text-align: center">
+                <img th:src="@{/assets/cart.svg}" alt="Logo" width="30" height="24"
                      class="d-inline-block align-text-top">
-                내가 작성한 레시피
             </a>
         </div>
-    </li>
-    <li class="vr"></li>
-    <li class="nav-item" style="width: 49%; text-align: center">
-        <div class="container-fluid">
-            <a class="nav-link" href="http://localhost:8080/me/thumbnails" style="color: black; font-weight: bold">
-                <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top">
-                북마크한 레시피
-            </a>
-        </div>
-    </li>
-</ul>
+    </nav>
 
-<div class="d-flex mx-3">
-    <div class="p-3">
-        <span>전체&nbsp</span>
-        <span th:text="${totalReviewCount}"></span>
-        <span>개</span>
-    </div>
-    <button id="newer-button" th:style="'background: white; border: 0'"
-            th:onclick="'location.href=\''+ @{http://localhost:8080/me?sorting=NEWER} + '\''">
-        최신 순
-    </button>
-    <div class="p-3">
-        <button th:style="'background: white; border: 0'"
-                th:onclick="'location.href=\''+ @{http://localhost:8080/me?sorting=OLDER} + '\''">
-            오래된 순
+    <ul class="nav justify-content-center bg-light" style="width: 100%; height: 55px; border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;">
+        <li class="nav-item" style="width: 49%; text-align: center">
+            <div class="container-fluid">
+                <a class="nav-link" href="http://localhost:8080/me" style="color: black; font-weight: bold">
+                    <div class="d-flex justify-content-center">
+                        <img th:src="@{/assets/pencil.svg}" alt="Logo" width="30" height="30"
+                             class="d-inline-block align-text-top">
+                        <div style="font-size: 20px">&nbsp;내가 작성한 레시피</div>
+                    </div>
+                </a>
+            </div>
+        </li>
+        <li class="vr"></li>
+        <li class="nav-item" style="width: 49%; text-align: center">
+            <div class="container-fluid">
+                <a class="nav-link" href="http://localhost:8080/me/thumbnails" style="color: black; font-weight: bold">
+                    <div class="d-flex justify-content-center">
+                        <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="30" height="30"
+                             class="d-inline-block align-text-top">
+                        <div style="font-size: 20px">&nbsp;북마크한 레시피</div>
+                    </div>
+
+                </a>
+            </div>
+        </li>
+    </ul>
+
+    <div class="d-flex bg-light" style="border-bottom: 1px solid lightgrey">
+        <div class="p-3">
+            <span>전체&nbsp</span>
+            <span th:text="${totalReviewCount}"></span>
+            <span>개</span>
+        </div>
+        <button class="bg-light" id="newer-button" th:style="'border: 0'"
+                th:onclick="'location.href=\''+ @{http://localhost:8080/me?sorting=NEWER} + '\''">
+            최신 순
         </button>
+        <div class="p-3">
+            <button class="bg-light" th:style="'border: 0'"
+                    th:onclick="'location.href=\''+ @{http://localhost:8080/me?sorting=OLDER} + '\''">
+                오래된 순
+            </button>
+        </div>
     </div>
-</div>
+
+</header>
+
+<body>
 
 <div class="card m-4"  th:each="myReview : ${myReviews}" style="height: 230px;">
     <div class="card-body row">
