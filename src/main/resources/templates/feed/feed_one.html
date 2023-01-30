@@ -38,29 +38,32 @@
                            aria-label="Search"
                            style=" height: 45px;cursor: pointer" id="dropdown-input">
                     <button class="btn btn-outline-success" type="submit" id="submitButton"
-                            onclick="submitSearch(event)">Search</button>
+                            onclick="submitSearch(event)">Search
+                    </button>
                 </form>
             </div>
         </div>
 
 
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
-                aria-expanded="true" aria-controls="collapseExample" style="width: 77px; height: 45px;
-                font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
+                aria-expanded="true" aria-controls="collapseExample"
+                style="width: 77px; height: 45px; font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+                background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold" >
             필터
         </button>
 
         <div class="d-flex flex-row justify-content-between">
-            <div style="width: fit-content">
-                <ul id="dropdown-menu" style="display: none; list-style: none">
-                    <div class="d-flex" th:each="hashtag : ${hashtags}">
-                        <div>#&nbsp;</div>
-                        <li onclick="setValue(this)" th:text="${hashtag.name}"></li>
-                    </div>
-                </ul>
+            <div id="dropdown-menu" style="width: 20%; height: 155px; border: #909090 1px solid; margin-left: 18px;
+            display: none; overflow: scroll;">
+                <div style="background-color: #dfe0e1">전체</div>
+                <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
+                    #&nbsp
+                    <div onclick="setValue(this)" th:text="${hashtag.name}"></div>
+                </span>
             </div>
-            <div class="collapse" id="cookFilter" style="width: fit-content;">
-                <div class="card card-body" style="width: max-content; background-color: lightgrey; margin-right: 65px;">
+            <div class="collapse" id="cookFilter" style="width: fit-content; margin-left: auto;">
+                <div class="card card-body"
+                     style="width: max-content; background-color: lightgrey; margin-right: 65px;">
 
                     <div class="form-check">
                         <ul style="list-style: none; margin-bottom: 2em" id="cookLevel">
@@ -118,7 +121,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button style="width: fit-content; float: right" id="filterButton">
+                    <button id="filterButton" style="width: fit-content; margin-left: auto;">
                         적용
                     </button>
                 </div>
@@ -375,7 +378,6 @@
 </script>
 
 
-
 <script>
 
     function callback(data) {
@@ -436,7 +438,7 @@
                 value = 'EASY';
             } else if (e.target.text === '보통예요') {
                 value = 'MEDIUM';
-            } else if(e.target.text === '어려워요'){
+            } else if (e.target.text === '어려워요') {
                 value = 'HARD';
             }
 
