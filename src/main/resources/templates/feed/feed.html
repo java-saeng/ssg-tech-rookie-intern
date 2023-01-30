@@ -8,47 +8,134 @@
 </head>
 
 <header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
-    <nav class="navbar bg-light" style="width: 100%;">
+    <nav class="navbar bg-light" style="width: 100%; height: 80px; border-bottom: 1px solid lightgrey;">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://www.ssg.com/">
-                <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="150px" class="d-inline-block align-text-top">
+                <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="175px" class="d-inline-block align-text-top">
             </a>
 
-            <form class="d-flex" role="search" style="width: 70%;" action="https://www.ssg.com/search.ssg">
+            <form class="d-flex" role="search" style="width: 67%; height: 45px" action="https://www.ssg.com/search.ssg">
                 <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 
             <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
-               style="width: 5%; text-align: center">
+               style="width: 10%; text-align: center">
                 <img th:src="@{/assets/cart.svg}" alt="Logo" width="30" height="24"
                      class="d-inline-block align-text-top">
             </a>
         </div>
-
-        <div class="d-inline-flex flex-row justify-content-between w-100">
-            <div class="m-3 flex-fill">
-                <form class="d-flex" role="search" action="#">
-                    <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-
-            <div class="dropdown m-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
     </nav>
 
-    <div class="d-flex bg-light">
+    <div class="bg-light"
+         style="margin-top: -1px;padding-left: 5%;padding-right: 5%; min-height: 80px; border-bottom: 2px solid lightgrey;">
+        <div class="d-inline-flex flex-row justify-content-between" style="width: 60%; margin-right: 205px;">
+            <div class="m-3 flex-fill">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 dropdown-input" type="query" placeholder="Search"
+                           aria-label="Search"
+                           style=" height: 45px;cursor: pointer" id="dropdown-input">
+                    <button class="btn btn-outline-success" type="submit" id="submitButton"
+                            onclick="submitSearch(event)">Search
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
+                aria-expanded="true" aria-controls="collapseExample"
+                style="width: 77px; height: 45px; font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+                background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold">
+            필터
+        </button>
+
+        <div class="d-flex flex-row justify-content-between">
+            <div id="dropdown-menu" style="width: 20%; height: 175px; border: #909090 1px solid; margin-left: 18px;
+            display: none; overflow: scroll;">
+                <div style="background-color: #dfe0e1">전체</div>
+                <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
+                    #&nbsp
+                    <div onclick="setValue(this)" th:text="${hashtag.name}"></div>
+                </span>
+            </div>
+            <div class="collapse" id="cookFilter" style="width: fit-content; margin-left: auto;">
+                <div class="card card-body"
+                     style="width: max-content; background-color: lightgrey; margin-right: 65px;">
+
+                    <div>
+                        <ul style="list-style: none; margin-bottom: 2em" id="cookLevel">
+                            <li style="float:left; margin-right: 1em; font-weight: bold">요리난이도</li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookLevel-li">쉬워요</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookLevel-li">보통예요</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookLevel-li">어려워요</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <ul style="list-style: none; margin-bottom: 2em" id="cookQuantity">
+                            <li style="float:left; margin-right: 2em; font-weight: bold">요리분량</a></li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px"
+                                   class="cookQuantity-li">1인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px"
+                                   class="cookQuantity-li">2~3인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px"
+                                   class="cookQuantity-li">3~4인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px"
+                                   class="cookQuantity-li">5~10인</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px"
+                                   class="cookQuantity-li">10인 이상</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <ul style="list-style: none" id="cookTime">
+                            <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분
+                                    미만</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분~20분</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">30분</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">1시간</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">2시간
+                                    이상</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button id="filterButton" style="width: fit-content; margin-left: auto; margin-top: 20px;
+                    background-color: #0c63e4; color: snow;">
+                        적용
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex bg-light" style="margin-top: -1px; height: 70px; border-bottom: 1px solid lightgrey;
+    font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
         <div class="p-3" id="newer">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
                     th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
@@ -60,6 +147,11 @@
                     th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
                 랭킹순
             </button>
+        </div>
+        <div class="p-3" style="margin-left: auto">
+            <a href="http://localhost:8080/me">
+                <img src="/assets/person-fill.svg" style="height: 45px;">
+            </a>
         </div>
     </div>
 </header>
