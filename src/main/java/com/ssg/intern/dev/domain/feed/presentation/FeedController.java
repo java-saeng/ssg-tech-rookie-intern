@@ -26,7 +26,10 @@ public class FeedController {
     @GetMapping("/feeds")
     public String searchAllFeed(Pageable pageable, Model model) {
         final List<FeedProfileResponse> response = feedQueryService.showFeedsSortedByCondition(pageable);
+        final List<HashTag> hashTags =  hashTagRepository.findDistinctTop10ByOrderByIdAsc();
+
         model.addAttribute("feeds", response);
+        model.addAttribute("hashtags", hashTags);
 
         return "feed/feed";
     }
@@ -44,9 +47,11 @@ public class FeedController {
 
     @GetMapping("/feeds/search")
     public String searchSpecificFeed(Pageable pageable, FeedSearchingConditionRequest request, Model model) {
-        final List<FeedProfileResponse> result = feedQueryService.showSatisfiedConditionFeeds(pageable,
-                                                                                              request);
+        final List<FeedProfileResponse> result = feedQueryService.showSatisfiedConditionFeeds(pageable, request);
+        final List<HashTag> hashTags =  hashTagRepository.findDistinctTop10ByOrderByIdAsc();
+
         model.addAttribute("feeds", result);
+        model.addAttribute("hashtags", hashTags);
 
         return "feed/feed_list";
     }
