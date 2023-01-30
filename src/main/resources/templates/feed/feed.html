@@ -373,5 +373,157 @@
 
 </script>
 
+<script>
+    var input = document.getElementById("dropdown-input");
+    var menu = document.getElementById("dropdown-menu");
+    input.addEventListener("click", function () {
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    });
+
+    function setValue(li) {
+        input.value = li.innerText;
+    }
+</script>
+
+<script>
+
+    function callback(data) {
+        console.log("callback 실행하자");
+        console.log(data);
+
+        fetch('http://localhost:8080/feeds/list', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    }
+
+    function submitSearch(event) {
+        event.preventDefault();
+        const input = document.getElementById("dropdown-input");
+
+        let url = 'http://localhost:8080/feeds/search?';
+
+        if (input.value !== "") {
+            url += 'hashTag=' + input.value;
+        }
+
+        window.location.href = url;
+    }
+
+</script>
+
+<script>
+
+    const cookInfo = {};
+
+    document.getElementById("cookQuantity").addEventListener(
+        "click", e => {
+
+            let ss = document.getElementsByClassName("cookQuantity-li");
+            for (let i = 0; i < ss.length; i++) {
+                ss[i].style.color = 'black';
+            }
+            e.target.style.color = 'red';
+
+            let value = '';
+            if (e.target.text === '1인') {
+                value = 'SOLO';
+            } else if (e.target.text === '2~3인') {
+                value = 'COUPLE';
+            } else if (e.target.text === '3~4인') {
+                value = 'FAMILY';
+            } else if (e.target.text === '5~10인') {
+                value = 'PARTY';
+            } else if (e.target.text === '10인 이상') {
+                value = 'FESTIVAL';
+            }
+            cookInfo["cookQuantity"] = value;
+        }
+    );
+
+    document.getElementById("cookLevel").addEventListener(
+        "click", e => {
+
+            let value = '';
+
+            let ss = document.getElementsByClassName("cookLevel-li");
+            for (let i = 0; i < ss.length; i++) {
+                ss[i].style.color = 'black';
+            }
+            e.target.style.color = 'red';
+
+            if (e.target.text === '쉬워요') {
+                value = 'EASY';
+            } else if (e.target.text === '보통예요') {
+                value = 'MEDIUM';
+            } else if (e.target.text === '어려워요') {
+                value = 'HARD';
+            }
+
+            cookInfo["cookLevel"] = value;
+        }
+    );
+
+    document.getElementById("cookTime").addEventListener(
+        "click", e => {
+
+            let ss = document.getElementsByClassName("cookTime-li");
+            for (let i = 0; i < ss.length; i++) {
+                ss[i].style.color = 'black';
+            }
+            e.target.style.color = 'red';
+
+            let value = '';
+            if (e.target.text === '10분 미만') {
+                value = 'TEN';
+            } else if (e.target.text === '10분~20분') {
+                value = 'TWENTY';
+            } else if (e.target.text === '30분') {
+                value = 'THIRTY';
+            } else if (e.target.text === '1시간') {
+                value = 'ONE_HOUR';
+            } else if (e.target.text === '2시간 이상') {
+                value = 'TWO_HOURS';
+            }
+
+            cookInfo["cookTime"] = value;
+        }
+    );
+
+    document.getElementById("filterButton").addEventListener(
+        "click", e => {
+
+            const input = document.getElementById("dropdown-input");
+
+            if (input.value !== "") {
+                cookInfo["hashTag"] = input.value;
+            }
+
+            let count = 0;
+            let queryParameter = '';
+
+            for (const [key, value] of Object.entries(cookInfo)) {
+                queryParameter += key + '=' + value;
+
+                if (count < Object.keys(cookInfo).length - 1) {
+                    queryParameter += '&';
+                }
+                count++;
+            }
+
+            window.location.href = `http://localhost:8080/feeds/search?${queryParameter}`;
+        }
+    )
+
+</script>
+
+
 </body>
 </html>
