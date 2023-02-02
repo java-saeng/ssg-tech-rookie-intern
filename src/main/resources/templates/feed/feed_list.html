@@ -55,8 +55,9 @@
                 <div style="background-color: #dfe0e1">전체</div>
                 <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
                     #&nbsp
-                    <div onclick="setValue(this)" th:text="${hashtag.name}"></div>
+                    <div class="hashtag-list" onclick="setValue(this)" th:text="${hashtag.name}"></div>
                 </span>
+                <div id="custom-hashtag" class="hashtag-list">직접입력</div>
             </div>
             <div class="collapse" id="cookFilter" style="width: fit-content; margin-left: auto;">
                 <div class="card card-body"
@@ -547,6 +548,14 @@
             window.location.href = `http://localhost:8080/feeds/search?${queryParameter}`;
         }
     )
+
+    let custom_hashtag = document.querySelector("#custom-hashtag");
+    custom_hashtag.addEventListener("click", function () {
+        let target = document.getElementById("dropdown-input");
+        target.value = "";
+        target.focus();
+        target.placeholder = "해시태그를 입력하세요!";
+    });
 
 </script>
 
