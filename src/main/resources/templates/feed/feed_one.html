@@ -16,9 +16,9 @@
                 <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="175px" class="d-inline-block align-text-top">
             </a>
 
-            <form class="d-flex" role="search" style="width: 67%; height: 45px" action="https://www.ssg.com/search.ssg">
-                <input class="form-control me-2" type="query" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex" role="search" style="width: 67%; height: 45px">
+                <input class="form-control me-2" type="query" aria-label="Search" id="ssg-search">
+                <button class="btn btn-outline-success" type="submit" onclick="submitSearchSSG(event)">Search</button>
             </form>
 
             <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
@@ -408,6 +408,19 @@
 
         if (input.value !== "") {
             url += 'hashTag=' + input.value;
+        }
+
+        window.location.href = url;
+    }
+
+    function submitSearchSSG(event) {
+        event.preventDefault();
+        const input = document.getElementById("ssg-search");
+
+        let url = 'https://www.ssg.com/search.ssg?target=all&src_area=late&query=';
+
+        if (input.value !== "") {
+            url += input.value;
         }
 
         window.location.href = url;
