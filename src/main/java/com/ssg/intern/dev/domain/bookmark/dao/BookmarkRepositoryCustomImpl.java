@@ -32,6 +32,7 @@ public class BookmarkRepositoryCustomImpl implements BookmarkRepositoryCustom {
                 .innerJoin(specialReview)
                 .on(feed.specialReviewId.eq(specialReview.id))
                 .where(bookmark.accountId.eq(accountId))
+                .where(bookmark.isBookmarked.eq(true))
                 .orderBy(sort(sortingCondition))
                 .fetch();
     }
