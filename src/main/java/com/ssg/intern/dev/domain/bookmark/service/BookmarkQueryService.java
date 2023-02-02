@@ -25,4 +25,10 @@ public class BookmarkQueryService {
 
         return bookmark.isBookmarked();
     }
+
+    public Optional<Bookmark> findBookmarkByAccountIdAndFeedId(final long accountId,
+                                                               final long feedId) {
+
+        return bookmarkRepository.findBookmarkByFeedAndAccount(feedId, accountId);
+    }
 }

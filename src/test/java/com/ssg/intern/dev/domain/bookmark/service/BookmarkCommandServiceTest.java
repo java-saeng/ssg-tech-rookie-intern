@@ -25,12 +25,15 @@ class BookmarkCommandServiceTest {
 
     BookmarkRepository bookmarkRepository;
 
+    BookmarkQueryService bookmarkQueryService;
+
     @BeforeEach
     void init() {
         bookmarkRepository = mock(BookmarkRepository.class);
         feedRepository = mock(FeedRepository.class);
+        bookmarkQueryService = mock(BookmarkQueryService.class);
 
-        bookmarkCommandService = new BookmarkCommandService(bookmarkRepository, feedRepository);
+        bookmarkCommandService = new BookmarkCommandService(bookmarkRepository, feedRepository, bookmarkQueryService);
     }
 
     @Test
