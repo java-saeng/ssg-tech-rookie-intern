@@ -20,17 +20,12 @@ public class FeedApi {
     private final FeedQueryService feedQueryService;
 
     @GetMapping("/feeds")
-    public List<FeedProfileResponse> searchAllFeed(Pageable pageable) {
-        return feedQueryService.showFeedsSortedByCondition(pageable);
+    public List<FeedProfileResponse> searchSpecificFeed(Pageable pageable, FeedSearchingConditionRequest request) {
+        return feedQueryService.showSatisfiedConditionFeeds(pageable, request);
     }
 
     @GetMapping("/feeds/{feed-id}")
     public FeedProfileResponse searchOneFeed(@PathVariable("feed-id") long feedId) {
         return feedQueryService.showOneFeed(feedId);
-    }
-
-    @GetMapping("/feeds/search")
-    public List<FeedProfileResponse> searchSpecificFeed(Pageable pageable, FeedSearchingConditionRequest request) {
-        return feedQueryService.showSatisfiedConditionFeeds(pageable, request);
     }
 }

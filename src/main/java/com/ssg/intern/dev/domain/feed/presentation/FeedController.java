@@ -24,11 +24,11 @@ public class FeedController {
     private final HashTagRepository hashTagRepository;
 
     @GetMapping("/feeds")
-    public String searchAllFeed(Pageable pageable, Model model) {
-        final List<FeedProfileResponse> response = feedQueryService.showFeedsSortedByCondition(pageable);
+    public String searchSpecificFeed(Pageable pageable, FeedSearchingConditionRequest request, Model model) {
+        final List<FeedProfileResponse> result = feedQueryService.showSatisfiedConditionFeeds(pageable, request);
         final List<HashTag> hashTags =  hashTagRepository.findDistinctTop10ByOrderByIdAsc();
 
-        model.addAttribute("feeds", response);
+        model.addAttribute("feeds", result);
         model.addAttribute("hashtags", hashTags);
 
         return "feed/feed";
@@ -43,16 +43,5 @@ public class FeedController {
         model.addAttribute("hashtags", hashTags);
 
         return "feed/feed_one";
-    }
-
-    @GetMapping("/feeds/search")
-    public String searchSpecificFeed(Pageable pageable, FeedSearchingConditionRequest request, Model model) {
-        final List<FeedProfileResponse> result = feedQueryService.showSatisfiedConditionFeeds(pageable, request);
-        final List<HashTag> hashTags =  hashTagRepository.findDistinctTop10ByOrderByIdAsc();
-
-        model.addAttribute("feeds", result);
-        model.addAttribute("hashtags", hashTags);
-
-        return "feed/feed_list";
     }
 }

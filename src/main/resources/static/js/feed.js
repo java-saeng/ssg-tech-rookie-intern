@@ -1,35 +1,34 @@
+$(document).ready(function () {
+    $(".recommend").click(function () {
+        let currentImage = $(this).attr("src");
+        let feedId = $(this).data("feed-id");
+        let recommendCount = parseInt($(this).siblings(".recommend-count").text());
+        let recommendFlag = $(this).data("flag");
+        let $recommend = $(this);
 
-    $(document).ready(function () {
-        $(".recommend").click(function () {
-            let currentImage = $(this).attr("src");
-            let feedId = $(this).data("feed-id");
-            let recommendCount = parseInt($(this).siblings(".recommend-count").text());
-            let recommendFlag = $(this).data("flag");
-            let $recommend = $(this);
-
-            if (currentImage === "/assets/hand-thumbs-up.svg") {
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
-                    headers: {'Authorization': '1'}
-                })
-                    .done(function (result) {
-                        $recommend.siblings(".recommend-count").text(recommendCount + 1);
-                        $recommend.attr("src", "/assets/hand-thumbs-up-fill.svg");
-                    });
-            } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
-                    headers: {'Authorization': '1'}
-                })
-                    .done(function (result) {
-                        $recommend.siblings(".recommend-count").text(recommendCount - 1);
-                        $recommend.attr("src", "/assets/hand-thumbs-up.svg");
-                    });
-            }
-        });
+        if (currentImage === "/assets/hand-thumbs-up.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
+                headers: {'Authorization': '1'}
+            })
+                .done(function (result) {
+                    $recommend.siblings(".recommend-count").text(recommendCount + 1);
+                    $recommend.attr("src", "/assets/hand-thumbs-up-fill.svg");
+                });
+        } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
+                headers: {'Authorization': '1'}
+            })
+                .done(function (result) {
+                    $recommend.siblings(".recommend-count").text(recommendCount - 1);
+                    $recommend.attr("src", "/assets/hand-thumbs-up.svg");
+                });
+        }
     });
+});
 
 $(document).ready(function () {
     $(".bookmark").click(function () {
@@ -61,22 +60,21 @@ $(document).ready(function () {
                 });
         }
     });
+});
 
-    var input = document.getElementById("dropdown-input");
-    var menu = document.getElementById("dropdown-menu");
-    input.addEventListener("click", function () {
-        if (menu.style.display === "none") {
-            menu.style.display = "block";
-        } else {
-            menu.style.display = "none";
-        }
-    });
+let dropdownInput = document.getElementById("dropdown-input");
+let dropdownMenu = document.getElementById("dropdown-menu");
+dropdownInput.addEventListener("click", function () {
+    if (dropdownMenu.style.display === "none") {
+        dropdownMenu.style.display = "block";
+    } else {
+        dropdownMenu.style.display = "none";
+    }
 });
 
 
-
 function setValue(li) {
-    input.value = li.innerText;
+    dropdownInput.value = li.innerText;
 }
 
 
@@ -84,13 +82,43 @@ function submitSearch(event) {
     event.preventDefault();
     const input = document.getElementById("dropdown-input");
 
-    let url = 'http://localhost:8080/feeds/search?';
+    let url = 'http://localhost:8080/feeds?';
 
     if (input.value !== "") {
         url += 'hashTag=' + input.value;
     }
 
     window.location.href = url;
+}
+
+function sorting(event) {
+    event.preventDefault();
+
+    let currentURL = window.location.href;
+    const paramsMap = getParamsAsMap(new URL(currentURL));
+
+    let sortingValue = event.target.innerText;
+    let sortingCondition = sortingValue === '최신순' ? 'NEWER' : 'RECOMMENDATION';
+
+    paramsMap.set("sort", sortingCondition);
+
+    let newURL = currentURL.split("?")[0] + "?";
+
+    for (const [key, value] of paramsMap) {
+        newURL += key + "=" + value + "&";
+    }
+    newURL = newURL.substring(0, newURL.length - 1);
+
+    window.location.href = newURL;
+}
+
+function getParamsAsMap(url) {
+    const params = new URLSearchParams(url.search);
+    const paramsMap = new Map();
+    for (const [key, value] of params) {
+        paramsMap.set(key, value);
+    }
+    return paramsMap;
 }
 
 const cookInfo = {};
@@ -117,6 +145,9 @@ document.getElementById("cookQuantity").addEventListener(
             value = 'FESTIVAL';
         }
         cookInfo["cookQuantity"] = value;
+
+        console.log(cookInfo);
+
     }
 );
 
@@ -140,6 +171,7 @@ document.getElementById("cookLevel").addEventListener(
         }
 
         cookInfo["cookLevel"] = value;
+
     }
 );
 
@@ -165,18 +197,20 @@ document.getElementById("cookTime").addEventListener(
             value = 'TWO_HOURS';
         }
 
-        cookInfo["cookTime"] = value;
     }
 );
+
 
 document.getElementById("filterButton").addEventListener(
     "click", e => {
 
         const input = document.getElementById("dropdown-input");
 
+
         if (input.value !== "") {
             cookInfo["hashTag"] = input.value;
         }
+
 
         let count = 0;
         let queryParameter = '';
@@ -190,7 +224,7 @@ document.getElementById("filterButton").addEventListener(
             count++;
         }
 
-        window.location.href = `http://localhost:8080/feeds/search?${queryParameter}`;
+        window.location.href = `http://localhost:8080/feeds?${queryParameter}`;
     }
 )
 
