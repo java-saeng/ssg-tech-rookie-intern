@@ -425,11 +425,16 @@
     document.getElementById("cookQuantity").addEventListener(
         "click", e => {
 
+            const chk = e.target.style.color==='red' ? true : false;
+
             let ss = document.getElementsByClassName("cookQuantity-li");
             for (let i = 0; i < ss.length; i++) {
                 ss[i].style.color = 'black';
             }
-            e.target.style.color = 'red';
+
+            if(chk===false) {
+                e.target.style.color = 'red';
+            }
 
             let value = '';
             if (e.target.text === '1인') {
@@ -450,14 +455,18 @@
     document.getElementById("cookLevel").addEventListener(
         "click", e => {
 
-            let value = '';
+            const chk = e.target.style.color==='red' ? true : false;
 
             let ss = document.getElementsByClassName("cookLevel-li");
             for (let i = 0; i < ss.length; i++) {
                 ss[i].style.color = 'black';
             }
-            e.target.style.color = 'red';
 
+            if(chk===false) {
+                e.target.style.color = 'red';
+            }
+
+            let value = '';
             if (e.target.text === '쉬워요') {
                 value = 'EASY';
             } else if (e.target.text === '보통예요') {
@@ -473,11 +482,16 @@
     document.getElementById("cookTime").addEventListener(
         "click", e => {
 
+            const chk = e.target.style.color==='red' ? true : false;
+
             let ss = document.getElementsByClassName("cookTime-li");
             for (let i = 0; i < ss.length; i++) {
                 ss[i].style.color = 'black';
             }
-            e.target.style.color = 'red';
+
+            if(chk===false) {
+                e.target.style.color = 'red';
+            }
 
             let value = '';
             if (e.target.text === '10분 미만') {
