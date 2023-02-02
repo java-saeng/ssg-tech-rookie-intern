@@ -33,7 +33,8 @@
         <div class="d-inline-flex flex-row justify-content-between" style="width: 60%; margin-right: 205px;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2 dropdown-input" type="query" placeholder="Search"
+                    <input class="form-control me-2 dropdown-input" type="text"
+                    th:value="${#httpServletRequest.getParameter('hashTag') != null} ? ${#httpServletRequest.getParameter('hashTag')} : '해시태그 입력'"
                            aria-label="Search"
                            style=" height: 45px;cursor: pointer" id="dropdown-input">
                     <button class="btn btn-outline-success" type="submit" id="submitButton"
@@ -139,13 +140,14 @@
         font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
         <div class="p-3" id="newer">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
-                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
+                    onclick="sorting(event)" class="sortingCandidate">
                 최신순
             </button>
         </div>
+
         <div class="p-3">
-            <button th:style="'border: 0; background-color: transparent'"
-                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
+            <button th:style="'border: 0; background-color: transparent'" class="sortingCandidate"
+                    onclick="sorting(event)">
                 랭킹순
             </button>
         </div>
@@ -333,7 +335,7 @@
 </div>
 
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script type="text/javascript" th:src="@{/js/feed.js}"></script>
 
 </body>
 </html>
