@@ -5,6 +5,7 @@
 
 <head>
     <title>피드</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 <header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
@@ -45,18 +46,18 @@
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
                 aria-expanded="true" aria-controls="collapseExample"
                 style="width: 77px; height: 45px; font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-                background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold">
+                    background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold">
             필터
         </button>
 
         <div class="d-flex flex-row justify-content-between">
             <div id="dropdown-menu" style="width: 20%; height: 175px; border: #909090 1px solid; margin-left: 18px;
-            display: none; overflow: scroll;">
+                display: none; overflow: scroll;">
                 <div style="background-color: #dfe0e1">전체</div>
                 <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
-                    #&nbsp
-                    <div onclick="setValue(this)" th:text="${hashtag.name}"></div>
-                </span>
+                        #&nbsp
+                        <div onclick="setValue(this)" th:text="${hashtag.name}"></div>
+                    </span>
             </div>
             <div class="collapse" id="cookFilter" style="width: fit-content; margin-left: auto;">
                 <div class="card card-body"
@@ -126,7 +127,7 @@
                         </ul>
                     </div>
                     <button id="filterButton" style="width: fit-content; margin-left: auto; margin-top: 20px;
-                    background-color: #0c63e4; color: snow;">
+                        background-color: #0c63e4; color: snow;">
                         적용
                     </button>
                 </div>
@@ -135,7 +136,7 @@
     </div>
 
     <div class="d-flex bg-light" style="margin-top: -1px; height: 70px; border-bottom: 1px solid lightgrey;
-    font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
+        font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
         <div class="p-3" id="newer">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
                     th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
@@ -229,39 +230,57 @@
                     <span th:text="${feed.productProfile.price}"/>
                     <span>원</span>
                     <span style="float: right; margin-right: 100px">
-                        <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
-                             class="d-inline-block align-text-top"/>
-                        <span th:text="${feed.productProfile.starScore}"></span>
-                        <span>/ 5</span>
-                    </span>
+                            <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
+                                 class="d-inline-block align-text-top"/>
+                            <span th:text="${feed.productProfile.starScore}"></span>
+                            <span>/ 5</span>
+                        </span>
                 </div>
             </div>
         </div>
 
         <div style="width: 800px; margin: 0 auto; padding-top: 1em; padding-bottom: 1em">
-            <span>
-                <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"
-                />
-                <span th:text="${feed.reviewProfile.starScore}"></span>
-            </span>
+                <span>
+                    <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
+                         class="d-inline-block align-text-top"
+                    />
+                    <span th:text="${feed.reviewProfile.starScore}"></span>
+                </span>
 
             <span style="text-align: right; margin-left: 77%">
-                <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"
-                     th:onclick="'submitRecommend(' + ${feed.feedReactionProfile.feedId} + ',' + ${feed.feedReactionProfile.recommended} + ')'"
-                     th:id="${feed.feedReactionProfile.feedId}"
+                    <img th:if="${feed.feedReactionProfile.recommended == true}"
+                         th:src="@{/assets/hand-thumbs-up-fill.svg}" alt="Logo" width="20" height="20"
+                         class="d-inline-block align-text-top recommend"
+                         th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.recommended}"
+                    />
+
+                <img th:unless="${feed.feedReactionProfile.recommended == true}"
+                     th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top recommend"
+                     th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.recommended}"
                 />
-                <span th:text="${feed.feedReactionProfile.recommendCount}"></span>
-            </span>
+
+                    <span th:text="${feed.feedReactionProfile.recommendCount}" class="recommend-count"></span>
+                </span>
 
             <span style="text-align: right; margin-left: 5%;">
-                <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"
-                     th:onclick="'submitBookmark(' + ${feed.feedReactionProfile.feedId} + ',' + ${feed.feedReactionProfile.bookmarked} + ')'"
+                <img th:if="${feed.feedReactionProfile.bookmarked == true}"
+                     th:src="@{/assets/bookmark-fill.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top bookmark"
+                     th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.bookmarked}"
                 />
-            <span th:text="${feed.feedReactionProfile.bookmarkCount}"></span>
+
+                <img th:unless="${feed.feedReactionProfile.bookmarked == true}"
+                     th:src=" @{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top bookmark"
+                     th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.bookmarked}"
+                />
+
+
+            <span th:text="${feed.feedReactionProfile.bookmarkCount}" class="bookmark-count"></span>
             </span>
+
+
         </div>
 
         <div class="d-flex mb-3" style="width: 800px; margin: 0 auto;">
@@ -297,18 +316,18 @@
             </div>
         </div>
 
-<!--        <div th:if="${feed.commentProfile.size() != 0}" style="width: 800px; margin: 0 auto">-->
-<!--            <hr>-->
-<!--            <div class="d-flex" style="margin-bottom: 10px">-->
-<!--                <div>댓글&nbsp;</div>-->
-<!--                <div th:text="${feed.commentProfile.get(0).getCommentCount()}"></div>-->
-<!--                <div>개 모두보기</div>-->
-<!--            </div>-->
-<!--            <div class="d-flex">-->
-<!--                <div th:text="${feed.commentProfile.get(0).getAuthor()}" style="margin-right: 100px;"></div>-->
-<!--                <div th:text="${feed.commentProfile.get(0).getContent()}"></div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div th:if="${feed.commentProfile.size() != 0}" style="width: 800px; margin: 0 auto">-->
+        <!--            <hr>-->
+        <!--            <div class="d-flex" style="margin-bottom: 10px">-->
+        <!--                <div>댓글&nbsp;</div>-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getCommentCount()}"></div>-->
+        <!--                <div>개 모두보기</div>-->
+        <!--            </div>-->
+        <!--            <div class="d-flex">-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getAuthor()}" style="margin-right: 100px;"></div>-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getContent()}"></div>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
     </div>
 </div>
@@ -316,61 +335,69 @@
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 
 <script>
-    function submitRecommend(feedId, isRecommended) {
 
-        console.log(feedId);
-        console.log(isRecommended);
+    $(".recommend").click(function () {
+        let currentImage = $(this).attr("src");
+        let feedId = $(this).data("feed-id");
+        let recommendCount = parseInt($(this).siblings(".recommend-count").text());
+        let recommendFlag = $(this).data("flag");
+        let $recommend = $(this);
 
-        if (isRecommended === false) {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/recommends', {
-                method: 'POST',
+        if (currentImage === "/assets/hand-thumbs-up.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
                 headers: {'Authorization': '1'}
             })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
+                .done(function (result) {
+                    $recommend.siblings(".recommend-count").text(recommendCount + 1);
+                    $recommend.attr("src", "/assets/hand-thumbs-up-fill.svg");
                 });
-        } else {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/recommends', {
-                method: 'DELETE',
+        } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
                 headers: {'Authorization': '1'}
             })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
+                .done(function (result) {
+                    $recommend.siblings(".recommend-count").text(recommendCount - 1);
+                    $recommend.attr("src", "/assets/hand-thumbs-up.svg");
                 });
         }
-
-
-    }
+    });
 
 </script>
 
 <script>
+    $(".bookmark").click(function () {
+        let currentImage = $(this).attr("src");
+        let feedId = $(this).data("feed-id");
+        let bookmarkCount = parseInt($(this).siblings(".bookmark-count").text());
+        let bookmarkFlag = $(this).data("flag");
+        let $bookmark = $(this);
 
-    function submitBookmark(feedId, isBookmarked) {
-
-        console.log(feedId);
-        console.log(isBookmarked);
-
-        if (isBookmarked === false) {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/bookmarks', {
-                method: 'POST',
+        if (currentImage === "/assets/bookmark.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
                 headers: {'Authorization': '1'}
             })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
+                .done(function (result) {
+                    $bookmark.siblings(".bookmark-count").text(bookmarkCount + 1);
+                    $bookmark.attr("src", "/assets/bookmark-fill.svg");
                 });
-        } else {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/bookmarks', {
-                method: 'DELETE',
+        } else if (currentImage === "/assets/bookmark-fill.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
                 headers: {'Authorization': '1'}
             })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
+                .done(function (result) {
+                    $bookmark.siblings(".bookmark-count").text(bookmarkCount - 1);
+                    $bookmark.attr("src", "/assets/bookmark.svg");
                 });
         }
-
-    }
-
+    });
 </script>
 
 <script>
@@ -390,19 +417,6 @@
 </script>
 
 <script>
-
-    function callback(data) {
-        console.log("callback 실행하자");
-        console.log(data);
-
-        fetch('http://localhost:8080/feeds/list', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-    }
 
     function submitSearch(event) {
         event.preventDefault();
