@@ -25,13 +25,18 @@ public class BookmarkProfileResponse {
         private String imageUrl;
         private long recommendCount;
         private String description;
+        private boolean isRecommended;
+        private long feedId;
 
         @Builder
         @QueryProjection
-        public Thumbnail(final String imageUrl, final long recommendCount, final String description) {
+        public Thumbnail(final String imageUrl, final long recommendCount, final String description,
+                         final boolean isRecommended, final long feedId) {
             this.imageUrl = imageUrl;
             this.recommendCount = recommendCount;
             this.description = description;
+            this.isRecommended = isRecommended;
+            this.feedId = feedId;
         }
     }
 }
