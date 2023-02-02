@@ -1,4 +1,4 @@
-package com.ssg.intern.dev.global;
+package com.ssg.intern.dev.global.buffer;
 
 import com.ssg.intern.dev.global.buffer.BufferInfo;
 import com.ssg.intern.dev.global.buffer.BufferStatus;
