@@ -11,6 +11,7 @@
 
 <head>
     <title>피드</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 <header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
@@ -38,8 +39,10 @@
         <div class="d-inline-flex flex-row justify-content-between" style="width: 60%; margin-right: 205px;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2 dropdown-input" type="query" placeholder="해시태그" aria-label="Search"
-                           style=" height: 45px; cursor: pointer;" maxlength="10" id="dropdown-input">
+                    <input class="form-control me-2 dropdown-input" type="text"
+                    th:value="${#httpServletRequest.getParameter('hashTag') != null} ? ${#httpServletRequest.getParameter('hashTag')} : '해시태그 입력'"
+                           aria-label="Search"
+                           style=" height: 45px;cursor: pointer" maxlength="10" id="dropdown-input">
                     <button class="btn btn-outline-success" type="submit" id="submitButton"
                             onclick="submitSearch(event)">Search
                     </button>
@@ -50,13 +53,13 @@
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
                 aria-expanded="true" aria-controls="collapseExample"
                 style="width: 77px; height: 45px; font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-                background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold">
+                    background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold">
             필터
         </button>
 
         <div class="d-flex flex-row justify-content-between">
             <div id="dropdown-menu" style="width: 20%; height: 175px; border: #909090 1px solid; margin-left: 18px;
-            display: none; overflow: scroll;">
+                display: none; overflow: scroll;">
                 <div style="background-color: #dfe0e1">전체</div>
                 <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
                     #&nbsp
@@ -131,7 +134,7 @@
                     </div>
 
                     <button id="filterButton" style="width: fit-content; margin-left: auto; margin-top: 20px;
-                    background-color: #0c63e4; color: snow;">
+                        background-color: #0c63e4; color: snow;">
                         적용
                     </button>
                 </div>
@@ -140,16 +143,17 @@
     </div>
 
     <div class="d-flex bg-light" style="margin-top: -1px; height: 70px; border-bottom: 1px solid lightgrey;
-    font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
+        font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
         <div class="p-3" id="newer">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
-                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
+                    onclick="sorting(event)" class="sortingCandidate">
                 최신순
             </button>
         </div>
+
         <div class="p-3">
-            <button th:style="'border: 0; background-color: transparent'"
-                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
+            <button th:style="'border: 0; background-color: transparent'" class="sortingCandidate"
+                    onclick="sorting(event)">
                 랭킹순
             </button>
         </div>
@@ -234,39 +238,57 @@
                     <span th:text="${feed.productProfile.price}"/>
                     <span>원</span>
                     <span style="float: right; margin-right: 100px">
-                        <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
-                             class="d-inline-block align-text-top"/>
-                        <span th:text="${feed.productProfile.starScore}"></span>
-                        <span>/ 5</span>
-                    </span>
+                            <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
+                                 class="d-inline-block align-text-top"/>
+                            <span th:text="${feed.productProfile.starScore}"></span>
+                            <span>/ 5</span>
+                        </span>
                 </div>
             </div>
         </div>
 
         <div style="width: 800px; margin: 0 auto; padding-top: 1em; padding-bottom: 1em">
-            <span>
-                <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"
-                />
-                <span th:text="${feed.reviewProfile.starScore}"></span>
-            </span>
+                <span>
+                    <img th:src="@{/assets/star-fill.svg}" alt="Logo" width="20" height="20"
+                         class="d-inline-block align-text-top"
+                    />
+                    <span th:text="${feed.reviewProfile.starScore}"></span>
+                </span>
 
             <span style="text-align: right; margin-left: 77%">
-                <img th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"
-                     th:onclick="'submitRecommend(' + ${feed.feedReactionProfile.feedId} + ',' + ${feed.feedReactionProfile.recommended} + ')'"
-                     th:id="${feed.feedReactionProfile.feedId}"
+                    <img th:if="${feed.feedReactionProfile.recommended == true}"
+                         th:src="@{/assets/hand-thumbs-up-fill.svg}" alt="Logo" width="20" height="20"
+                         class="d-inline-block align-text-top recommend"
+                         th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.recommended}"
+                    />
+
+                <img th:unless="${feed.feedReactionProfile.recommended == true}"
+                     th:src="@{/assets/hand-thumbs-up.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top recommend"
+                     th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.recommended}"
                 />
-                <span th:text="${feed.feedReactionProfile.recommendCount}"></span>
-            </span>
+
+                    <span th:text="${feed.feedReactionProfile.recommendCount}" class="recommend-count"></span>
+                </span>
 
             <span style="text-align: right; margin-left: 5%;">
-                <img th:src="@{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
-                     class="d-inline-block align-text-top"
-                     th:onclick="'submitBookmark(' + ${feed.feedReactionProfile.feedId} + ',' + ${feed.feedReactionProfile.bookmarked} + ')'"
+                <img th:if="${feed.feedReactionProfile.bookmarked == true}"
+                     th:src="@{/assets/bookmark-fill.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top bookmark"
+                     th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.bookmarked}"
                 />
-            <span th:text="${feed.feedReactionProfile.bookmarkCount}"></span>
+
+                <img th:unless="${feed.feedReactionProfile.bookmarked == true}"
+                     th:src=" @{/assets/bookmark.svg}" alt="Logo" width="20" height="20"
+                     class="d-inline-block align-text-top bookmark"
+                     th:attr="data-feed-id=${feed.feedReactionProfile.feedId}, data-flag=${feed.feedReactionProfile.bookmarked}"
+                />
+
+
+            <span th:text="${feed.feedReactionProfile.bookmarkCount}" class="bookmark-count"></span>
             </span>
+
+
         </div>
 
         <div class="d-flex mb-3" style="width: 800px; margin: 0 auto;">
@@ -319,239 +341,7 @@
 </div>
 
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-
-<script>
-    function submitRecommend(feedId, isRecommended) {
-
-        console.log(feedId);
-        console.log(isRecommended);
-
-        if (isRecommended === false) {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/recommends', {
-                method: 'POST',
-                headers: {'Authorization': '1'}
-            })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
-                });
-        } else {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/recommends', {
-                method: 'DELETE',
-                headers: {'Authorization': '1'}
-            })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
-                });
-        }
-
-
-    }
-
-</script>
-
-<script>
-
-    function submitBookmark(feedId, isBookmarked) {
-
-        console.log(feedId);
-        console.log(isBookmarked);
-
-        if (isBookmarked === false) {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/bookmarks', {
-                method: 'POST',
-                headers: {'Authorization': '1'}
-            })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
-                });
-        } else {
-            fetch('http://localhost:8080/api/feeds/' + feedId + '/bookmarks', {
-                method: 'DELETE',
-                headers: {'Authorization': '1'}
-            })
-                .then(response => {
-                    window.location.href = 'http://localhost:8080/feeds';
-                });
-        }
-
-    }
-
-</script>
-
-<script>
-    var input = document.getElementById("dropdown-input");
-    var menu = document.getElementById("dropdown-menu");
-    input.addEventListener("click", function () {
-        if (menu.style.display === "none") {
-            menu.style.display = "block";
-        } else {
-            menu.style.display = "none";
-        }
-    });
-
-    function setValue(li) {
-        input.value = li.innerText;
-    }
-</script>
-
-<script>
-
-    function callback(data) {
-        console.log("callback 실행하자");
-        console.log(data);
-
-        fetch('http://localhost:8080/feeds/list', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-    }
-
-    function submitSearch(event) {
-        event.preventDefault();
-        const input = document.getElementById("dropdown-input");
-
-        let url = 'http://localhost:8080/feeds/search?';
-
-        if (input.value !== "") {
-            url += 'hashTag=' + input.value;
-        }
-
-        window.location.href = url;
-    }
-
-    function submitSearchSSG(event) {
-        event.preventDefault();
-        const input = document.getElementById("ssg-search");
-
-        let url = 'https://www.ssg.com/search.ssg?target=all&src_area=late&query=';
-
-        if (input.value !== "") {
-            url += input.value;
-        }
-
-        window.location.href = url;
-    }
-
-</script>
-
-<script>
-
-    const cookInfo = {};
-
-    document.getElementById("cookQuantity").addEventListener(
-        "click", e => {
-            const chk = e.target.style.color==='red' ? true : false;
-
-            let ss = document.getElementsByClassName("cookQuantity-li");
-            for (let i = 0; i < ss.length; i++) {
-                ss[i].style.color = 'black';
-            }
-
-            if(chk===false) {
-                e.target.style.color = 'red';
-            }
-
-            let value = '';
-            if (e.target.text === '1인') {
-                value = 'SOLO';
-            } else if (e.target.text === '2~3인') {
-                value = 'COUPLE';
-            } else if (e.target.text === '3~4인') {
-                value = 'FAMILY';
-            } else if (e.target.text === '5~10인') {
-                value = 'PARTY';
-            } else if (e.target.text === '10인 이상') {
-                value = 'FESTIVAL';
-            }
-            cookInfo["cookQuantity"] = value;
-        }
-    );
-
-    document.getElementById("cookLevel").addEventListener(
-        "click", e => {
-
-            const chk = e.target.style.color==='red' ? true : false;
-
-            let ss = document.getElementsByClassName("cookLevel-li");
-            for (let i = 0; i < ss.length; i++) {
-                ss[i].style.color = 'black';
-            }
-
-            if(chk===false) {
-                e.target.style.color = 'red';
-            }
-
-            let value = '';
-            if (e.target.text === '쉬워요') {
-                value = 'EASY';
-            } else if (e.target.text === '보통예요') {
-                value = 'MEDIUM';
-            } else if (e.target.text === '어려워요') {
-                value = 'HARD';
-            }
-
-            cookInfo["cookLevel"] = value;
-        }
-    );
-
-    document.getElementById("cookTime").addEventListener(
-        "click", e => {
-
-            let value = '';
-            if (e.target.text === '10분 미만') {
-                value = 'TEN';
-            } else if (e.target.text === '10분~20분') {
-                value = 'TWENTY';
-            } else if (e.target.text === '30분') {
-                value = 'THIRTY';
-            } else if (e.target.text === '1시간') {
-                value = 'ONE_HOUR';
-            } else if (e.target.text === '2시간 이상') {
-                value = 'TWO_HOURS';
-            }
-
-            cookInfo["cookTime"] = value;
-        }
-    );
-
-    document.getElementById("filterButton").addEventListener(
-        "click", e => {
-
-            const input = document.getElementById("dropdown-input");
-
-            if (input.value !== "") {
-                cookInfo["hashTag"] = input.value;
-            }
-
-            let count = 0;
-            let queryParameter = '';
-
-            for (const [key, value] of Object.entries(cookInfo)) {
-                queryParameter += key + '=' + value;
-
-                if (count < Object.keys(cookInfo).length - 1) {
-                    queryParameter += '&';
-                }
-                count++;
-            }
-
-            window.location.href = `http://localhost:8080/feeds/search?${queryParameter}`;
-        }
-    )
-
-    let custom_hashtag = document.querySelector("#custom-hashtag");
-    custom_hashtag.addEventListener("click", function () {
-        let target = document.getElementById("dropdown-input");
-        target.value = "";
-        target.focus();
-        target.placeholder = "해시태그를 입력하세요!";
-    });
-
-</script>
-
+<script type="text/javascript" th:src="@{/js/feed.js}"></script>
 
 </body>
 </html>

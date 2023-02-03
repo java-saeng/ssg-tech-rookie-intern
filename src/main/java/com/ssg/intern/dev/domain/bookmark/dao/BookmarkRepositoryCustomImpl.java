@@ -7,6 +7,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.dev.domain.bookmark.entity.Bookmark;
 import com.ssg.intern.dev.domain.mypage.presentation.model.BookmarkProfileResponse;
 import com.ssg.intern.dev.domain.mypage.presentation.model.QBookmarkProfileResponse_Thumbnail;
+import com.ssg.intern.dev.domain.recommend.entity.QRecommend;
 import com.ssg.intern.dev.global.SortingCondition;
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 import static com.ssg.intern.dev.domain.bookmark.entity.QBookmark.bookmark;
 import static com.ssg.intern.dev.domain.feed.entity.QFeed.feed;
+import static com.ssg.intern.dev.domain.recommend.entity.QRecommend.*;
 import static com.ssg.intern.mock.domain.review.entity.QSpecialReview.specialReview;
 
 @RequiredArgsConstructor
@@ -25,7 +27,15 @@ public class BookmarkRepositoryCustomImpl implements BookmarkRepositoryCustom {
     @Override
     public List<BookmarkProfileResponse.Thumbnail> findThumbnails(Long accountId, SortingCondition sortingCondition) {
         return queryFactory
-                .select(new QBookmarkProfileResponse_Thumbnail(specialReview.imageUrl, feed.recommendCount, specialReview.description))
+                .select(new QBookmarkProfileResponse_Thumbnail(specialReview.imageUrl, feed.recommendCount,
+                                                               specialReview.description,
+                                                               queryFactory.selectFrom(recommend)
+                                                                           .innerJoin(feed)
+                                                                           .on(recommend.feed.id.eq(feed.id))
+                                                                           .where(recommend.accountId.eq(accountId),
+                                                                                  recommend.isRecommended.eq(true))
+                                                                           .exists(),
+                                                               feed.id))
                 .from(bookmark)
                 .innerJoin(feed)
                 .on(bookmark.feed.id.eq(feed.id))

@@ -2,7 +2,11 @@
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8"/>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<title>내가 저장한 북마크 미리보기</title>
+
+<head>
+    <title>내가 저장한 북마크 미리보기</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
 
 <header style="position: sticky; top: 0px; overflow-x: hidden; overflow-y: scroll; z-index: 10">
     <nav class="navbar bg-light" style="width: 100%; height: 80px; border-bottom: 1px solid lightgrey;">
@@ -58,12 +62,12 @@
             <span>개</span>
         </div>
         <button class="bg-light" id="newer-button" th:style="'border: 0'"
-                th:onclick="'location.href=\''+ @{http://localhost:8080/me/thumbnails?sortingCondition=NEWER} + '\''">
+                th:onclick="'location.href=\''+ @{http://localhost:8080/me/thumbnails?sort=NEWER} + '\''">
             최근 저장순
         </button>
         <div class="p-3">
             <button class="bg-light" th:style="'border: 0'"
-                    th:onclick="'location.href=\''+ @{http://localhost:8080/me/thumbnails?sortingCondition=OLDER} + '\''">
+                    th:onclick="'location.href=\''+ @{http://localhost:8080/me/thumbnails?sort=OLDER} + '\''">
                 오래된 순
             </button>
         </div>
@@ -81,12 +85,28 @@
             </a>
             <div class="card-body h-auto">
                 <div class="d-flex flex-row justify-content-between mb-3">
-                    <div>
-                        <img th:src="@{/assets/hand-thumbs-up.svg}" th:width="20px" th:height="20px" th:class="liked"/>
-                        <span th:text="${thumbnail.getRecommendCount()}"></span>
+
+                    <div th:if="${thumbnail.isRecommended() == true}">
+                        <img th:src="@{/assets/hand-thumbs-up-fill.svg}" th:width="20px" th:height="20px"
+                             class="recommend"
+                             th:attr="data-feed-id=${thumbnail.feedId}, data-flag=${thumbnail.isRecommended}"
+                        />
+                        <span th:text="${thumbnail.getRecommendCount()}" class="recommend-count"></span>
                     </div>
+
+                    <div th:unless="${thumbnail.isRecommended() == true}">
+                        <img th:src="@{/assets/hand-thumbs-up.svg}" th:width="20px" th:height="20px"
+                             class="recommend"
+                             th:attr="data-feed-id=${thumbnail.getFeedId()}, data-flag=${thumbnail.isRecommended()}"
+                        />
+                        <span th:text="${thumbnail.getRecommendCount()}" class="recommend-count"></span>
+                    </div>
+
+
                     <div style="text-align: right">
-                        <img th:src="@{/assets/bookmark.svg}" th:width="20px" th:height="20px"/>
+                        <img th:src="@{/assets/bookmark-fill.svg}" th:width="20px" th:height="20px"
+                        class="bookmark"
+                        th:attr="data-feed-id=${thumbnail.getFeedId()}, data-flag=${thumbnail.isRecommended()}"/>
                     </div>
                 </div>
                 <div class="card-text" th:text="${thumbnail.getDescription()}"></div>
@@ -94,6 +114,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bookmark.js}"></script>
 
 </body>
 </html>
