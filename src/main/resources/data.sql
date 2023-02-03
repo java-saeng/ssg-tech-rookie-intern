@@ -140,64 +140,64 @@ values (20, now(), now(), 'MEDIUM', 'FESTIVAL', 'TWO_HOURS', '사랑아 육회�
 -- feed 테이블
 
 insert into feed
-values (1, now(), now(), 0, 0, 0, 1);
+values (1, now(), now(), 0, 0, 1);
 
 insert into feed
-values (2, now(), now(), 0, 0, 0, 2);
+values (2, now(), now(), 0, 0, 2);
 
 insert into feed
-values (3, now(), now(), 0, 0, 0, 3);
+values (3, now(), now(), 0, 0, 3);
 
 insert into feed
-values (4, now(), now(), 0, 0, 0, 4);
+values (4, now(), now(), 0, 0, 4);
 
 insert into feed
-values (5, now(), now(), 0, 0, 0, 5);
+values (5, now(), now(), 0, 0, 5);
 
 insert into feed
-values (6, now(), now(), 0, 0, 0, 6);
+values (6, now(), now(), 0, 0, 6);
 
 insert into feed
-values (7, now(), now(), 0, 0, 0, 7);
+values (7, now(), now(), 0, 0, 7);
 
 insert into feed
-values (8, now(), now(), 0, 0, 0, 8);
+values (8, now(), now(), 0, 0, 8);
 
 insert into feed
-values (9, now(), now(), 0, 0, 0, 9);
+values (9, now(), now(), 0, 0, 9);
 
 insert into feed
-values (10, now(), now(), 0, 0, 0, 10);
+values (10, now(), now(), 0, 0, 10);
 
 insert into feed
-values (11, now(), now(), 0, 0, 0, 11);
+values (11, now(), now(), 0, 0, 11);
 
 insert into feed
-values (12, now(), now(), 0, 0, 0, 12);
+values (12, now(), now(), 0, 0, 12);
 
 insert into feed
-values (13, now(), now(), 0, 0, 0, 13);
+values (13, now(), now(), 0, 0, 13);
 
 insert into feed
-values (14, now(), now(), 0, 0, 0, 14);
+values (14, now(), now(), 0, 0, 14);
 
 insert into feed
-values (15, now(), now(), 0, 0, 0, 15);
+values (15, now(), now(), 0, 0, 15);
 
 insert into feed
-values (16, now(), now(), 0, 0, 0, 16);
+values (16, now(), now(), 0, 0, 16);
 
 insert into feed
-values (17, now(), now(), 0, 0, 0, 17);
+values (17, now(), now(), 0, 0, 17);
 
 insert into feed
-values (18, now(), now(), 0, 0, 0, 18);
+values (18, now(), now(), 0, 0, 18);
 
 insert into feed
-values (19, now(), now(), 0, 0, 0, 19);
+values (19, now(), now(), 0, 0, 19);
 
 insert into feed
-values (20, now(), now(), 1, 0, 0, 20);
+values (20, now(), now(), 0, 0, 20);
 
 -- 해시 태그
 
@@ -260,15 +260,6 @@ values (19, now(), now(), '쓱쉐프', 18);
 
 insert into hash_tag
 values (20, now(), now(), '방구석', 19);
-
-insert into comment
-values (1, now(), now(), 1, '댓글1', 0, 20);
-
-insert into comment
-values (2, now(), now(), 2, '댓글2', 0, 20);
-
-insert into comment
-values (3, now(), now(), 2, '너무 맛있겠네요~', 0, 11);
 
 insert into hash_tag
 values (21, now(), now(), '전복', 11);

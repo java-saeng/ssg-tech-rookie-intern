@@ -1,7 +1,6 @@
 package com.ssg.intern.dev.domain.feed.service;
 
 import com.ssg.intern.dev.domain.bookmark.service.BookmarkQueryService;
-import com.ssg.intern.dev.domain.comment.entity.Comment;
 import com.ssg.intern.dev.domain.feed.dao.FeedRepository;
 import com.ssg.intern.dev.domain.feed.entity.Feed;
 import com.ssg.intern.dev.domain.feed.presentation.model.FeedProfileResponse;
@@ -40,7 +39,6 @@ public class FeedQueryService {
 
                                  return FeedProfileResponse.builder()
                                                            .feedReactionProfile(convertToReaction(feed, specialReview))
-                                                           .commentProfile(convertToComment(feed, specialReview))
                                                            .productProfile(convertToProduct(specialReview))
                                                            .reviewProfile(convertToReview(specialReview))
                                                            .build();
@@ -60,8 +58,6 @@ public class FeedQueryService {
 
                                            return FeedProfileResponse.builder()
                                                                      .feedReactionProfile(convertToReaction(feed, specialReview))
-                                                                     .commentProfile(
-                                                                             convertToComment(feed, specialReview))
                                                                      .productProfile(convertToProduct(specialReview))
                                                                      .reviewProfile(convertToReview(specialReview))
                                                                      .hashTags(specialReview.getHashTags()
@@ -86,22 +82,6 @@ public class FeedQueryService {
                                   .isRecommended(recommendQueryService.isAccountRecommendFeed(1L, feedId))
                                   .isBookmarked(bookmarkQueryService.isAccountBookmarkFeed(1L, feedId))
                                   .build();
-    }
-
-    private List<CommentProfile> convertToComment(Feed feed, SpecialReview specialReview) {
-
-        final List<Comment> savedComments = feed.getComments();
-
-        return savedComments.stream()
-                            .map(comment -> {
-                                return CommentProfile.builder()
-                                                     .author(specialReview.getAccount().getEmail())
-                                                     .content(comment.getContent())
-                                                     .commentCount(savedComments.size())
-                                                     .isCommentBlocked(feed.isCommentBlocked())
-                                                     .build();
-                            })
-                            .collect(Collectors.toList());
     }
 
     private ProductProfile convertToProduct(SpecialReview specialReview) {

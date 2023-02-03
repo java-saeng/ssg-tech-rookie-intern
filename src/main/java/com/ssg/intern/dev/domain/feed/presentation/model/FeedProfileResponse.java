@@ -12,18 +12,15 @@ import java.util.List;
 public class FeedProfileResponse {
 
     private FeedReactionProfile feedReactionProfile;
-    private List<CommentProfile> commentProfile;
     private ProductProfile productProfile;
     private ReviewProfile reviewProfile;
 
     private List<String> hashTags;
 
     @Builder
-    public FeedProfileResponse(final FeedReactionProfile feedReactionProfile, final List<CommentProfile> commentProfile,
-                               final ProductProfile productProfile, final ReviewProfile reviewProfile,
-                               List<String> hashTags) {
+    public FeedProfileResponse(final FeedReactionProfile feedReactionProfile, final ProductProfile productProfile,
+                               final ReviewProfile reviewProfile, List<String> hashTags) {
         this.feedReactionProfile = feedReactionProfile;
-        this.commentProfile = commentProfile;
         this.productProfile = productProfile;
         this.reviewProfile = reviewProfile;
         this.hashTags = hashTags;
@@ -48,26 +45,6 @@ public class FeedProfileResponse {
             this.feedId = feedId;
             this.isBookmarked = isBookmarked;
             this.isRecommended = isRecommended;
-        }
-    }
-
-
-    @Getter
-    @NoArgsConstructor
-    public static class CommentProfile {
-
-        private int commentCount;
-        private String content;
-        private String author;
-        private boolean isCommentBlocked;
-
-        @Builder
-        public CommentProfile(final int commentCount, final String content, final String author,
-                              final boolean isCommentBlocked) {
-            this.commentCount = commentCount;
-            this.content = content;
-            this.author = author;
-            this.isCommentBlocked = isCommentBlocked;
         }
     }
 
@@ -109,7 +86,7 @@ public class FeedProfileResponse {
                              final String description, final String imageUrl, final float starScore,
                              final String author) {
             StringBuilder sb = new StringBuilder();
-            sb.append(author.substring(0, 3));
+            sb.append(author, 0, 3);
             sb.append("*******");
 
             this.createdAt = createdAt;

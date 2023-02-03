@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
-import static com.ssg.intern.dev.domain.comment.entity.QComment.*;
 import static com.ssg.intern.dev.domain.feed.entity.QFeed.*;
 import static com.ssg.intern.dev.domain.feed.presentation.model.MyReviewProfileResponse.*;
 import static com.ssg.intern.mock.domain.review.entity.QSpecialReview.specialReview;
@@ -30,10 +29,6 @@ public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
                         specialReview.description,
                         feed.recommendCount,
                         feed.bookmarkCount,
-                        queryFactory.select(comment.count())
-                                .from(comment)
-                                .where(comment.feed.id.eq(feed.id)),
-                        feed.isCommentBlocked,
                         feed.id))
                 .from(feed)
                 .innerJoin(specialReview).fetchJoin()
