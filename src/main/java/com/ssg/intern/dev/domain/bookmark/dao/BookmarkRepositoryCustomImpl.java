@@ -30,10 +30,9 @@ public class BookmarkRepositoryCustomImpl implements BookmarkRepositoryCustom {
                 .select(new QBookmarkProfileResponse_Thumbnail(specialReview.imageUrl, feed.recommendCount,
                                                                specialReview.description,
                                                                queryFactory.selectFrom(recommend)
-                                                                           .innerJoin(feed)
-                                                                           .on(recommend.feed.id.eq(feed.id))
-                                                                           .where(recommend.accountId.eq(accountId),
-                                                                                  recommend.isRecommended.eq(true))
+                                                                       .where(recommend.feed.id.eq(feed.id))
+                                                                       .where(recommend.accountId.eq(accountId))
+                                                                       .where(recommend.isRecommended.eq(true))
                                                                            .exists(),
                                                                feed.id))
                 .from(bookmark)

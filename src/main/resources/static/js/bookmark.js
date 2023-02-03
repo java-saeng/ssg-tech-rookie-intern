@@ -2,7 +2,7 @@ $(document).ready(function () {
     $(".recommend").click(function () {
         let currentImage = $(this).attr("src");
         let feedId = $(this).data("feed-id");
-        let recommendFlag = $(this).data("flag");
+        let recommendCount = parseInt($(this).siblings(".recommend-count").text());
         let $recommend = $(this);
 
         if (currentImage === "/assets/hand-thumbs-up.svg") {
@@ -13,6 +13,7 @@ $(document).ready(function () {
             })
                 .done(function (result) {
                     $recommend.attr("src", "/assets/hand-thumbs-up-fill.svg");
+                    $recommend.siblings(".recommend-count").text(recommendCount + 1);
                 });
         } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
             $.ajax({
@@ -22,6 +23,7 @@ $(document).ready(function () {
             })
                 .done(function (result) {
                     $recommend.attr("src", "/assets/hand-thumbs-up.svg");
+                    $recommend.siblings(".recommend-count").text(recommendCount - 1);
                 });
         }
     });
@@ -32,7 +34,6 @@ $(document).ready(function () {
         let currentImage = $(this).attr("src");
         let feedId = $(this).data("feed-id");
         let bookmarkCount = parseInt($(this).siblings(".bookmark-count").text());
-        let bookmarkFlag = $(this).data("flag");
         let $bookmark = $(this);
 
         if (currentImage === "/assets/bookmark.svg") {

@@ -84,9 +84,15 @@ function submitSearch(event) {
 
     let url = 'http://localhost:8080/feeds?';
 
-    if (input.value !== "") {
+    if (input.value === "해시태그 입력") {
+        input.placeholder = '해시태그 입력';
+    }
+
+    if (input.value !== "" && input.value !== "해시태그 입력") {
         url += 'hashTag=' + input.value;
     }
+
+    console.log(input.value);
 
     window.location.href = url;
 }
@@ -126,11 +132,16 @@ const cookInfo = {};
 document.getElementById("cookQuantity").addEventListener(
     "click", e => {
 
+        const chk = e.target.style.color==='red' ? true : false;
+
         let ss = document.getElementsByClassName("cookQuantity-li");
         for (let i = 0; i < ss.length; i++) {
             ss[i].style.color = 'black';
         }
-        e.target.style.color = 'red';
+
+        if(chk===false) {
+            e.target.style.color = 'red';
+        }
 
         let value = '';
         if (e.target.text === '1인') {
@@ -154,13 +165,18 @@ document.getElementById("cookQuantity").addEventListener(
 document.getElementById("cookLevel").addEventListener(
     "click", e => {
 
-        let value = '';
+        const chk = e.target.style.color==='red' ? true : false;
 
         let ss = document.getElementsByClassName("cookLevel-li");
         for (let i = 0; i < ss.length; i++) {
             ss[i].style.color = 'black';
         }
-        e.target.style.color = 'red';
+
+        if(chk===false) {
+            e.target.style.color = 'red';
+        }
+
+        let value = '';
 
         if (e.target.text === '쉬워요') {
             value = 'EASY';
@@ -171,6 +187,7 @@ document.getElementById("cookLevel").addEventListener(
         }
 
         cookInfo["cookLevel"] = value;
+        console.log(cookInfo);
 
     }
 );
@@ -178,11 +195,16 @@ document.getElementById("cookLevel").addEventListener(
 document.getElementById("cookTime").addEventListener(
     "click", e => {
 
+        const chk = e.target.style.color==='red' ? true : false;
+
         let ss = document.getElementsByClassName("cookTime-li");
         for (let i = 0; i < ss.length; i++) {
             ss[i].style.color = 'black';
         }
-        e.target.style.color = 'red';
+
+        if(chk===false) {
+            e.target.style.color = 'red';
+        }
 
         let value = '';
         if (e.target.text === '10분 미만') {
@@ -196,6 +218,9 @@ document.getElementById("cookTime").addEventListener(
         } else if (e.target.text === '2시간 이상') {
             value = 'TWO_HOURS';
         }
+
+        cookInfo["cookTime"] = value;
+        console.log(cookInfo);
 
     }
 );
@@ -228,3 +253,10 @@ document.getElementById("filterButton").addEventListener(
     }
 )
 
+let custom_hashtag = document.querySelector("#custom-hashtag");
+custom_hashtag.addEventListener("click", function () {
+    let target = document.getElementById("dropdown-input");
+    target.value = "";
+    target.focus();
+    target.placeholder = "해시태그를 입력하세요!";
+});
