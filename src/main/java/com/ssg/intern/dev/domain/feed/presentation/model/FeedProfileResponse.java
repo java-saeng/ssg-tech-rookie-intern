@@ -108,6 +108,10 @@ public class FeedProfileResponse {
                              final String cookTime,
                              final String description, final String imageUrl, final float starScore,
                              final String author) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(author.substring(0, 3));
+            sb.append("*******");
+
             this.createdAt = createdAt;
             this.cookLevel = cookLevel;
             this.cookQuantity = cookQuantity;
@@ -115,7 +119,7 @@ public class FeedProfileResponse {
             this.description = description;
             this.imageUrl = imageUrl;
             this.starScore = starScore;
-            this.author = author;
+            this.author = sb.toString();
         }
     }
 }

@@ -23,7 +23,7 @@ public class MypageController {
     private final MypageCommandService mypageCommandService;
 
     @GetMapping("/me/thumbnails")
-    public String getThumbnails(@RequestParam(value = "sorting", required = false) SortingCondition sortingCondition,
+    public String getThumbnails(@RequestParam(value = "sort", required = false) SortingCondition sortingCondition,
                                 Model model) {
 
         if(sortingCondition==null) {
@@ -43,7 +43,7 @@ public class MypageController {
     }
 
     @GetMapping("/me")
-    public String getMyFeeds(@RequestParam(value = "sorting", required = false) SortingCondition sortingCondition,
+    public String getMyFeeds(@RequestParam(value = "sort", required = false) SortingCondition sortingCondition,
                              Model model) {
 
         if(sortingCondition==null) {

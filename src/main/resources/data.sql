@@ -107,7 +107,7 @@ values (12, now(), now(), 'HARD', 'COUPLE', 'TWENTY', '싱싱한 제철 전복, 
 
 insert into special_review
 values (13, now(), now(), 'EASY', 'FAMILY', 'THIRTY', '샤인머스켓 그냥 먹어도 꿀맛이지롱',
-        'https://succ.ssgcdn.com/uphoto/202301/20230103193806_1189392950_0_1.jpg', 5, 6, 4.7);
+        'https://succ.ssgcdn.com/uphoto/202110/20211013222128_1148252917_1.jpg', 5, 6, 4.7);
 
 insert into special_review
 values (14, now(), now(), 'MEDIUM', 'PARTY', 'ONE_HOUR', '노릇노릇하게 고등어~!',
