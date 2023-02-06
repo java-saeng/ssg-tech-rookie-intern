@@ -33,40 +33,44 @@ public class FeedQueryService {
 
     public FeedProfileResponse showOneFeed(final long feedId) {
         return feedRepository.findById(feedId)
-                             .map(feed -> {
-                                 final SpecialReview specialReview =
-                                         mockDataFacadeRepository.findBySpecialReviewId(feed.getId());
+                .map(feed -> {
+                    final SpecialReview specialReview =
+                            mockDataFacadeRepository.findBySpecialReviewId(feed.getId());
 
-                                 return FeedProfileResponse.builder()
-                                                           .feedReactionProfile(convertToReaction(feed, specialReview))
-                                                           .productProfile(convertToProduct(specialReview))
-                                                           .reviewProfile(convertToReview(specialReview))
-                                                           .build();
-                             })
-                             .orElseThrow(EntityNotFoundException::new);
+                    return FeedProfileResponse.builder()
+                            .feedReactionProfile(convertToReaction(feed, specialReview))
+                            .productProfile(convertToProduct(specialReview))
+                            .reviewProfile(convertToReview(specialReview))
+                            .hashTags(specialReview.getHashTags()
+                                    .stream()
+                                    .map((HashTag::getName))
+                                    .collect(Collectors.toList()))
+                            .build();
+                })
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     public List<FeedProfileResponse> showSatisfiedConditionFeeds(final Pageable pageable,
                                                                  final FeedSearchingConditionRequest request) {
 
         return mockDataFacadeRepository.findBySearchingCondition(pageable, request)
-                                       .stream()
-                                       .map(specialReview -> {
+                .stream()
+                .map(specialReview -> {
 
-                                           final Feed feed = feedRepository.findBySpecialReviewId(specialReview.getId())
-                                                                           .orElseThrow(EntityNotFoundException::new);
+                    final Feed feed = feedRepository.findBySpecialReviewId(specialReview.getId())
+                            .orElseThrow(EntityNotFoundException::new);
 
-                                           return FeedProfileResponse.builder()
-                                                                     .feedReactionProfile(convertToReaction(feed, specialReview))
-                                                                     .productProfile(convertToProduct(specialReview))
-                                                                     .reviewProfile(convertToReview(specialReview))
-                                                                     .hashTags(specialReview.getHashTags()
-                                                                                            .stream()
-                                                                                            .map((HashTag::getName))
-                                                                                            .collect(Collectors.toList()))
-                                                                     .build();
-                                       })
-                                       .collect(Collectors.toList());
+                    return FeedProfileResponse.builder()
+                            .feedReactionProfile(convertToReaction(feed, specialReview))
+                            .productProfile(convertToProduct(specialReview))
+                            .reviewProfile(convertToReview(specialReview))
+                            .hashTags(specialReview.getHashTags()
+                                    .stream()
+                                    .map((HashTag::getName))
+                                    .collect(Collectors.toList()))
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
 
     private FeedReactionProfile convertToReaction(Feed feed, SpecialReview specialReview) {
@@ -75,38 +79,38 @@ public class FeedQueryService {
         final Long feedId = feed.getId();
 
         return FeedReactionProfile.builder()
-                                  .feedId(feedId)
-                                  .bookmarkCount(feed.getBookmarkCount())
-                                  .recommendCount(feed.getRecommendCount())
-                                  //TODO : DTO 분리 시켜서 Http header에서 accountId를 받아서 1L 대신 넣어주기
-                                  .isRecommended(recommendQueryService.isAccountRecommendFeed(1L, feedId))
-                                  .isBookmarked(bookmarkQueryService.isAccountBookmarkFeed(1L, feedId))
-                                  .build();
+                .feedId(feedId)
+                .bookmarkCount(feed.getBookmarkCount())
+                .recommendCount(feed.getRecommendCount())
+                //TODO : DTO 분리 시켜서 Http header에서 accountId를 받아서 1L 대신 넣어주기
+                .isRecommended(recommendQueryService.isAccountRecommendFeed(1L, feedId))
+                .isBookmarked(bookmarkQueryService.isAccountBookmarkFeed(1L, feedId))
+                .build();
     }
 
     private ProductProfile convertToProduct(SpecialReview specialReview) {
         final Product product = specialReview.getProduct();
 
         return ProductProfile.builder()
-                             .name(product.getName())
-                             .imageUrl(product.getImageUrl())
-                             .price(product.getPrice())
-                             .starScore(product.getStarScore())
-                             .discountPercent(product.getDiscountPercent())
-                             .build();
+                .name(product.getName())
+                .imageUrl(product.getImageUrl())
+                .price(product.getPrice())
+                .starScore(product.getStarScore())
+                .discountPercent(product.getDiscountPercent())
+                .build();
     }
 
     private ReviewProfile convertToReview(SpecialReview specialReview) {
 
         return ReviewProfile.builder()
-                            .createdAt(specialReview.getCreatedAt())
-                            .cookLevel(specialReview.getCookLevel().getLevel())
-                            .cookQuantity(specialReview.getCookQuantity().getQuantity())
-                            .cookTime(specialReview.getCookTime().getTime())
-                            .description(specialReview.getDescription())
-                            .imageUrl(specialReview.getImageUrl())
-                            .starScore(specialReview.getStarScore())
-                            .author(specialReview.getAccount().getEmail())
-                            .build();
+                .createdAt(specialReview.getCreatedAt())
+                .cookLevel(specialReview.getCookLevel().getLevel())
+                .cookQuantity(specialReview.getCookQuantity().getQuantity())
+                .cookTime(specialReview.getCookTime().getTime())
+                .description(specialReview.getDescription())
+                .imageUrl(specialReview.getImageUrl())
+                .starScore(specialReview.getStarScore())
+                .author(specialReview.getAccount().getEmail())
+                .build();
     }
 }

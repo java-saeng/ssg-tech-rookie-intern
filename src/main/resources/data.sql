@@ -202,34 +202,34 @@ values (20, now(), now(), 0, 0, 20);
 -- 해시 태그
 
 insert into hash_tag
-values (1, now(), now(), '몸보신', 1);
+values (1, now(), now(), '간편요리', 1);
 
 insert into hash_tag
-values (2, now(), now(), '좋아', 1);
+values (2, now(), now(), 'SNS용', 1);
 
 insert into hash_tag
-values (3, now(), now(), '맛있어', 2);
+values (3, now(), now(), '1인요리', 2);
 
 insert into hash_tag
-values (4, now(), now(), '멋있어', 3);
+values (4, now(), now(), '매일매일', 3);
 
 insert into hash_tag
-values (5, now(), now(), '1인요리', 4);
+values (5, now(), now(), '몸보신용', 4);
 
 insert into hash_tag
-values (6, now(), now(), '가족요리', 5);
+values (6, now(), now(), '가족최애요리', 5);
 
 insert into hash_tag
-values (7, now(), now(), '모임요리', 6);
+values (7, now(), now(), '인생요리', 6);
 
 insert into hash_tag
-values (8, now(), now(), '취미', 7);
+values (8, now(), now(), '주말스페셜', 7);
 
 insert into hash_tag
-values (9, now(), now(), '특기', 8);
+values (9, now(), now(), '손님대접용', 8);
 
 insert into hash_tag
-values (10, now(), now(), '맛있어', 9);
+values (10, now(), now(), '생일파티용', 9);
 
 insert into hash_tag
 values (11, now(), now(), '쉬워', 10);
@@ -241,7 +241,7 @@ insert into hash_tag
 values (13, now(), now(), '화려해', 12);
 
 insert into hash_tag
-values (14, now(), now(), 'SNS용', 13);
+values (14, now(), now(), '뚝딱', 13);
 
 insert into hash_tag
 values (15, now(), now(), '맛도리', 14);
