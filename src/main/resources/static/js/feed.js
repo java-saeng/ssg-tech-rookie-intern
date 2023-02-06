@@ -92,8 +92,6 @@ function submitSearch(event) {
         url += 'hashTag=' + input.value;
     }
 
-    console.log(input.value);
-
     window.location.href = url;
 }
 
@@ -127,19 +125,37 @@ function getParamsAsMap(url) {
     return paramsMap;
 }
 
+const cookMap = new Map();
+
+cookMap.set('10분 미만', 'TEN');
+cookMap.set('10분~20분', 'TWENTY');
+cookMap.set('30분', 'THIRTY');
+cookMap.set('1시간', 'ONE_HOUR');
+cookMap.set('2시간 이상', 'TWO_HOURS');
+
+cookMap.set('쉬워요', 'EASY');
+cookMap.set('보통예요', 'MEDIUM');
+cookMap.set('어려워요', 'HARD');
+
+cookMap.set('1인', 'SOLO');
+cookMap.set('2~3인', 'COUPLE');
+cookMap.set('3~4인', 'FAMILY');
+cookMap.set('5~10인', 'PARTY');
+cookMap.set('10인 이상', 'FESTIVAL');
+
 const cookInfo = {};
 
 document.getElementById("cookQuantity").addEventListener(
     "click", e => {
 
-        const chk = e.target.style.color==='red' ? true : false;
+        const chk = e.target.style.color === 'red' ? true : false;
 
         let ss = document.getElementsByClassName("cookQuantity-li");
         for (let i = 0; i < ss.length; i++) {
             ss[i].style.color = 'black';
         }
 
-        if(chk===false) {
+        if (chk === false) {
             e.target.style.color = 'red';
         }
 
@@ -155,9 +171,12 @@ document.getElementById("cookQuantity").addEventListener(
         } else if (e.target.text === '10인 이상') {
             value = 'FESTIVAL';
         }
-        cookInfo["cookQuantity"] = value;
 
-        console.log(cookInfo);
+        if (e.target.style.color === 'red') {
+            cookInfo["cookQuantity"] = value;
+        } else {
+            delete cookInfo["cookQuantity"];
+        }
 
     }
 );
@@ -165,14 +184,14 @@ document.getElementById("cookQuantity").addEventListener(
 document.getElementById("cookLevel").addEventListener(
     "click", e => {
 
-        const chk = e.target.style.color==='red' ? true : false;
+        const chk = e.target.style.color === 'red' ? true : false;
 
         let ss = document.getElementsByClassName("cookLevel-li");
         for (let i = 0; i < ss.length; i++) {
             ss[i].style.color = 'black';
         }
 
-        if(chk===false) {
+        if (chk === false) {
             e.target.style.color = 'red';
         }
 
@@ -186,8 +205,11 @@ document.getElementById("cookLevel").addEventListener(
             value = 'HARD';
         }
 
-        cookInfo["cookLevel"] = value;
-        console.log(cookInfo);
+        if (e.target.style.color === 'red') {
+            cookInfo["cookLevel"] = value;
+        } else {
+            delete cookInfo["cookLevel"];
+        }
 
     }
 );
@@ -195,14 +217,14 @@ document.getElementById("cookLevel").addEventListener(
 document.getElementById("cookTime").addEventListener(
     "click", e => {
 
-        const chk = e.target.style.color==='red' ? true : false;
+        const chk = e.target.style.color === 'red' ? true : false;
 
         let ss = document.getElementsByClassName("cookTime-li");
         for (let i = 0; i < ss.length; i++) {
             ss[i].style.color = 'black';
         }
 
-        if(chk===false) {
+        if (chk === false) {
             e.target.style.color = 'red';
         }
 
@@ -219,9 +241,62 @@ document.getElementById("cookTime").addEventListener(
             value = 'TWO_HOURS';
         }
 
-        cookInfo["cookTime"] = value;
-        console.log(cookInfo);
+        if (e.target.style.color === 'red') {
+            cookInfo["cookTime"] = value;
+        } else {
+            delete cookInfo["cookTime"];
+        }
 
+    }
+);
+
+
+document.getElementById("filter").addEventListener(
+    "click", e => {
+
+        let currentURL = window.location.href;
+        const paramsMap = getParamsAsMap(new URL(currentURL));
+
+        for (const [key, value] of paramsMap) {
+
+            if (key === 'cookLevel') {
+                let cookLevelCandidate = document.getElementsByClassName("cookLevel-li");
+
+                for (let i = 0; i < cookLevelCandidate.length; i++) {
+
+                    if (cookMap.get(cookLevelCandidate[i].text) === value) {
+
+                        cookLevelCandidate[i].style.color = 'red';
+                        cookInfo['cookLevel'] = value;
+
+                    }
+                }
+
+            } else if (key === 'cookTime') {
+
+                let cookTimeCandidate = document.getElementsByClassName("cookTime-li");
+
+                for (let i = 0; i < cookTimeCandidate.length; i++) {
+
+                    if (cookMap.get(cookTimeCandidate[i].text) === value) {
+                        cookTimeCandidate[i].style.color = 'red';
+                        cookInfo['cookTime'] = value;
+                    }
+                }
+
+            } else if (key === 'cookQuantity') {
+
+                let cookQuantityCandidate = document.getElementsByClassName("cookQuantity-li");
+
+                for (let i = 0; i < cookQuantityCandidate.length; i++) {
+
+                    if (cookMap.get(cookQuantityCandidate[i].text) === value) {
+                        cookQuantityCandidate[i].style.color = 'red';
+                        cookInfo['cookQuantity'] = value;
+                    }
+                }
+            }
+        }
     }
 );
 
@@ -231,8 +306,11 @@ document.getElementById("filterButton").addEventListener(
 
         const input = document.getElementById("dropdown-input");
 
+        if (input.value === "해시태그 입력") {
+            input.placeholder = '해시태그 입력';
+        }
 
-        if (input.value !== "") {
+        if (input.value !== "" && input.value !== "해시태그 입력") {
             cookInfo["hashTag"] = input.value;
         }
 
