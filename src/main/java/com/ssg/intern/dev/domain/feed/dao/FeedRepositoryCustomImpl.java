@@ -29,6 +29,7 @@ public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
                         specialReview.description,
                         feed.recommendCount,
                         feed.bookmarkCount,
+                        specialReview.id,
                         feed.id))
                 .from(feed)
                 .innerJoin(specialReview).fetchJoin()

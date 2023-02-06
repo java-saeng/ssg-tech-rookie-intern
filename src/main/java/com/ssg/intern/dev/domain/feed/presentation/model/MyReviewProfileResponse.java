@@ -30,11 +30,12 @@ public class MyReviewProfileResponse {
         private long recommendCount;
         private long bookmarkCount;
         private long specialReviewId;
+        private long feedId;
 
         @Builder
         @QueryProjection
         public MyReview(String imageUrl, float starScore, LocalDateTime createdAt, String description,
-                        long recommendCount, long bookmarkCount, long specialReviewId) {
+                        long recommendCount, long bookmarkCount, long specialReviewId, long feedId) {
             this.imageUrl = imageUrl;
             this.starScore = starScore;
             this.createdAt = createdAt;
@@ -42,8 +43,7 @@ public class MyReviewProfileResponse {
             this.recommendCount = recommendCount;
             this.bookmarkCount = bookmarkCount;
             this.specialReviewId = specialReviewId;
+            this.feedId = feedId;
         }
-
-
     }
 }
