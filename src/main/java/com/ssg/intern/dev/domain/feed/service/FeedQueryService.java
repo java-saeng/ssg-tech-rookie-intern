@@ -53,7 +53,7 @@ public class FeedQueryService {
                                        .stream()
                                        .map(specialReview -> {
 
-                                           final Feed feed = feedRepository.findById(specialReview.getId())
+                                           final Feed feed = feedRepository.findBySpecialReviewId(specialReview.getId())
                                                                            .orElseThrow(EntityNotFoundException::new);
 
                                            return FeedProfileResponse.builder()
