@@ -44,8 +44,8 @@ values (5, now(), now(), '제주에서 막 잡은 전복',
         'https://sitem.ssgcdn.com/60/42/51/item/1000340514260_i1_1100.jpg', 34610, 4.4, 50);
 
 insert into product
-values (6, now(), now(), '방금 막 딴 샤인머스켓',
-        'https://sitem.ssgcdn.com/92/13/26/item/2097001261392_i1_1100.jpg', 19950, 4.5, 40);
+values (6, now(), now(), '호주청정우 치마살 구이 300g',
+        'https://sitem.ssgcdn.com/13/81/37/item/2097001378113_i1_1100.jpg', 19950, 4.5, 40);
 
 insert into product
 values (7, now(), now(), '논산 딸기',
@@ -106,8 +106,8 @@ values (12, now(), now(), 'HARD', 'COUPLE', 'TWENTY', '싱싱한 제철 전복, 
         'https://succ.ssgcdn.com/uphoto/202207/20220703164357_1175739232_3_1.jpg', 5, 5, 4.6);
 
 insert into special_review
-values (13, now(), now(), 'EASY', 'FAMILY', 'THIRTY', '샤인머스켓 그냥 먹어도 꿀맛이지롱',
-        'https://succ.ssgcdn.com/uphoto/202110/20211013222128_1148252917_1.jpg', 5, 6, 4.7);
+values (13, now(), now(), 'EASY', 'FAMILY', 'THIRTY', '치마살에 깨소금 솔솔~ 얼마나 맛있게요~!',
+        'https://succ.ssgcdn.com/uphoto/202209/20220921180000_1182001008_3_1.jpg', 5, 6, 4.7);
 
 insert into special_review
 values (14, now(), now(), 'MEDIUM', 'PARTY', 'ONE_HOUR', '노릇노릇하게 고등어~!',
