@@ -40,7 +40,7 @@
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2 dropdown-input" type="text"
-                    th:value="${#httpServletRequest.getParameter('hashTag') != null} ? ${#httpServletRequest.getParameter('hashTag')} : '해시태그 입력'"
+                           th:value="${#httpServletRequest.getParameter('hashTag') != null} ? ${#httpServletRequest.getParameter('hashTag')} : '해시태그 입력'"
                            aria-label="Search"
                            style=" height: 45px;cursor: pointer" maxlength="10" id="dropdown-input">
                     <button class="btn btn-outline-success" type="submit" id="submitButton"
@@ -60,7 +60,10 @@
         <div class="d-flex flex-row justify-content-between">
             <div id="dropdown-menu" style="width: 20%; height: 175px; border: #909090 1px solid; margin-left: 18px;
                 display: none; overflow: scroll;">
-                <div style="background-color: #dfe0e1">전체</div>
+                <div style="background-color: #dfe0e1">
+                    <a href="http://localhost:8080/feeds?sort=NEWER"
+                       style="text-decoration-line: none; color: black; font-weight: bolder;">전체</a>
+                </div>
                 <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
                     #&nbsp
                     <div class="hashtag-list" onclick="setValue(this)" th:text="${hashtag.name}"></div>
@@ -90,7 +93,8 @@
                         <ul style="list-style: none; margin-bottom: 2em" id="cookTime">
                             <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
                             <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분 미만</a>
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분
+                                    미만</a>
                             </li>
                             <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
                                 <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분~20분</a>
@@ -102,7 +106,8 @@
                                 <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">1시간</a>
                             </li>
                             <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">2시간 이상</a>
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">2시간
+                                    이상</a>
                             </li>
                         </ul>
                     </div>
