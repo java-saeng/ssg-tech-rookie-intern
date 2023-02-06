@@ -54,7 +54,10 @@
         <div class="d-flex flex-row justify-content-between">
             <div id="dropdown-menu" style="width: 20%; height: 175px; border: #909090 1px solid; margin-left: 18px;
             display: none; overflow: scroll;">
-                <div style="background-color: #dfe0e1">전체</div>
+                <div style="background-color: #dfe0e1">
+                    <a href="http://localhost:8080/feeds?sort=NEWER"
+                       style="text-decoration-line: none; color: black; font-weight: bolder;">전체</a>
+                </div>
                 <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
                     #&nbsp
                     <div class="hashtag-list" onclick="setValue(this)" th:text="${hashtag.name}"></div>
