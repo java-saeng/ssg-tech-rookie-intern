@@ -95,6 +95,19 @@ function submitSearch(event) {
     window.location.href = url;
 }
 
+function submitSearchSSG(event) {
+    event.preventDefault();
+    const input = document.getElementById("ssg-search");
+
+    let url = 'https://www.ssg.com/search.ssg?target=all&src_area=late&query=';
+
+    if (input.value !== "") {
+        url += input.value;
+    }
+
+    window.location.href = url;
+}
+
 function sorting(event) {
     event.preventDefault();
 
