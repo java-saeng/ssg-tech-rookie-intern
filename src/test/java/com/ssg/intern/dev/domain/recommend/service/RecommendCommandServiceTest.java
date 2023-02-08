@@ -23,12 +23,15 @@ class RecommendCommandServiceTest {
 
     RecommendRepository recommendRepository;
 
+    RecommendQueryService recommendQueryService;
+
     @BeforeEach
     void init() {
         recommendRepository = mock(RecommendRepository.class);
         feedRepository = mock(FeedRepository.class);
 
-        recommendCommandService = new RecommendCommandService(recommendRepository, feedRepository);
+        recommendCommandService = new RecommendCommandService(recommendRepository, feedRepository,
+                                                              recommendQueryService);
     }
 
     @Test

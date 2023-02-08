@@ -5,7 +5,6 @@ import com.ssg.intern.dev.domain.recommend.entity.Recommend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -25,5 +24,11 @@ public class RecommendQueryService {
         final Recommend recommend = savedRecommend.get();
 
         return recommend.isRecommended();
+    }
+
+    public Optional<Recommend> findBookmarkByAccountIdAndFeedId(final long accountId,
+                                                               final long feedId) {
+
+        return recommendRepository.findRecommendByFeedAndAccount(feedId, accountId);
     }
 }

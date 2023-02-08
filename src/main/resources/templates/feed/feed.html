@@ -3,12 +3,6 @@
 <meta charset="utf-8">
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 
-<style>
-    .hashtag-list:hover {
-        color: red;
-    }
-</style>
-
 <head>
     <title>피드</title>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -21,9 +15,9 @@
                 <img th:src="@{/assets/ssg-logo.svg}" alt="Logo" width="175px" class="d-inline-block align-text-top">
             </a>
 
-            <form class="d-flex" role="search" style="width: 67%; height: 45px">
-                <input class="form-control me-2" type="query" aria-label="Search" id="ssg-search">
-                <button class="btn btn-outline-success" type="submit" onclick="submitSearchSSG(event)">Search</button>
+            <form class="d-flex" role="search" style="width: 67%; height: 45px" action="https://www.ssg.com/search.ssg">
+                <input class="form-control me-2" type="query" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 
             <a class="navbar-brand" href="https://pay.ssg.com/cart/dmsShpp.ssg?gnb=cart"
@@ -39,10 +33,9 @@
         <div class="d-inline-flex flex-row justify-content-between" style="width: 60%; margin-right: 205px;">
             <div class="m-3 flex-fill">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2 dropdown-input" type="text"
-                           th:value="${#httpServletRequest.getParameter('hashTag') != null} ? ${#httpServletRequest.getParameter('hashTag')} : '해시태그 입력'"
+                    <input class="form-control me-2 dropdown-input" type="query" placeholder="Search"
                            aria-label="Search"
-                           style=" height: 45px;cursor: pointer" maxlength="10" id="dropdown-input">
+                           style=" height: 45px;cursor: pointer" id="dropdown-input">
                     <button class="btn btn-outline-success" type="submit" id="submitButton"
                             onclick="submitSearch(event)">Search
                     </button>
@@ -51,7 +44,7 @@
         </div>
 
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cookFilter"
-                aria-expanded="true" aria-controls="collapseExample" id="filter"
+                aria-expanded="true" aria-controls="collapseExample"
                 style="width: 77px; height: 45px; font-size: 20px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';
                     background-color: gainsboro; border-color: gainsboro; color: black; font-weight: bold">
             필터
@@ -60,15 +53,11 @@
         <div class="d-flex flex-row justify-content-between">
             <div id="dropdown-menu" style="width: 20%; height: 175px; border: #909090 1px solid; margin-left: 18px;
                 display: none; overflow: scroll;">
-                <div style="background-color: #dfe0e1">
-                    <a href="http://localhost:8080/feeds?sort=NEWER"
-                       style="text-decoration-line: none; color: black; font-weight: bolder;">전체</a>
-                </div>
+                <div style="background-color: #dfe0e1">전체</div>
                 <span class="d-flex" th:each="hashtag : ${hashtags}" style="border: 1px solid #909090">
-                    #&nbsp
-                    <div class="hashtag-list" onclick="setValue(this)" th:text="${hashtag.name}"></div>
-                </span>
-                <div id="custom-hashtag" class="hashtag-list">직접입력</div>
+                        #&nbsp
+                        <div onclick="setValue(this)" th:text="${hashtag.name}"></div>
+                    </span>
             </div>
             <div class="collapse" id="cookFilter" style="width: fit-content; margin-left: auto;">
                 <div class="card card-body"
@@ -90,30 +79,7 @@
                     </div>
 
                     <div>
-                        <ul style="list-style: none; margin-bottom: 2em" id="cookTime">
-                            <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
-                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분
-                                    미만</a>
-                            </li>
-                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분~20분</a>
-                            </li>
-                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">30분</a>
-                            </li>
-                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">1시간</a>
-                            </li>
-                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
-                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">2시간
-                                    이상</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul style="list-style: none;" id="cookQuantity">
+                        <ul style="list-style: none; margin-bottom: 2em" id="cookQuantity">
                             <li style="float:left; margin-right: 2em; font-weight: bold">요리분량</a></li>
                             <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
                                 <a style="text-decoration-line: none; color: black; margin: 10px"
@@ -138,6 +104,28 @@
                         </ul>
                     </div>
 
+                    <div>
+                        <ul style="list-style: none" id="cookTime">
+                            <li style="float:left; margin-right: 2em; font-weight: bold">요리시간</a></li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분
+                                    미만</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">10분~20분</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">30분</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">1시간</a>
+                            </li>
+                            <li style="float:left; margin-right: 1em; border: 1px solid white; border-radius: 50%; background-color: white">
+                                <a style="text-decoration-line: none; color: black; margin: 10px" class="cookTime-li">2시간
+                                    이상</a>
+                            </li>
+                        </ul>
+                    </div>
                     <button id="filterButton" style="width: fit-content; margin-left: auto; margin-top: 20px;
                         background-color: #0c63e4; color: snow;">
                         적용
@@ -151,14 +139,13 @@
         font-size: 23px; font-family: 'Spoqa Han Sans Neo', 'sans-serif';">
         <div class="p-3" id="newer">
             <button id="newer-button" th:style="'border: 0; background-color: transparent'"
-                    onclick="sorting(event)" class="sortingCandidate">
+                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=NEWER} + '\''">
                 최신순
             </button>
         </div>
-
         <div class="p-3">
-            <button th:style="'border: 0; background-color: transparent'" class="sortingCandidate"
-                    onclick="sorting(event)">
+            <button th:style="'border: 0; background-color: transparent'"
+                    th:onclick="'location.href=\''+ @{http://localhost:8080/feeds?sort=RECOMMENDATION} + '\''">
                 랭킹순
             </button>
         </div>
@@ -328,11 +315,229 @@
                 <span th:text="${hashTag}" style="color:darkgray; font-weight: bold;"></span>
             </div>
         </div>
+
+        <!--        <div th:if="${feed.commentProfile.size() != 0}" style="width: 800px; margin: 0 auto">-->
+        <!--            <hr>-->
+        <!--            <div class="d-flex" style="margin-bottom: 10px">-->
+        <!--                <div>댓글&nbsp;</div>-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getCommentCount()}"></div>-->
+        <!--                <div>개 모두보기</div>-->
+        <!--            </div>-->
+        <!--            <div class="d-flex">-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getAuthor()}" style="margin-right: 100px;"></div>-->
+        <!--                <div th:text="${feed.commentProfile.get(0).getContent()}"></div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
     </div>
 </div>
 
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/feed.js}"></script>
+
+<script>
+
+    $(".recommend").click(function () {
+        let currentImage = $(this).attr("src");
+        let feedId = $(this).data("feed-id");
+        let recommendCount = parseInt($(this).siblings(".recommend-count").text());
+        let recommendFlag = $(this).data("flag");
+        let $recommend = $(this);
+
+        if (currentImage === "/assets/hand-thumbs-up.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
+                headers: {'Authorization': '1'}
+            })
+                .done(function (result) {
+                    $recommend.siblings(".recommend-count").text(recommendCount + 1);
+                    $recommend.attr("src", "/assets/hand-thumbs-up-fill.svg");
+                });
+        } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
+                headers: {'Authorization': '1'}
+            })
+                .done(function (result) {
+                    $recommend.siblings(".recommend-count").text(recommendCount - 1);
+                    $recommend.attr("src", "/assets/hand-thumbs-up.svg");
+                });
+        }
+    });
+
+</script>
+
+<script>
+    $(".bookmark").click(function () {
+        let currentImage = $(this).attr("src");
+        let feedId = $(this).data("feed-id");
+        let bookmarkCount = parseInt($(this).siblings(".bookmark-count").text());
+        let bookmarkFlag = $(this).data("flag");
+        let $bookmark = $(this);
+
+        if (currentImage === "/assets/bookmark.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
+                headers: {'Authorization': '1'}
+            })
+                .done(function (result) {
+                    $bookmark.siblings(".bookmark-count").text(bookmarkCount + 1);
+                    $bookmark.attr("src", "/assets/bookmark-fill.svg");
+                });
+        } else if (currentImage === "/assets/bookmark-fill.svg") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
+                headers: {'Authorization': '1'}
+            })
+                .done(function (result) {
+                    $bookmark.siblings(".bookmark-count").text(bookmarkCount - 1);
+                    $bookmark.attr("src", "/assets/bookmark.svg");
+                });
+        }
+    });
+</script>
+
+<script>
+    var input = document.getElementById("dropdown-input");
+    var menu = document.getElementById("dropdown-menu");
+    input.addEventListener("click", function () {
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    });
+
+    function setValue(li) {
+        input.value = li.innerText;
+    }
+</script>
+
+<script>
+
+    function submitSearch(event) {
+        event.preventDefault();
+        const input = document.getElementById("dropdown-input");
+
+        let url = 'http://localhost:8080/feeds/search?';
+
+        if (input.value !== "") {
+            url += 'hashTag=' + input.value;
+        }
+
+        window.location.href = url;
+    }
+
+</script>
+
+<script>
+
+    const cookInfo = {};
+
+    document.getElementById("cookQuantity").addEventListener(
+        "click", e => {
+
+            let ss = document.getElementsByClassName("cookQuantity-li");
+            for (let i = 0; i < ss.length; i++) {
+                ss[i].style.color = 'black';
+            }
+            e.target.style.color = 'red';
+
+            let value = '';
+            if (e.target.text === '1인') {
+                value = 'SOLO';
+            } else if (e.target.text === '2~3인') {
+                value = 'COUPLE';
+            } else if (e.target.text === '3~4인') {
+                value = 'FAMILY';
+            } else if (e.target.text === '5~10인') {
+                value = 'PARTY';
+            } else if (e.target.text === '10인 이상') {
+                value = 'FESTIVAL';
+            }
+            cookInfo["cookQuantity"] = value;
+        }
+    );
+
+    document.getElementById("cookLevel").addEventListener(
+        "click", e => {
+
+            let value = '';
+
+            let ss = document.getElementsByClassName("cookLevel-li");
+            for (let i = 0; i < ss.length; i++) {
+                ss[i].style.color = 'black';
+            }
+            e.target.style.color = 'red';
+
+            if (e.target.text === '쉬워요') {
+                value = 'EASY';
+            } else if (e.target.text === '보통예요') {
+                value = 'MEDIUM';
+            } else if (e.target.text === '어려워요') {
+                value = 'HARD';
+            }
+
+            cookInfo["cookLevel"] = value;
+        }
+    );
+
+    document.getElementById("cookTime").addEventListener(
+        "click", e => {
+
+            let ss = document.getElementsByClassName("cookTime-li");
+            for (let i = 0; i < ss.length; i++) {
+                ss[i].style.color = 'black';
+            }
+            e.target.style.color = 'red';
+
+            let value = '';
+            if (e.target.text === '10분 미만') {
+                value = 'TEN';
+            } else if (e.target.text === '10분~20분') {
+                value = 'TWENTY';
+            } else if (e.target.text === '30분') {
+                value = 'THIRTY';
+            } else if (e.target.text === '1시간') {
+                value = 'ONE_HOUR';
+            } else if (e.target.text === '2시간 이상') {
+                value = 'TWO_HOURS';
+            }
+
+            cookInfo["cookTime"] = value;
+        }
+    );
+
+    document.getElementById("filterButton").addEventListener(
+        "click", e => {
+
+            const input = document.getElementById("dropdown-input");
+
+            if (input.value !== "") {
+                cookInfo["hashTag"] = input.value;
+            }
+
+            let count = 0;
+            let queryParameter = '';
+
+            for (const [key, value] of Object.entries(cookInfo)) {
+                queryParameter += key + '=' + value;
+
+                if (count < Object.keys(cookInfo).length - 1) {
+                    queryParameter += '&';
+                }
+                count++;
+            }
+
+            window.location.href = `http://localhost:8080/feeds/search?${queryParameter}`;
+        }
+    )
+
+</script>
+
 
 </body>
 </html>
