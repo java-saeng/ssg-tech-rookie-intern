@@ -13,14 +13,17 @@ public class ProductProfile {
     private int price;
     private float starScore;
     private int discountPercent;
+    private String productInfoUrl;
 
     @Builder
     public ProductProfile(final String name, final String imageUrl, final int price, final float starScore,
-                          final int discountPercent) {
+                          final int discountPercent,
+                          final String productInfoUrl) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;
         this.starScore = starScore;
         this.discountPercent = discountPercent;
+        this.productInfoUrl = productInfoUrl;
     }
 }

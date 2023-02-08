@@ -14,6 +14,7 @@ public class ProductMapper {
                              .price(product.getPrice())
                              .starScore(product.getStarScore())
                              .discountPercent(product.getDiscountPercent())
+                             .productInfoUrl(product.getProductInfoUrl())
                              .build();
     }
 }

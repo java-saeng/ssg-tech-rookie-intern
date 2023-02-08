@@ -25,43 +25,43 @@ values (7, now(), now(), 'alfla@ssg.com');
 
 insert into product
 values (1, now(), now(), '[냉장/호주산] 블랙타이 블랙앵거스 윗등심 스테이크 250g',
-        'https://sitem.ssgcdn.com/93/59/10/item/2097001105993_i1_1100.jpg', 9730, 4.7, 30);
+        'https://sitem.ssgcdn.com/93/59/10/item/2097001105993_i1_1100.jpg', 9730, 4.7, 30, 'https://www.ssg.com/item/itemView.ssg?itemId=2097001105993&siteNo=6001&salestrNo=2439');
 
 insert into product
 values (2, now(), now(), '[하림] 냉장 닭다리(북채) (500g)',
-        'https://sitem.ssgcdn.com/14/83/80/item/2097000808314_i1_1100.jpg', 20000, 4.1, 20);
+        'https://sitem.ssgcdn.com/14/83/80/item/2097000808314_i1_1100.jpg', 20000, 4.1, 20, 'https://www.ssg.com/item/itemView.ssg?itemId=2097000808314&siteNo=6001&salestrNo=2439');
 
-insert into product
-values (3, now(), now(), '맛있는 닭고기',
-        'https://sitem.ssgcdn.com/30/11/65/item/1000018651130_i1_1100.jpg', 5420, 4.2, 30);
-
-insert into product
-values (4, now(), now(), '싱싱한 새우',
-        'https://sitem.ssgcdn.com/85/29/37/item/1000432372985_i1_550.jpg', 3390, 4.3, 40);
-
-insert into product
-values (5, now(), now(), '제주에서 막 잡은 전복',
-        'https://sitem.ssgcdn.com/60/42/51/item/1000340514260_i1_1100.jpg', 34610, 4.4, 50);
-
-insert into product
-values (6, now(), now(), '방금 막 딴 샤인머스켓',
-        'https://sitem.ssgcdn.com/92/13/26/item/2097001261392_i1_1100.jpg', 19950, 4.5, 40);
-
-insert into product
-values (7, now(), now(), '논산 딸기',
-        'https://sitem.ssgcdn.com/81/55/89/item/2097000895581_i1_1100.jpg', 13860, 4.6, 30);
-
-insert into product
-values (8, now(), now(), '등푸른 고등어',
-        'https://sitem.ssgcdn.com/65/85/06/item/2097000068565_i1_1100.jpg', 33950, 4.7, 20);
-
-insert into product
-values (9, now(), now(), '방금 잡은 오징어',
-        'https://sitem.ssgcdn.com/18/42/61/item/0000010614218_i1_1100.jpg', 19500, 4.8, 10);
-
-insert into product
-values (10, now(), now(), '마장동 한우 육회',
-        'https://sitem.ssgcdn.com/69/83/39/item/1000065398369_i1_1100.jpg', 57900, 4.9, 5);
+-- # insert into product
+-- # values (3, now(), now(), '맛있는 닭고기',
+-- #         'https://sitem.ssgcdn.com/30/11/65/item/1000018651130_i1_1100.jpg', 5420, 4.2, 30);
+-- #
+-- # insert into product
+-- # values (4, now(), now(), '싱싱한 새우',
+-- #         'https://sitem.ssgcdn.com/85/29/37/item/1000432372985_i1_550.jpg', 3390, 4.3, 40);
+-- #
+-- # insert into product
+-- # values (5, now(), now(), '제주에서 막 잡은 전복',
+-- #         'https://sitem.ssgcdn.com/60/42/51/item/1000340514260_i1_1100.jpg', 34610, 4.4, 50);
+-- #
+-- # insert into product
+-- # values (6, now(), now(), '방금 막 딴 샤인머스켓',
+-- #         'https://sitem.ssgcdn.com/92/13/26/item/2097001261392_i1_1100.jpg', 19950, 4.5, 40);
+-- #
+-- # insert into product
+-- # values (7, now(), now(), '논산 딸기',
+-- #         'https://sitem.ssgcdn.com/81/55/89/item/2097000895581_i1_1100.jpg', 13860, 4.6, 30);
+-- #
+-- # insert into product
+-- # values (8, now(), now(), '등푸른 고등어',
+-- #         'https://sitem.ssgcdn.com/65/85/06/item/2097000068565_i1_1100.jpg', 33950, 4.7, 20);
+-- #
+-- # insert into product
+-- # values (9, now(), now(), '방금 잡은 오징어',
+-- #         'https://sitem.ssgcdn.com/18/42/61/item/0000010614218_i1_1100.jpg', 19500, 4.8, 10);
+-- #
+-- # insert into product
+-- # values (10, now(), now(), '마장동 한우 육회',
+-- #         'https://sitem.ssgcdn.com/69/83/39/item/1000065398369_i1_1100.jpg', 57900, 4.9, 5);
 
 -- 스페셜 리뷰
 
@@ -78,8 +78,6 @@ values (2, now(), now(), 'MEDIUM', 'COUPLE', 'TWENTY',
         '종이컵2컵 정도의 찹쌀을 씻어 찬물에 한시간 불려둔다. 불린 찹쌀을 압력솥에 먼저 넣어 깔고 그위에 닭다리,대파,양파,마늘,대추를 올린다. 소금 반스푼,후추조금, 맛술 2스푼을 넣는다. 그리고 물을1.5L넣는다. 뚜껑을 닫고 가스불에 강불5분,중불10분,약불10분동안 끓인다. 5분후 김을빼고 뚜껑을 연다.',
         '넓은 접시에 닭다리먼저 깔고 누룽지가 된 찹쌀을 붓는다. 정말 맛있는 닭다리 찹쌀 누룽지 완성! 야들야들 닭다리에 고소한 찹쌀 누룽지의 조합으로 환상의 맛 탄생!',
         1, 2, 3.6);
-
-
 
 -- insert into special_review
 -- values (3, now(), now(), 'HARD', 'FAMILY', 'THIRTY', '고춧가루 팍팍',
@@ -276,13 +274,13 @@ values (21, now(), now(), '전복', 11);
 
 -- image
 insert into image
-values (1, 'https://succ.ssgcdn.com/uphoto/202208/20220805101605_1178408979_1_1.jpg', 1, 'INGREDIENT');
+values (1, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_1_1.jpg', 1, 'INGREDIENT');
 
 insert into image
-values (2, 'https://succ.ssgcdn.com/uphoto/202208/20220805101605_1178408979_2_1.jpg', 1, 'PROCESS');
+values (2, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_2_2.jpg', 1, 'PROCESS');
 
 insert into image
-values (3, 'https://succ.ssgcdn.com/uphoto/202208/20220805101605_1178408979_3_1.jpg', 1, 'COMPLETE');
+values (3, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_3_2.jpg', 1, 'COMPLETE');
 
 
 insert into image
@@ -292,10 +290,4 @@ insert into image
 values (5, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_2_1.jpg', 2, 'PROCESS');
 
 insert into image
-values (6, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_2_2.jpg', 2, 'PROCESS');
-
-insert into image
-values (7, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_2_3.jpg', 2, 'PROCESS');
-
-insert into image
-values (8, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_3_1.jpg', 2, 'COMPLETE');
+values (6, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_3_1.jpg', 2, 'COMPLETE');

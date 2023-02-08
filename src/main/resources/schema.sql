@@ -47,6 +47,7 @@ create table product
     price            integer      not null,
     star_score       float        not null,
     discount_percent integer      not null,
+    product_info_url varchar(255) not null,
     primary key (id)
 );
 
@@ -74,18 +75,18 @@ create table bookmark
 
 create table special_review
 (
-    special_review_id     bigint       not null auto_increment,
-    created_at            datetime,
-    updated_at            datetime,
-    cook_level            varchar(255) not null,
-    cook_quantity         varchar(255) not null,
-    cook_time             varchar(255) not null,
+    special_review_id      bigint       not null auto_increment,
+    created_at             datetime,
+    updated_at             datetime,
+    cook_level             varchar(255) not null,
+    cook_quantity          varchar(255) not null,
+    cook_time              varchar(255) not null,
     description_ingredient varchar(255),
     description_process    varchar(255),
     description_complete   varchar(255),
-    account_id            bigint       not null,
-    product_id            bigint       not null,
-    star_score            float        not null,
+    account_id             bigint       not null,
+    product_id             bigint       not null,
+    star_score             float        not null,
     primary key (special_review_id)
 );
 
@@ -94,6 +95,6 @@ create table image
     image_id          bigint       not null auto_increment,
     image_url         varchar(255) not null,
     special_review_id bigint       not null,
-    cook_step         enum('INGREDIENT', 'PROCESS', 'COMPLETE'),
+    cook_step         enum ('INGREDIENT', 'PROCESS', 'COMPLETE'),
     primary key (image_id)
 );
