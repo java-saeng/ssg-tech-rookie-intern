@@ -9,8 +9,7 @@ $(document).ready(function () {
         if (currentImage === "/assets/hand-thumbs-up.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/recommends"
             })
                 .done(function (result) {
                     $recommend.siblings(".recommend-count").text(recommendCount + 1);
@@ -19,8 +18,7 @@ $(document).ready(function () {
         } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/recommends"
             })
                 .done(function (result) {
                     $recommend.siblings(".recommend-count").text(recommendCount - 1);
@@ -41,8 +39,7 @@ $(document).ready(function () {
         if (currentImage === "/assets/bookmark.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/bookmarks"
             })
                 .done(function (result) {
                     $bookmark.siblings(".bookmark-count").text(bookmarkCount + 1);
@@ -51,8 +48,7 @@ $(document).ready(function () {
         } else if (currentImage === "/assets/bookmark-fill.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/bookmarks"
             })
                 .done(function (result) {
                     $bookmark.siblings(".bookmark-count").text(bookmarkCount - 1);
@@ -82,7 +78,7 @@ function submitSearch(event) {
     event.preventDefault();
     const input = document.getElementById("dropdown-input");
 
-    let url = 'http://localhost:8080/feeds?';
+    let url = 'http://localhost:8080/1/feeds?';
 
     if (input.value === "해시태그 입력") {
         input.placeholder = '해시태그 입력';
@@ -99,7 +95,7 @@ function submitSearchSSG(event) {
     event.preventDefault();
     const input = document.getElementById("ssg-search");
 
-    let url = 'https://www.ssg.com/search.ssg?target=all&src_area=late&query=';
+    let url = 'https://m.ssg.com/search.ssg?query=';
 
     if (input.value !== "") {
         url += input.value;
@@ -340,7 +336,7 @@ document.getElementById("filterButton").addEventListener(
             count++;
         }
 
-        window.location.href = `http://localhost:8080/feeds?${queryParameter}`;
+        window.location.href = `http://localhost:8080/1/feeds?${queryParameter}`;
     }
 )
 
@@ -350,4 +346,56 @@ custom_hashtag.addEventListener("click", function () {
     target.value = "";
     target.focus();
     target.placeholder = "해시태그를 입력하세요!";
+});
+
+$(document).ready(function(){
+    $('.bxslider').bxSlider( {
+        mode: 'horizontal',// 가로 방향 수평 슬라이드
+        speed: 500,        // 이동 속도를 설정
+        pager: false,      // 현재 위치 페이징 표시 여부 설정
+        moveSlides: 1,     // 슬라이드 이동시 개수
+        slideWidth: 100,   // 슬라이드 너비
+        minSlides: 4,      // 최소 노출 개수
+        maxSlides: 4,      // 최대 노출 개수
+        slideMargin: 5,    // 슬라이드간의 간격
+        auto: true,        // 자동 실행 여부
+        autoHover: true,   // 마우스 호버시 정지 여부
+        controls: false    // 이전 다음 버튼 노출 여부
+    });
+});
+
+
+const slides = document.querySelector('.slides'); //전체 슬라이드 컨테이너
+const slideImg = document.querySelectorAll('.slides li'); //모든 슬라이드들
+let currentIdx = 0; //현재 슬라이드 index
+const slideCount = slideImg.length; // 슬라이드 개수
+const prev = document.querySelector('.prev'); //이전 버튼
+const next = document.querySelector('.next'); //다음 버튼
+const slideWidth = 300; //한개의 슬라이드 넓이
+const slideMargin = 100; //슬라이드간의 margin 값
+
+//전체 슬라이드 컨테이너 넓이 설정
+slides.style.width = (slideWidth + slideMargin) * slideCount + 'px';
+
+function moveSlide(num) {
+    slides.style.left = -num * 400 + 'px';
+    currentIdx = num;
+}
+
+prev.addEventListener('click', function () {
+    /*첫 번째 슬라이드로 표시 됐을때는
+    이전 버튼 눌러도 아무런 반응 없게 하기 위해
+    currentIdx !==0일때만 moveSlide 함수 불러옴 */
+
+    if (currentIdx !== 0) moveSlide(currentIdx - 1);
+});
+
+next.addEventListener('click', function () {
+    /* 마지막 슬라이드로 표시 됐을때는
+    다음 버튼 눌러도 아무런 반응 없게 하기 위해
+    currentIdx !==slideCount - 1 일때만
+    moveSlide 함수 불러옴 */
+    if (currentIdx !== slideCount - 1) {
+        moveSlide(currentIdx + 1);
+    }
 });
