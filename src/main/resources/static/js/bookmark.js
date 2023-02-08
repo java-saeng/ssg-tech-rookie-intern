@@ -8,8 +8,7 @@ $(document).ready(function () {
         if (currentImage === "/assets/hand-thumbs-up.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/recommends"
             })
                 .done(function (result) {
                     $recommend.attr("src", "/assets/hand-thumbs-up-fill.svg");
@@ -18,8 +17,7 @@ $(document).ready(function () {
         } else if (currentImage === "/assets/hand-thumbs-up-fill.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/recommends",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/recommends"
             })
                 .done(function (result) {
                     $recommend.attr("src", "/assets/hand-thumbs-up.svg");
@@ -39,8 +37,7 @@ $(document).ready(function () {
         if (currentImage === "/assets/bookmark.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/bookmarks"
             })
                 .done(function (result) {
                     $bookmark.siblings(".bookmark-count").text(bookmarkCount + 1);
@@ -49,8 +46,7 @@ $(document).ready(function () {
         } else if (currentImage === "/assets/bookmark-fill.svg") {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/api/feeds/" + feedId + "/bookmarks",
-                headers: {'Authorization': '1'}
+                url: "http://localhost:8080/1/feeds/" + feedId + "/bookmarks"
             })
                 .done(function (result) {
                     $bookmark.siblings(".bookmark-count").text(bookmarkCount - 1);
