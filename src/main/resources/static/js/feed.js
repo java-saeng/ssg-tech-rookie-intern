@@ -99,7 +99,7 @@ function submitSearchSSG(event) {
     event.preventDefault();
     const input = document.getElementById("ssg-search");
 
-    let url = 'https://www.ssg.com/search.ssg?target=all&src_area=late&query=';
+    let url = 'https://m.ssg.com/search.ssg?query=';
 
     if (input.value !== "") {
         url += input.value;
