@@ -1,7 +1,6 @@
 package com.ssg.intern.dev.domain.feed.entity;
 
 import com.ssg.intern.common.BaseEntity;
-import com.ssg.intern.dev.domain.comment.entity.Comment;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,22 +33,12 @@ public class Feed extends BaseEntity {
     @Column(nullable = false)
     private long recommendCount;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "feed")
-    private final List<Comment> comments = new ArrayList<>();
-
-    @Column(columnDefinition = "TINYINT(1)")
-    private boolean isCommentBlocked;
-
     private Feed(final Long specialReviewId) {
         this.specialReviewId = specialReviewId;
     }
 
     public static Feed from(Long specialReviewId) {
         return new Feed(specialReviewId);
-    }
-
-    public void changeCommentStatus() {
-        isCommentBlocked = !isCommentBlocked;
     }
 
     public void increaseRecommend() {

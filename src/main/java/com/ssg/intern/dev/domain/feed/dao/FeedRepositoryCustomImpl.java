@@ -3,18 +3,13 @@ package com.ssg.intern.dev.domain.feed.dao;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssg.intern.dev.domain.feed.entity.Feed;
 import com.ssg.intern.dev.domain.feed.presentation.model.QMyReviewProfileResponse_MyReview;
 import com.ssg.intern.dev.global.SortingCondition;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.List;
 
-import static com.ssg.intern.dev.domain.comment.entity.QComment.*;
 import static com.ssg.intern.dev.domain.feed.entity.QFeed.*;
 import static com.ssg.intern.dev.domain.feed.presentation.model.MyReviewProfileResponse.*;
 import static com.ssg.intern.mock.domain.review.entity.QSpecialReview.specialReview;
@@ -23,19 +18,6 @@ import static com.ssg.intern.mock.domain.review.entity.QSpecialReview.specialRev
 public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
-
-    @Override
-    public Page<Feed> findAllFeeds(Pageable pageable) {
-        final List<Feed> feeds = queryFactory.selectFrom(feed).distinct()
-                                             .leftJoin(comment).fetchJoin()
-                                             .on(feed.id.eq(comment.feed.id))
-                                             .offset(pageable.getOffset())
-                                             .limit(pageable.getPageSize())
-                                             .orderBy(sort(pageable.getSort()))
-                                             .fetch();
-
-        return PageableExecutionUtils.getPage(feeds, pageable, feeds::size);
-    }
 
     @Override
     public List<MyReview> findMyReviews(Long accountId, SortingCondition sortingCondition) {
@@ -47,10 +29,7 @@ public class FeedRepositoryCustomImpl implements FeedRepositoryCustom {
                         specialReview.description,
                         feed.recommendCount,
                         feed.bookmarkCount,
-                        queryFactory.select(comment.count())
-                                .from(comment)
-                                .where(comment.feed.id.eq(feed.id)),
-                        feed.isCommentBlocked,
+                        specialReview.id,
                         feed.id))
                 .from(feed)
                 .innerJoin(specialReview).fetchJoin()

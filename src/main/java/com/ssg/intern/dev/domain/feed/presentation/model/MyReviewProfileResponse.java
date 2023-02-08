@@ -29,26 +29,21 @@ public class MyReviewProfileResponse {
         private String description;
         private long recommendCount;
         private long bookmarkCount;
-        private long commentCount;
-        private boolean isCommentBlocked;
         private long specialReviewId;
+        private long feedId;
 
         @Builder
         @QueryProjection
         public MyReview(String imageUrl, float starScore, LocalDateTime createdAt, String description,
-                        long recommendCount, long bookmarkCount, long commentCount, boolean isCommentBlocked,
-                        long specialReviewId) {
+                        long recommendCount, long bookmarkCount, long specialReviewId, long feedId) {
             this.imageUrl = imageUrl;
             this.starScore = starScore;
             this.createdAt = createdAt;
             this.description = description;
             this.recommendCount = recommendCount;
             this.bookmarkCount = bookmarkCount;
-            this.commentCount = commentCount;
-            this.isCommentBlocked = isCommentBlocked;
             this.specialReviewId = specialReviewId;
+            this.feedId = feedId;
         }
-
-
     }
 }

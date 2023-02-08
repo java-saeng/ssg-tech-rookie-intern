@@ -35,7 +35,7 @@
                     <div class="d-flex justify-content-center">
                         <img th:src="@{/assets/pencil.svg}" alt="Logo" width="30" height="30"
                              class="d-inline-block align-text-top">
-                        <div style="font-size: 20px">&nbsp;내가 작성한 레시피</div>
+                        <div style="font-size: 20px">&nbsp;MY 레시피</div>
                     </div>
                 </a>
             </div>
@@ -78,7 +78,7 @@
 <body>
 
 <div class="card m-4"  th:each="myReview : ${myReviews}" style="height: 230px;">
-    <div class="card-body row">
+    <div class="card-body row" th:onclick="'location.href=\''+ @{http://localhost:8080/feeds/} + ${myReview.feedId} + '\''">
         <div class="p-4 col align-middle" style="height: 230px; width: 230px; margin-top: -17px;">
             <img th:src="${myReview.imageUrl}" class="img-fluid rounded-start rounded-end" alt="..."
                  style="width: 100%; height: 100%; object-fit: cover"
@@ -107,38 +107,10 @@
                          class="d-inline-block">
                     <p class="card-text" style="float: right" th:text="${myReview.bookmarkCount}"></p>
                 </div>
-<!--                <div th:class="col" style="padding-left: 30%; padding-right: 20%;">-->
-<!--                    <img th:src="@{/assets/chat.svg}" alt="Logo" width="23" height="23"-->
-<!--                         class="d-inline-block">-->
-<!--                    <p class="card-text" style="float: right" th:text="${myReview.commentCount}"></p>-->
-<!--                </div>-->
-<!--                <div class="form-check form-switch col d-flex" style="min-width: 105%">-->
-<!--                    <div>댓글막기</div>-->
-<!--                    <div style="margin-left: auto;">-->
-<!--                        <input th:if="${myReview.isCommentBlocked}"-->
-<!--                               class="form-check-input" type="checkbox" role="switch" th:id="flexSwitchCheckDefault" checked-->
-<!--                               th:onclick="'sendRequest(' + ${myReview.specialReviewId} + ')'"/>-->
-
-<!--                        <input th:unless=" ${myReview.isCommentBlocked}"-->
-<!--                               class="form-check-input" type="checkbox" role="switch" th:id="flexSwitchCheckDefault"-->
-<!--                               th:onclick="'sendRequest(' + ${myReview.specialReviewId} + ')'"/>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
 </div>
-
-<script th:inline="javascript">
-    function sendRequest(id) {
-
-        fetch('http://localhost:8080/api/me/feeds/' + id + '/comments/block', {
-            method: 'PATCH',
-        }).then(function (response) {
-            location.reload();
-        });
-    }
-</script>
 
 </body>
 </html>
