@@ -1,18 +1,14 @@
 package com.ssg.intern.dev.bookmark.adapter.out.persistence;
 
-import com.querydsl.core.types.Order;
-import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.dev.bookmark.domain.Bookmark;
-import com.ssg.intern.dev.feed.domain.QFeed;
-import com.ssg.intern.dev.global.SortingCondition;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
 import static com.ssg.intern.dev.bookmark.domain.QBookmark.bookmark;
-import static com.ssg.intern.dev.feed.domain.QFeed.*;
+import static com.ssg.intern.dev.feed.domain.QFeed.feed;
 
 
 @RequiredArgsConstructor

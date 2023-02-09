@@ -17,9 +17,9 @@ public class CancelRecommendService implements CancelRecommendUseCase {
     public void cancelRecommendToFeed(final long accountId, final long feedId) {
 
         loadRecommendPort.findRecommendByFeedAndAccount(accountId, feedId)
-                .ifPresent((recommend) -> {
-                    recommend.cancelRecommend();
-                    recommend.getFeed().decreaseRecommend();
-                });
+                         .ifPresent((recommend) -> {
+                             recommend.cancelRecommend();
+                             recommend.getFeed().decreaseRecommend();
+                         });
     }
 }

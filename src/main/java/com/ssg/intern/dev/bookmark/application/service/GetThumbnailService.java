@@ -1,6 +1,5 @@
 package com.ssg.intern.dev.bookmark.application.service;
 
-import com.ssg.intern.common.BaseEntity;
 import com.ssg.intern.dev.bookmark.application.port.in.GetThumbnailQuery;
 import com.ssg.intern.dev.bookmark.application.port.out.LoadMyBookmarkPort;
 import com.ssg.intern.dev.bookmark.domain.ThumbnailProfile;
@@ -13,11 +12,10 @@ import com.ssg.intern.dev.global.SortingCondition;
 import com.ssg.intern.dev.recommend.application.port.in.GetExistenceOfRecommendQuery;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.ssg.intern.dev.common.SpecialReviewProfile.*;
+import static com.ssg.intern.dev.common.SpecialReviewProfile.ImageInfo;
 
 @UseCase
 @RequiredArgsConstructor

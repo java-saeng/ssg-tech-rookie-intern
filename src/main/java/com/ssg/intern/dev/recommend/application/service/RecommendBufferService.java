@@ -8,14 +8,13 @@ import com.ssg.intern.dev.recommend.application.port.in.AddRecommendUseCase;
 import com.ssg.intern.dev.recommend.application.port.in.CancelRecommendUseCase;
 import com.ssg.intern.dev.recommend.application.port.out.LoadRecommendPort;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @UseCase
 @Transactional
-@Qualifier("recommendBuffer기")
+@Qualifier("recommendBuffer")
 public class RecommendBufferService implements BufferUseCase {
 
     private final LoadRecommendPort loadRecommendPort;

@@ -2,13 +2,12 @@ package com.ssg.intern.dev.recommend.adapter.out.persistence;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssg.intern.dev.feed.domain.QFeed;
 import com.ssg.intern.dev.recommend.domain.Recommend;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-import static com.ssg.intern.dev.feed.domain.QFeed.*;
+import static com.ssg.intern.dev.feed.domain.QFeed.feed;
 import static com.ssg.intern.dev.recommend.domain.QRecommend.recommend;
 
 

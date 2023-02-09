@@ -5,7 +5,6 @@ import com.ssg.intern.dev.recommend.application.port.out.AddRecommendPort;
 import com.ssg.intern.dev.recommend.application.port.out.LoadRecommendPort;
 import com.ssg.intern.dev.recommend.domain.Recommend;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

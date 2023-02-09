@@ -17,9 +17,9 @@ public class CancelBookmarkService implements CancelBookmarkUseCase {
     public void cancelBookmarkToFeed(final long accountId, final long feedId) {
 
         loadBookmarkPort.findBookmarkByFeedAndAccount(accountId, feedId)
-                .ifPresent((bookmark) -> {
-                    bookmark.cancelBookmark();
-                    bookmark.getFeed().decreaseBookmark();
-                });
+                        .ifPresent((bookmark) -> {
+                            bookmark.cancelBookmark();
+                            bookmark.getFeed().decreaseBookmark();
+                        });
     }
 }

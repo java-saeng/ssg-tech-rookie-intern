@@ -4,10 +4,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssg.intern.dev.common.FeedSearchingConditionRequest;
-import com.ssg.intern.dev.external.hashtag.domain.QHashTag;
-import com.ssg.intern.dev.external.image.domain.QImage;
-import com.ssg.intern.dev.external.product.domain.QProduct;
-import com.ssg.intern.dev.external.speical_review.domain.QSpecialReview;
 import com.ssg.intern.dev.external.speical_review.domain.SpecialReview;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,10 +14,10 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 import static com.ssg.intern.common.domain.account.entity.QAccount.account;
-import static com.ssg.intern.dev.external.hashtag.domain.QHashTag.*;
-import static com.ssg.intern.dev.external.image.domain.QImage.*;
-import static com.ssg.intern.dev.external.product.domain.QProduct.*;
-import static com.ssg.intern.dev.external.speical_review.domain.QSpecialReview.*;
+import static com.ssg.intern.dev.external.hashtag.domain.QHashTag.hashTag;
+import static com.ssg.intern.dev.external.image.domain.QImage.image;
+import static com.ssg.intern.dev.external.product.domain.QProduct.product;
+import static com.ssg.intern.dev.external.speical_review.domain.QSpecialReview.specialReview;
 
 @RequiredArgsConstructor
 public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositoryCustom {
@@ -40,7 +36,8 @@ public class SpecialReviewRepositoryCustomImpl implements SpecialReviewRepositor
                                                                .innerJoin(image).fetchJoin()
                                                                .on(image.specialReview.id.eq(specialReview.id))
                                                                .where(eqCookLevel(condition), eqCookQuantity(condition),
-                                                                      eqCookTime(condition), hashTagSubQuery(condition), imageSubQuery())
+                                                                      eqCookTime(condition), hashTagSubQuery(condition),
+                                                                      imageSubQuery())
                                                                .offset(pageable.getOffset())
                                                                .limit(pageable.getPageSize())
                                                                .fetch();

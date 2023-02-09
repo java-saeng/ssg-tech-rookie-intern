@@ -1,14 +1,13 @@
 package com.ssg.intern.dev.bookmark.application.service;
 
 import com.ssg.intern.dev.bookmark.application.port.in.AddBookmarkUseCase;
-import com.ssg.intern.dev.bookmark.application.port.in.CancelBookmarkUseCase;
 import com.ssg.intern.dev.bookmark.application.port.in.BufferUseCase;
+import com.ssg.intern.dev.bookmark.application.port.in.CancelBookmarkUseCase;
 import com.ssg.intern.dev.bookmark.application.port.out.LoadBookmarkPort;
 import com.ssg.intern.dev.common.UseCase;
 import com.ssg.intern.dev.global.buffer.BufferStatus;
 import com.ssg.intern.dev.global.buffer.ConcurrentMapBuffer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
