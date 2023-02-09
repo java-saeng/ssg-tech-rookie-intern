@@ -208,19 +208,19 @@
                 <button type="button" th:data-bs-target="'#carousel'+${feed.feedReactionProfile.feedId}"
                         data-bs-slide-to="2"></button>
             </div>
-            <div class="carousel-inner align-self-lg-auto mw-100 h-auto">
+            <div class="carousel-inner align-self-lg-auto mw-100 h-auto" data-interval="false">
                 <div class="carousel-item active">
-                    <img th:src="${feed.specialReviewProfile.imageInfos.get(2).imageUrl}" class="d-block mw-100 m-auto"
-                         alt="..."
-                         style="width: 100%; height: 100%; object-fit: cover">
-                </div>
-                <div class="carousel-item">
                     <img th:src="${feed.specialReviewProfile.imageInfos.get(0).imageUrl}" class="d-block mw-100 m-auto"
                          alt="..."
                          style="width: 100%; height: 100%; object-fit: cover">
                 </div>
                 <div class="carousel-item">
                     <img th:src="${feed.specialReviewProfile.imageInfos.get(1).imageUrl}" class="d-block mw-100 m-auto"
+                         alt="..."
+                         style="width: 100%; height: 100%; object-fit: cover">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="${feed.specialReviewProfile.imageInfos.get(2).imageUrl}" class="d-block mw-100 m-auto"
                          alt="..."
                          style="width: 100%; height: 100%; object-fit: cover">
                 </div>
@@ -343,11 +343,11 @@
         <div th:id="'description'+${feed.feedReactionProfile.feedId}" th:data-ride="carousel"
              class="carousel-inner align-self-lg-auto mw-100"
              style="margin: 0 auto; width: 700px; height: 100px; overflow: scroll">
-            <div th:text="${feed.specialReviewProfile.descriptionComplete}" class="carousel-item active"
-                 style="margin: 20px auto; min-height: 30px"></div>
-            <div th:text="${feed.specialReviewProfile.descriptionIngredient}" class="carousel-item"
+            <div th:text="${feed.specialReviewProfile.descriptionIngredient}" class="carousel-item active"
                  style="margin: 20px auto; min-height: 30px"></div>
             <div th:text="${feed.specialReviewProfile.descriptionProcess}" class="carousel-item"
+                 style="margin: 20px auto; min-height: 30px"></div>
+            <div th:text="${feed.specialReviewProfile.descriptionComplete}" class="carousel-item"
                  style="margin: 20px auto; min-height: 30px"></div>
         </div>
 
