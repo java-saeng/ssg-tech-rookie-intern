@@ -104,7 +104,7 @@ insert into hash_tag
 values (6, now(), now(), '가족최애요리', 5);
 
 insert into hash_tag
-values (7, now(), now(), '인생요리', 6);
+values (7, now(), now(), '인생요리', 66);
 
 insert into hash_tag
 values (8, now(), now(), '주말스페셜', 1);
@@ -161,6 +161,9 @@ values (24, now(), now(), '매일매일', 5);
 insert into hash_tag
 values (25, now(), now(), 'SNS용', 5);
 
+insert into hash_tag
+values (26, now(), now(), '간편요리', 6);
+
 
 
 -- 상품
@@ -176,6 +179,10 @@ values (2, now(), now(), '[노브랜드]한입쏙쏙비엔나 550g',
 insert into product
 values (3, now(), now(), '[노브랜드] 숯불 데리야끼 닭꼬치 800g',
         'https://sitem.ssgcdn.com/06/55/52/item/1000034525506_i1_550.jpg', 14980, 4.8, 0, 'ssg.com/item/itemView.ssg?itemId=1000034525506&siteNo=6001&salestrNo=2439');
+
+insert into product
+values (4, now(), now(), '노브랜드 통안심치킨텐더 550g',
+        'https://sitem.ssgcdn.com/97/04/54/item/1000081540497_i1_550.jpg', 5980, 4.8, 0, 'https://www.ssg.com/item/itemView.ssg?itemId=1000081540497&siteNo=6001&salestrNo=2439');
 
 
 -- 스페셜 리뷰
@@ -214,6 +221,13 @@ values (5, now(), now(), 'EASY', 'SOLO', 'THIRTY',
         '1.밥먼저해두고요 2.팬에 대파가 수분이다날아갈때까지 볶아요 3.전자레인지에 돌린 닭꼬치를 젓가락으로 빼서 팬에 대파랑같이 볶아요',
         '밥을담고 그위에 볶은대파닭꼬치 가쓰오부시 계란노른자 마요네즈를 올려 취향껏 실파송송까지 해주면 완성!',
         3, 3, 5);
+
+insert into special_review
+values (6, now(), now(), 'EASY', 'COUPLE', 'TWENTY',
+        '치킨텐더 간편 야채 샐러드를 만들어 봤어요 재료로는 치킨텐더. 케일. 파프리카 노란색 빨간색을 준비하고 소스는 아일랜드 드레싱. 그릭요거트 드레싱을 준비해 주세요.',
+        '치킨텐더는 그릴에 13 분간 구워서 준비해두고 파프리카와 케일도 채썰어서 접시에 담아 준비해 주세요.',
+        '구워놓은 치킨텐더를 적당한 크기로 잘라서 그릇에 담고 썰어 놓은 파프리카와 케일을 보기좋게 그릇에 담아 그위에 그릭요거트 드레싱과 아일랜드 드레싱을 뿌려서 먹으면 간편하고 영양 높은 샐러드가 완성 됩니다.',
+        4, 4, 5);
 
 # insert into special_review
 # values (4, now(), now(), 'MEDIUM', 'COUPLE', 'THIRTY',
@@ -275,4 +289,14 @@ values (14, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_2_3
 
 insert into image
 values (15, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_3_1.jpg', 5, 'COMPLETE');
+
+
+insert into image
+values (16, 'https://succ.ssgcdn.com/uphoto/202301/20230122192116_1190543293_1_1.jpg', 6, 'INGREDIENT');
+
+insert into image
+values (17, 'https://succ.ssgcdn.com/uphoto/202301/20230122192116_1190543293_2_1.jpg', 6, 'PROCESS');
+
+insert into image
+values (18, 'https://succ.ssgcdn.com/uphoto/202301/20230122192116_1190543293_3_1.jpg', 6, 'COMPLETE');
 
