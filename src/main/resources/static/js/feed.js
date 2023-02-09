@@ -349,16 +349,12 @@ custom_hashtag.addEventListener("click", function () {
 });
 
 function goNext(id) {
-    console.log(id);
-
 
     $('#description'+ id).carousel('next');
     $('#carousel'+id).carousel('next');
 }
 
 function goPrev(id) {
-    console.log(id);
-
 
     $('#description'+ id).carousel('prev');
     $('#carousel'+id).carousel('prev');

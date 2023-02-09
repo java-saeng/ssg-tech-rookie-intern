@@ -7502,7 +7502,7 @@ textarea.form-control-lg {
 .vr {
     display: inline-block;
     align-self: stretch;
-    width: 1px;
+    width: 2px;
     min-height: 1em;
     background-color: currentcolor;
     opacity: .25
@@ -7769,7 +7769,7 @@ textarea.form-control-lg {
 
 .border-success {
     --bs-border-opacity: 1;
-    border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important
+    /*border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important*/
 }
 
 .border-info {

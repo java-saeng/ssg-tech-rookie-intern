@@ -21,130 +21,6 @@ values (6, now(), now(), 'tjgus@ssg.com');
 insert into account
 values (7, now(), now(), 'alfla@ssg.com');
 
--- 상품
-
-insert into product
-values (1, now(), now(), '[냉장/호주산] 블랙타이 블랙앵거스 윗등심 스테이크 250g',
-        'https://sitem.ssgcdn.com/93/59/10/item/2097001105993_i1_1100.jpg', 9730, 4.7, 30, 'https://www.ssg.com/item/itemView.ssg?itemId=2097001105993&siteNo=6001&salestrNo=2439');
-
-insert into product
-values (2, now(), now(), '[하림] 냉장 닭다리(북채) (500g)',
-        'https://sitem.ssgcdn.com/14/83/80/item/2097000808314_i1_1100.jpg', 20000, 4.1, 20, 'https://www.ssg.com/item/itemView.ssg?itemId=2097000808314&siteNo=6001&salestrNo=2439');
-
--- # insert into product
--- # values (3, now(), now(), '맛있는 닭고기',
--- #         'https://sitem.ssgcdn.com/30/11/65/item/1000018651130_i1_1100.jpg', 5420, 4.2, 30);
--- #
--- # insert into product
--- # values (4, now(), now(), '싱싱한 새우',
--- #         'https://sitem.ssgcdn.com/85/29/37/item/1000432372985_i1_550.jpg', 3390, 4.3, 40);
--- #
--- # insert into product
--- # values (5, now(), now(), '제주에서 막 잡은 전복',
--- #         'https://sitem.ssgcdn.com/60/42/51/item/1000340514260_i1_1100.jpg', 34610, 4.4, 50);
--- #
--- # insert into product
--- # values (6, now(), now(), '방금 막 딴 샤인머스켓',
--- #         'https://sitem.ssgcdn.com/92/13/26/item/2097001261392_i1_1100.jpg', 19950, 4.5, 40);
--- #
--- # insert into product
--- # values (7, now(), now(), '논산 딸기',
--- #         'https://sitem.ssgcdn.com/81/55/89/item/2097000895581_i1_1100.jpg', 13860, 4.6, 30);
--- #
--- # insert into product
--- # values (8, now(), now(), '등푸른 고등어',
--- #         'https://sitem.ssgcdn.com/65/85/06/item/2097000068565_i1_1100.jpg', 33950, 4.7, 20);
--- #
--- # insert into product
--- # values (9, now(), now(), '방금 잡은 오징어',
--- #         'https://sitem.ssgcdn.com/18/42/61/item/0000010614218_i1_1100.jpg', 19500, 4.8, 10);
--- #
--- # insert into product
--- # values (10, now(), now(), '마장동 한우 육회',
--- #         'https://sitem.ssgcdn.com/69/83/39/item/1000065398369_i1_1100.jpg', 57900, 4.9, 5);
-
--- 스페셜 리뷰
-
-insert into special_review
-values (1, now(), now(), 'EASY', 'SOLO', 'TEN',
-        '닭다리 300g, 굴소스 3스푼, 올리고당 2스푼, 설탕 2스푼, 다진마늘 1스푼, 소금, 후추',
-        '양념장을 만들어서 소금, 후추로 미리 염지한 닭다리에 고루 묻혀 에어프라이어에 구워주세요 (170도 15분, 15분)',
-        '소금 후추로 미리 염지를 해둬요 양념장을 만들어서 골고루 발라줘요 에어프라이어에 구우면 완성 예쁘게 플레이팅하면 더 좋아요 맥주안주로 굿',
-        1, 1, 3.5);
-
-insert into special_review
-values (2, now(), now(), 'MEDIUM', 'COUPLE', 'TWENTY',
-        '하림 냉장 닭다리500g, 찹쌀, 다진마늘, 대파,양파, 대추, 소금, 후추, 맛술등을 준비한다.',
-        '종이컵2컵 정도의 찹쌀을 씻어 찬물에 한시간 불려둔다. 불린 찹쌀을 압력솥에 먼저 넣어 깔고 그위에 닭다리,대파,양파,마늘,대추를 올린다. 소금 반스푼,후추조금, 맛술 2스푼을 넣는다. 그리고 물을1.5L넣는다. 뚜껑을 닫고 가스불에 강불5분,중불10분,약불10분동안 끓인다. 5분후 김을빼고 뚜껑을 연다.',
-        '넓은 접시에 닭다리먼저 깔고 누룽지가 된 찹쌀을 붓는다. 정말 맛있는 닭다리 찹쌀 누룽지 완성! 야들야들 닭다리에 고소한 찹쌀 누룽지의 조합으로 환상의 맛 탄생!',
-        1, 2, 3.6);
-
--- insert into special_review
--- values (3, now(), now(), 'HARD', 'FAMILY', 'THIRTY', '고춧가루 팍팍',
---         'https://succ.ssgcdn.com/uphoto/202212/20221203102228_1187313220_3_1.jpg', 2, 1, 3.7);
--- insert into special_review
--- values (4, now(), now(), 'EASY', 'PARTY', 'ONE_HOUR', '구워먹으면 맛있어용',
---         'https://succ.ssgcdn.com/uphoto/202209/20220927203329_1182361564_3_1.jpg', 2, 1, 3.8);
--- insert into special_review
--- values (5, now(), now(), 'MEDIUM', 'FESTIVAL', 'TWO_HOURS', '최고의 레시피',
---         'https://succ.ssgcdn.com/uphoto/202210/20221027161201_1184564522_3_1.jpg', 3, 2, 3.9);
---
--- insert into special_review
--- values (6, now(), now(), 'HARD', 'SOLO', 'TEN', '소고기는 이렇게 드셔보세요',
---         'https://succ.ssgcdn.com/uphoto/202211/20221103164133_1185167240_3_1.jpeg', 3, 2, 4.0);
--- insert into special_review
--- values (7, now(), now(), 'EASY', 'COUPLE', 'TWENTY', '닭가슴살도 퍽퍽하지 않아!',
---         'https://succ.ssgcdn.com/uphoto/202212/20221224163419_1188633964_3_1.jpeg', 4, 3, 4.1);
--- insert into special_review
--- values (8, now(), now(), 'MEDIUM', 'FAMILY', 'THIRTY', '새우가 빨개지면 드세요',
---         'https://succ.ssgcdn.com/uphoto/202301/20230105160939_1189546552_3_1.jpg', 4, 4, 4.2);
--- insert into special_review
--- values (9, now(), now(), 'HARD', 'PARTY', 'ONE_HOUR', '이렇게 하면 우리 아이도 새우를 잘 먹어요',
---         'https://succ.ssgcdn.com/uphoto/202301/20230103195103_1189393996_3_1.jpg', 4, 4, 4.3);
--- insert into special_review
--- values (10, now(), now(), 'EASY', 'FESTIVAL', 'TWO_HOURS', '새우로 사랑도 잡으새우',
---         'https://succ.ssgcdn.com/uphoto/202301/20230118183756_1190383162_3_1.jpg', 1, 4, 4.4);
---
--- insert into special_review
--- values (11, now(), now(), 'MEDIUM', 'SOLO', 'TEN', '몸보신엔 전복이쥬',
---         'https://succ.ssgcdn.com/uphoto/202212/20221223225631_1188605472_0_1.jpg', 1, 5, 4.5);
---
--- insert into special_review
--- values (12, now(), now(), 'HARD', 'COUPLE', 'TWENTY', '싱싱한 제철 전복, 이렇게 드셔보세요!',
---         'https://succ.ssgcdn.com/uphoto/202207/20220703164357_1175739232_3_1.jpg', 5, 5, 4.6);
---
--- insert into special_review
--- values (13, now(), now(), 'EASY', 'FAMILY', 'THIRTY', '샤인머스켓 그냥 먹어도 꿀맛이지롱',
---         'https://succ.ssgcdn.com/uphoto/202110/20211013222128_1148252917_1.jpg', 5, 6, 4.7);
---
--- insert into special_review
--- values (14, now(), now(), 'MEDIUM', 'PARTY', 'ONE_HOUR', '노릇노릇하게 고등어~!',
---         'https://succ.ssgcdn.com/uphoto/202204/20220404203214_1167121259_1.jpg', 6, 8, 4.8);
---
--- insert into special_review
--- values (15, now(), now(), 'HARD', 'FESTIVAL', 'TWO_HOURS', '고등어야~ 고마워~',
---         'https://sitem.ssgcdn.com/02/02/08/item/1000037080202_i3_550.jpg', 6, 8, 4.9);
---
--- insert into special_review
--- values (16, now(), now(), 'EASY', 'SOLO', 'TEN', '오징어랑 오징어먹기',
---         'https://succ.ssgcdn.com/uphoto/202211/20221105080508_1185305559_3_1.jpg', 6, 9, 5.0);
---
--- insert into special_review
--- values (17, now(), now(), 'MEDIUM', 'COUPLE', 'TWENTY', '최고의 술안주는 오징어지요',
---         'https://succ.ssgcdn.com/uphoto/202210/20221022160912_1184246126_0_1.jpg', 7, 9, 4.9);
---
--- insert into special_review
--- values (18, now(), now(), 'HARD', 'FAMILY', 'THIRTY', '오징어는 이렇게 드세요',
---         'https://succ.ssgcdn.com/uphoto/202210/20221029082911_1184649840_0_1.jpg', 7, 9, 4.8);
---
--- insert into special_review
--- values (19, now(), now(), 'EASY', 'PARTY', 'ONE_HOUR', '육회 그냥 먹어도 맛있어',
---         'https://sitem.ssgcdn.com/69/83/39/item/1000065398369_i1_1100.jpg', 7, 10, 4.7);
---
--- insert into special_review
--- values (20, now(), now(), 'MEDIUM', 'FESTIVAL', 'TWO_HOURS', '사랑아 육회해',
---         'https://sitem.ssgcdn.com/99/68/03/item/1000057036899_i1_1100.jpg', 7, 10, 4.6);
-
 -- feed 테이블
 
 insert into feed
@@ -210,84 +86,193 @@ values (20, now(), now(), 0, 0, 20);
 -- 해시 태그
 
 insert into hash_tag
-values (1, now(), now(), '몸보신', 1);
+values (1, now(), now(), '간편요리', 1);
 
 insert into hash_tag
-values (2, now(), now(), '좋아', 1);
+values (2, now(), now(), 'SNS용', 1);
 
 insert into hash_tag
-values (3, now(), now(), '맛있어', 2);
+values (3, now(), now(), '1인요리', 1);
 
 insert into hash_tag
-values (4, now(), now(), '멋있어', 3);
+values (4, now(), now(), '매일매일', 2);
 
 insert into hash_tag
-values (5, now(), now(), '1인요리', 4);
+values (5, now(), now(), '몸보신용', 4);
 
 insert into hash_tag
-values (6, now(), now(), '가족요리', 5);
+values (6, now(), now(), '가족최애요리', 5);
 
 insert into hash_tag
-values (7, now(), now(), '모임요리', 6);
+values (7, now(), now(), '인생요리', 6);
 
 insert into hash_tag
-values (8, now(), now(), '취미', 7);
+values (8, now(), now(), '주말스페셜', 1);
 
 insert into hash_tag
-values (9, now(), now(), '특기', 8);
+values (9, now(), now(), '손님대접용', 1);
 
 insert into hash_tag
-values (10, now(), now(), '맛있어', 9);
+values (10, now(), now(), '생일파티용', 9);
 
 insert into hash_tag
-values (11, now(), now(), '쉬워', 10);
+values (11, now(), now(), '간편요리', 2);
 
 insert into hash_tag
-values (12, now(), now(), '어려워', 11);
+values (12, now(), now(), '주말스페셜', 2);
 
 insert into hash_tag
-values (13, now(), now(), '화려해', 12);
+values (13, now(), now(), 'SNS용', 2);
 
 insert into hash_tag
-values (14, now(), now(), 'SNS용', 13);
+values (14, now(), now(), '1인요리', 2);
 
 insert into hash_tag
-values (15, now(), now(), '맛도리', 14);
+values (15, now(), now(), '간편요리', 3);
 
 insert into hash_tag
-values (16, now(), now(), '백종원', 15);
+values (16, now(), now(), '인생요리', 4);
 
 insert into hash_tag
-values (17, now(), now(), '레시피', 16);
+values (17, now(), now(), '가족최애요리', 4);
 
 insert into hash_tag
-values (18, now(), now(), '이연복', 17);
+values (18, now(), now(), '주말스페셜', 4);
 
 insert into hash_tag
-values (19, now(), now(), '쓱쉐프', 18);
+values (19, now(), now(), '손님대접용', 4);
+
 
 insert into hash_tag
-values (20, now(), now(), '방구석', 19);
+values (20, now(), now(), '인생요리', 5);
 
 insert into hash_tag
-values (21, now(), now(), '전복', 11);
+values (21, now(), now(), '간편요리', 5);
+
+insert into hash_tag
+values (22, now(), now(), '1인요리', 5);
+
+insert into hash_tag
+values (23, now(), now(), '주말스페셜', 5);
+
+insert into hash_tag
+values (24, now(), now(), '매일매일', 5);
+
+insert into hash_tag
+values (25, now(), now(), 'SNS용', 5);
+
+
+
+-- 상품
+
+insert into product
+values (1, now(), now(), '[하림] 냉장 닭다리(북채) (500g)',
+        'https://sitem.ssgcdn.com/14/83/80/item/2097000808314_i1_1100.jpg', 6675, 4.8, 25, 'https://www.ssg.com/item/itemView.ssg?itemId=2097000808314&siteNo=6001&salestrNo=2439');
+
+insert into product
+values (2, now(), now(), '[노브랜드]한입쏙쏙비엔나 550g',
+        'https://sitem.ssgcdn.com/67/17/83/item/1000033831767_i1_1100.jpg', 5880, 4.9, 3, 'https://www.ssg.com/item/itemView.ssg?itemId=1000033831767&siteNo=6001&salestrNo=2439');
+
+insert into product
+values (3, now(), now(), '[노브랜드] 숯불 데리야끼 닭꼬치 800g',
+        'https://sitem.ssgcdn.com/06/55/52/item/1000034525506_i1_550.jpg', 14980, 4.8, 0, 'ssg.com/item/itemView.ssg?itemId=1000034525506&siteNo=6001&salestrNo=2439');
+
+
+-- 스페셜 리뷰
+
+insert into special_review
+values (1, now(), now(), 'MEDIUM', 'COUPLE', 'TWENTY',
+        '닭다리 300g, 굴소스 3스푼, 올리고당 2스푼, 설탕 2스푼, 다진마늘 1스푼, 소금, 후추',
+        '양념장을 만들어서 소금, 후추로 미리 염지한 닭다리에 고루 묻혀 에어프라이어에 구워주세요 (170도 15분, 15분)',
+        '소금 후추로 미리 염지를 해둬요 양념장을 만들어서 골고루 발라줘요 에어프라이어에 구우면 완성 예쁘게 플레이팅하면 더 좋아요 맥주안주로 굿',
+        1, 1, 5);
+
+insert into special_review
+values (2, now(), now(), 'EASY', 'SOLO', 'TWENTY',
+        '비엔나 10개 스파게티면 1인분 올리브유 2T 다진마늘, 맛소금, 후추, 양파 반개 생크림 100ml(없으면 우유로) 우유 100ml 치킨스톡 1T',
+        '1. 비엔나 1개에 스파게티를 4~5줄을 꽂은 후, 소금과 올리유를 넣고 8분간 삶는다. 2. 후라이팬에 다진마늘과 양파 반개를 볶다가, 1를 넣고 볶는다. (매콤한맛을 원하면 고추가루나 베트남고추를 첨가) (브로콜리, 새우, 버섯등을 기호에 맞게 넣어도 된다.) 3. 2에 치킨스톡 1T, 우유 200ml를 넣고 5분간 끓인다. 간은 맛소금으로 한다.',
+        '아이들이 놀이도 하고 맛있게 먹은 면을 품은 비엔나 크림 스파게티로 직접 만들었다는 생각이여서 인지 더 맛있게 즐겁게 먹었답니다. 한번 도전해 보세요~',
+        1, 2, 5);
+
+insert into special_review
+values (3, now(), now(), 'EASY', 'COUPLE', 'TWENTY',
+        '밥도그 요리 재료: 비엔나소세지, 다진 당근, 다진 양파, 다진애호박, 계란 1알, 빵가루',
+        '1. 비엔나 소세지를 먼저 구워주세요 2. 준비해 둔 다진 야채들을 볶아주세요(양파, 당근, 애호박) 3. 밥과 볶은 야채들을 섞어주세요 4. 가운에 비엔나 소제지를 넣고 동글게 말아주세요 5. 풀어 둔 계란 물을 묻힌 후 빵가루를 묻혀 주세요 6. 에어프라이어기에 14분 구워주면 완성',
+        '# 간을 따로 하지 않아도 소세지 자체가 맛있어서 맛나요 애용하던 소세지에서 갈아 타야 겠어요 # 간식으로 먹기 좋아요',
+        2, 2, 5);
+
+insert into special_review
+values (4, now(), now(), 'MEDIUM', 'COUPLE', 'THIRTY',
+        '비엔나 소세지 15개, 마늘 3개, 양파 1/2개, 스파게티면 2인분, 스파게티소스 300g, 모짜렐라 치즈 200g, 파슬리가루 약간',
+        '1. 스파게티면을 삶아줍니다. 2. 후라이팬에 기름을 두르고 마늘과 양파, 소세지를 넣고 볶아주세요. 3. 볶아놓은 재료에 삶은면과 소스를넣고 1분간 볶아줍니다. 4. 오븐용기에 스파게티를 담고 모짜렐라 치즈를 올려 오븐에서 익혀주세요.',
+        '치즈가 노릇하게 구워지면 완성~ 연말 파티음식으로도 좋고 손님초대요리로도 좋은 오븐치즈파스타 입니다.',
+        3, 2, 5);
+
+insert into special_review
+values (5, now(), now(), 'EASY', 'SOLO', 'THIRTY',
+        '오야코동) 닭꼬치4 개,대파 한줌,마요네즈 적당량,노른자1알,후추,파슬리 ,쪽파 먹고싶은만큼',
+        '1.밥먼저해두고요 2.팬에 대파가 수분이다날아갈때까지 볶아요 3.전자레인지에 돌린 닭꼬치를 젓가락으로 빼서 팬에 대파랑같이 볶아요',
+        '밥을담고 그위에 볶은대파닭꼬치 가쓰오부시 계란노른자 마요네즈를 올려 취향껏 실파송송까지 해주면 완성!',
+        3, 3, 5);
+
+# insert into special_review
+# values (4, now(), now(), 'MEDIUM', 'COUPLE', 'THIRTY',
+#         '',
+#         '',
+#         '',
+#         3, 2, 5);
+
+
+
 
 -- image
-insert into image
-values (1, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_1_1.jpg', 1, 'INGREDIENT');
 
 insert into image
-values (2, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_2_2.jpg', 1, 'PROCESS');
+values (1, 'https://succ.ssgcdn.com/uphoto/202208/20220805101605_1178408979_1_1.jpg', 1, 'INGREDIENT');
 
 insert into image
-values (3, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_3_2.jpg', 1, 'COMPLETE');
+values (2, 'https://succ.ssgcdn.com/uphoto/202208/20220805101605_1178408979_2_1.jpg', 1, 'PROCESS');
+
+insert into image
+values (3, 'https://succ.ssgcdn.com/uphoto/202208/20220805101605_1178408979_3_1.jpg', 1, 'COMPLETE');
 
 
 insert into image
-values (4, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_1_1.jpg', 2, 'INGREDIENT');
+values (4, 'https://succ.ssgcdn.com/uphoto/202212/20221224230723_1188648537_1_1.jpg', 2, 'INGREDIENT');
 
 insert into image
-values (5, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_2_1.jpg', 2, 'PROCESS');
+values (5, 'https://succ.ssgcdn.com/uphoto/202212/20221224230723_1188648537_2_1.jpg', 2, 'PROCESS');
 
 insert into image
-values (6, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_3_1.jpg', 2, 'COMPLETE');
+values (6, 'https://succ.ssgcdn.com/uphoto/202212/20221224230723_1188648537_3_1.jpg', 2, 'COMPLETE');
+
+
+insert into image
+values (7, 'https://succ.ssgcdn.com/uphoto/202301/20230103160328_1189376325_1_1.jpg', 3, 'INGREDIENT');
+
+insert into image
+values (8, 'https://succ.ssgcdn.com/uphoto/202301/20230103160328_1189376325_2_1.jpg', 3, 'PROCESS');
+
+insert into image
+values (9, 'https://succ.ssgcdn.com/uphoto/202301/20230103160328_1189376325_3_1.jpg', 3, 'COMPLETE');
+
+
+insert into image
+values (10, 'https://succ.ssgcdn.com/uphoto/202212/20221205123532_1187457601_1_1.jpg', 4, 'INGREDIENT');
+
+insert into image
+values (11, 'https://succ.ssgcdn.com/uphoto/202212/20221205123532_1187457601_2_1.jpg', 4, 'PROCESS');
+
+insert into image
+values (12, 'https://succ.ssgcdn.com/uphoto/202212/20221205123532_1187457601_3_1.jpg', 4, 'COMPLETE');
+
+
+insert into image
+values (13, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_1_1.jpg', 5, 'INGREDIENT');
+
+insert into image
+values (14, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_2_3.jpg', 5, 'PROCESS');
+
+insert into image
+values (15, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_3_1.jpg', 5, 'COMPLETE');
+
