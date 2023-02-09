@@ -7769,7 +7769,7 @@ textarea.form-control-lg {
 
 .border-success {
     --bs-border-opacity: 1;
-    border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important
+    /*border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important*/
 }
 
 .border-info {
