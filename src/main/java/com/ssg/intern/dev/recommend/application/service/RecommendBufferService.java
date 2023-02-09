@@ -15,7 +15,7 @@ import java.util.List;
 
 @UseCase
 @Transactional
-@Qualifier("recommendBuffer")
+@Qualifier("recommendBuffer기")
 public class RecommendBufferService implements BufferUseCase {
 
     private final LoadRecommendPort loadRecommendPort;
