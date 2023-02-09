@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.ssg.intern.dev.common.SpecialReviewProfile.*;
+import static com.ssg.intern.dev.common.SpecialReviewProfile.ImageInfo;
 
 @Component
 @RequiredArgsConstructor

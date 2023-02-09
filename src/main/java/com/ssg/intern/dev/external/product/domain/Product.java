@@ -38,6 +38,7 @@ public class Product extends BaseEntity {
 
     private String productInfoUrl;
 
+    @Builder
     public Product(final String name, final int price, final String imageUrl, final float starScore,
                    final int discountPercent, final String productInfoUrl) {
         this.name = name;

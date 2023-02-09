@@ -2,7 +2,6 @@ package com.ssg.intern.dev.bookmark.adapter.in.web;
 
 import com.ssg.intern.dev.bookmark.application.port.in.BufferUseCase;
 import com.ssg.intern.dev.common.WebAdapter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

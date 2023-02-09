@@ -24,8 +24,10 @@ public class SpecialReviewProfile {
 
     @Builder
     public SpecialReviewProfile(final LocalDateTime createdAt, final String cookLevel, final String cookQuantity,
-                                final String cookTime, final String descriptionIngredient, final String descriptionComplete,
-                                final String descriptionProcess, final List<ImageInfo> imageInfos, final float starScore,
+                                final String cookTime, final String descriptionIngredient,
+                                final String descriptionComplete,
+                                final String descriptionProcess, final List<ImageInfo> imageInfos,
+                                final float starScore,
                                 final String author, final long specialReviewId) {
 
         final String sb = author.substring(0, 3) +
