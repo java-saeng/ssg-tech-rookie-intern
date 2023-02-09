@@ -143,6 +143,25 @@ insert into hash_tag
 values (19, now(), now(), '손님대접용', 4);
 
 
+insert into hash_tag
+values (20, now(), now(), '인생요리', 5);
+
+insert into hash_tag
+values (21, now(), now(), '간편요리', 5);
+
+insert into hash_tag
+values (22, now(), now(), '1인요리', 5);
+
+insert into hash_tag
+values (23, now(), now(), '주말스페셜', 5);
+
+insert into hash_tag
+values (24, now(), now(), '매일매일', 5);
+
+insert into hash_tag
+values (25, now(), now(), 'SNS용', 5);
+
+
 
 -- 상품
 
@@ -153,6 +172,10 @@ values (1, now(), now(), '[하림] 냉장 닭다리(북채) (500g)',
 insert into product
 values (2, now(), now(), '[노브랜드]한입쏙쏙비엔나 550g',
         'https://sitem.ssgcdn.com/67/17/83/item/1000033831767_i1_1100.jpg', 5880, 4.9, 3, 'https://www.ssg.com/item/itemView.ssg?itemId=1000033831767&siteNo=6001&salestrNo=2439');
+
+insert into product
+values (3, now(), now(), '[노브랜드] 숯불 데리야끼 닭꼬치 800g',
+        'https://sitem.ssgcdn.com/06/55/52/item/1000034525506_i1_550.jpg', 14980, 4.8, 0, 'ssg.com/item/itemView.ssg?itemId=1000034525506&siteNo=6001&salestrNo=2439');
 
 
 -- 스페셜 리뷰
@@ -184,6 +207,23 @@ values (4, now(), now(), 'MEDIUM', 'COUPLE', 'THIRTY',
         '1. 스파게티면을 삶아줍니다. 2. 후라이팬에 기름을 두르고 마늘과 양파, 소세지를 넣고 볶아주세요. 3. 볶아놓은 재료에 삶은면과 소스를넣고 1분간 볶아줍니다. 4. 오븐용기에 스파게티를 담고 모짜렐라 치즈를 올려 오븐에서 익혀주세요.',
         '치즈가 노릇하게 구워지면 완성~ 연말 파티음식으로도 좋고 손님초대요리로도 좋은 오븐치즈파스타 입니다.',
         3, 2, 5);
+
+insert into special_review
+values (5, now(), now(), 'EASY', 'SOLO', 'THIRTY',
+        '오야코동) 닭꼬치4 개,대파 한줌,마요네즈 적당량,노른자1알,후추,파슬리 ,쪽파 먹고싶은만큼',
+        '1.밥먼저해두고요 2.팬에 대파가 수분이다날아갈때까지 볶아요 3.전자레인지에 돌린 닭꼬치를 젓가락으로 빼서 팬에 대파랑같이 볶아요',
+        '밥을담고 그위에 볶은대파닭꼬치 가쓰오부시 계란노른자 마요네즈를 올려 취향껏 실파송송까지 해주면 완성!',
+        3, 3, 5);
+
+# insert into special_review
+# values (4, now(), now(), 'MEDIUM', 'COUPLE', 'THIRTY',
+#         '',
+#         '',
+#         '',
+#         3, 2, 5);
+
+
+
 
 -- image
 
@@ -225,4 +265,14 @@ values (11, 'https://succ.ssgcdn.com/uphoto/202212/20221205123532_1187457601_2_1
 
 insert into image
 values (12, 'https://succ.ssgcdn.com/uphoto/202212/20221205123532_1187457601_3_1.jpg', 4, 'COMPLETE');
+
+
+insert into image
+values (13, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_1_1.jpg', 5, 'INGREDIENT');
+
+insert into image
+values (14, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_2_3.jpg', 5, 'PROCESS');
+
+insert into image
+values (15, 'https://succ.ssgcdn.com/uphoto/202301/20230115160112_1190180944_3_1.jpg', 5, 'COMPLETE');
 
