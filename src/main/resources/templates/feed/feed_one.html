@@ -208,7 +208,7 @@
                 <button type="button" th:data-bs-target="'#carousel'+${feed.feedReactionProfile.feedId}"
                         data-bs-slide-to="2"></button>
             </div>
-            <div class="carousel-inner align-self-lg-auto mw-100 h-auto">
+            <div class="carousel-inner align-self-lg-auto mw-100 h-auto" data-interval="false">
                 <div class="carousel-item active">
                     <img th:src="${feed.specialReviewProfile.imageInfos.get(0).imageUrl}" class="d-block mw-100 m-auto"
                          alt="..."
