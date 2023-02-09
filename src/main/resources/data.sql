@@ -284,10 +284,10 @@ values (3, 'https://succ.ssgcdn.com/uphoto/202212/20221214221652_1188077699_3_2.
 
 
 insert into image
-values (4, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_1_1.jpg', 2, 'INGREDIENT');
+values (4, 'https://succ.ssgcdn.com/uphoto/202209/20220930152944_1182568712_1_2.jpg', 2, 'INGREDIENT');
 
 insert into image
-values (5, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_2_1.jpg', 2, 'PROCESS');
+values (5, 'https://succ.ssgcdn.com/uphoto/202209/20220930152944_1182568712_2_1.jpg', 2, 'PROCESS');
 
 insert into image
 values (6, 'https://succ.ssgcdn.com/uphoto/202207/20220717225455_1176901492_3_1.jpg', 2, 'COMPLETE');
