@@ -1,6 +1,6 @@
 package com.ssg.intern.dev.bookmark.application.port.in;
 
-public interface UsingBookmarkBufferUseCase {
+public interface BufferUseCase {
 
     void bufferCaching(final long accountId, final long feedId);
 
