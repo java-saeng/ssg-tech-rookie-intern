@@ -75,7 +75,7 @@
         </li>
     </ul>
 
-    <div class="d-flex bg-white" style="font-size: 22px; font-family: 'Spoqa Han Sans Neo', 'sans-serif'; margin-bottom: -7p">
+    <div class="d-flex bg-white" style="font-size: 22px; font-family: 'Spoqa Han Sans Neo', 'sans-serif'; margin-bottom: -7px;">
         <div class="p-3">
             <span>전체&nbsp</span>
             <span th:text="${totalReviewCount}"></span>
@@ -83,7 +83,7 @@
         </div>
         <button class="bg-white" id="newer-button" th:style="'border: 0'"
                 th:onclick="'location.href=\''+ @{http://localhost:8080/1/me?sort=NEWER} + '\''">
-            최신 순
+            최근 작성순
         </button>
         <div class="p-3">
             <button class="bg-white" th:style="'border: 0'"
