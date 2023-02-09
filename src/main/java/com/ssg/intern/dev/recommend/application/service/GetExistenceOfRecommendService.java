@@ -27,8 +27,6 @@ public class GetExistenceOfRecommendService implements GetExistenceOfRecommendQu
 
         final Recommend recommend = savedRecommend.get();
 
-        System.out.println("recommend.isRecommended() = " + recommend.isRecommended());
-
         return recommend.isRecommended();
     }
 }
